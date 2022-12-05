@@ -24,13 +24,13 @@
             }
 
             create() {
-                this.cameras.main.setBounds(0, 0, 800, 6000);
+                this.cameras.main.setBounds(0, 0, 768, 6000);
 
                 this.add.image(0, 0, 'map').setOrigin(0).setScrollFactor(1);
 
                 this.cursors = this.input.keyboard.createCursorKeys();
 
-                this.ship = this.physics.add.image(400, 5980, 'ship').setOrigin(0)
+                this.ship = this.physics.add.image(384, 5980, 'ship').setOrigin(0)
 
                 this.cameras.main.startFollow(this.ship, true); +
 
