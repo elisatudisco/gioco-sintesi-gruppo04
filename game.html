@@ -13,6 +13,7 @@
 
     <script type="text/javascript">
 
+
         class Example extends Phaser.Scene {
             constructor() {
                 super();
@@ -20,31 +21,45 @@
 
 
 
+
             preload() {
                 this.load.image('map', 'assets/sfondo.png');
-                this.load.image('ship', 'assets/star.png');
+                this.load.image('bomb', 'assets/bomb.png');
+                this.load.image('ground', 'assets/platform.png');
+                this.load.spritesheet('ship', 'assets/star.png', { frameWidth: 24, frameHeight: 22 });
             }
 
             create() {
                 this.cameras.main.setBounds(0, 0, 800, 6000)     //.setOrigin(0);
-                this.cameras.main.centerOn(0, 0);
+                //this.cameras.main.centerOn(0, 0);
 
-                this.add.image(0, 0, 'map').setOrigin(0).setScrollFactor(1);
+                this.add.image(0, 0, 'map').setOrigin(0)//.setScrollFactor(1);
 
                 this.cursors = this.input.keyboard.createCursorKeys();
 
-                this.ship = this.physics.add.image(400, 5920, 'ship').setOrigin(0)
+                this.ship = this.physics.add.sprite(400, 5920, 'ship')
 
                 //this.ship.setCollideWorldBounds(true);
 
-                this.cameras.main.startFollow(this.ship, true); //+
-
+                this.cameras.main.startFollow(this.ship, true);
+                this.cameras.main.setFollowOffset(0, 120);
+                //+
+                // this.cameras.main.scrollY(200);
                 //this.cameras.main.setZoom(2);
+
+                this.ship.body.setGravityY(300);
+
+                this.platforms = this.physics.add.staticGroup();
+                this.platforms.create(400, 5980, 'ground').setScale(2).refreshBody();
+                this.physics.add.collider(this.ship, this.platforms);
+
+                this.bombs = this.physics.add.group();
+                this.bomb = this.bombs.create(400, 5800, 'bomb');
 
             }
 
             update() {
-                this.ship.setVelocity(0);
+                this.ship.setVelocityX(0);
 
                 if (this.cursors.left.isDown) {
                     this.ship.setVelocityX(-200);
@@ -54,7 +69,7 @@
                 }
 
                 if (this.cursors.up.isDown) {
-                    this.ship.setVelocityY(-200);
+                    this.ship.setVelocityY(-400);
                 }
                 else if (this.cursors.down.isDown) {
                     this.ship.setVelocityY(200);
@@ -76,7 +91,10 @@
                     this.ship.x = 0
                 }
             }
+
+            
         }
+
 
         const config = {
             type: Phaser.AUTO,
@@ -86,10 +104,15 @@
             pixelArt: true,
             physics: {
                 default: 'arcade',
+                arcade: {
+                    //gravity: { y: 300 },
+                    debug: true
+                }
             },
             scene: [Example]
 
         };
+        
         const game = new Phaser.Game(config);
 
 //ciao
