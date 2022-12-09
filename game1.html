@@ -82,10 +82,17 @@
 
             this.physics.add.overlap(this.ship, this.bombs, collectBomb, null, this);
 
+         //   scoreText = this.add.text(100, 100, 'score: 0', { fontSize: '32px', fill: 'black' });
+
         }
 
         function update() {
             this.ship.setVelocityX(0);
+
+            // if (gameOver) {
+            //     // return;
+            //     this.physics.pause();
+            // }
 
             if (this.cursors.left.isDown) {
                 this.ship.setVelocityX(-200);
@@ -101,7 +108,7 @@
                 this.ship.setVelocityY(200);
             }
 
-            //collide world bounds
+            //collide with world bounds
             // if (this.ship.x < 0) {
             //     this.ship.x = 1;
             // }
@@ -116,17 +123,22 @@
             if (this.ship.x > 800) {
                 this.ship.x = 0
             }
+
+            // if (this.ship.setVelocityY(100)) {
+            //     // gameOver = true;
+            //     this.physics.pause();
+            // }
         }
 
         function collectBomb(ship, bomb) {
             this.bomb.disableBody(true, true);
             this.ship.setVelocityY(-700);
-            //  Add and update the score
-            // score += 10;
+
+            // //Add and update the score
+            // score += 1;
             // scoreText.setText('Score: ' + score);
-
-
         }
+
 
     </script>
 
