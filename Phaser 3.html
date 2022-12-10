@@ -54,6 +54,8 @@
         }
 
         function create() {
+        
+
             this.cameras.main.setBounds(0, 0, 800, 6000)     //.setOrigin(0);
             //this.cameras.main.centerOn(0, 0);
 
@@ -80,13 +82,17 @@
             this.bombs = this.physics.add.group();
             this.bomb = this.bombs.create(400, 5800, 'bomb');
 
+            this.bomb = this.bombs.create(300, 5500, 'bomb');
+
             this.physics.add.overlap(this.ship, this.bombs, collectBomb, null, this);
 
-         //   scoreText = this.add.text(100, 100, 'score: 0', { fontSize: '32px', fill: 'black' });
-
+            this.scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
+            this.scoreText.setScrollFactor(0);
         }
 
         function update() {
+
+
             this.ship.setVelocityX(0);
 
             // if (gameOver) {
@@ -128,15 +134,17 @@
             //     // gameOver = true;
             //     this.physics.pause();
             // }
-        }
-
+      
+            }
         function collectBomb(ship, bomb) {
-            this.bomb.disableBody(true, true);
-            this.ship.setVelocityY(-700);
+            this.bomb.kill(true, true);
+            //this.ship.setVelocityY(-700);
 
-            // //Add and update the score
-            // score += 1;
-            // scoreText.setText('Score: ' + score);
+            //Add and update the score
+            this.score += 1;
+            this.scoreText.setText('Score: ' + score);
+            //this.scoreText.setText('Samoiedoo');
+            console.log(score);
         }
 
 
