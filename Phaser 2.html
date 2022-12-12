@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <title>Gioco di merda</title>
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+    <script src="libraries/p5.serialport.js"></script>
     <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -19,18 +22,39 @@
             game.load.image('sky', 'assets/sfondo.png');
             game.load.image('ground', 'assets/platform.png');
             game.load.image('star', 'assets/star.png');
-            game.load.spritesheet('dude', 'assets/star.png');
+            game.load.spritesheet('dude', 'assets/bomb.png');
 
         }
 
         var player;
         var platforms;
         var cursors;
-        var pillon = 0;
+        var stelleCreate = 0;
         var stars;
         var score = 0;
         var scoreText;
 
+        let serial;
+        let sensors = [];
+        let currentString;
+        let splitString;
+
+        function setup() {
+            serial = new p5.SerialPort();
+            serial.list();
+            //serial.on('open',)
+            serial.open('/dev/tty.usbmodem14101');
+            //LIST LI METTE IN LISTA?
+            serial.on('data', gotData);
+            serial.on('list', gotList);
+            serial.on('open', gotOpen);
+
+
+            //NON LI METTE IN SETUP MA FA UNA FUNZIONE CHIAMATA GOTDATA
+
+
+            console.log(sensors);
+        }
 
         function create() {
             game.world.setBounds(0, 0, 800, 6000);
@@ -58,7 +82,7 @@
 
 
             // The player and its settings
-            player = game.add.sprite(32, game.world.height - 150, 'dude');
+            player = game.add.sprite(400, game.world.height - 78, 'dude');
 
             //  We need to enable physics on the player
             game.physics.arcade.enable(player);
@@ -76,6 +100,8 @@
             stars.create(100, 5800, 'star')
             stars.create(100, 5600, 'star')
 
+            scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+            scoreText.fixedToCamera = true;
 
 
 
@@ -86,21 +112,49 @@
             // }
 
             //  The score
-            scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-            scoreText.fixedToCamera = true;
+
 
             //  Our controls.
-            cursors = game.input.keyboard.createCursorKeys();
+            //cursors = game.input.keyboard.createCursorKeys();
             game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.05, 0.001);
-            //
-
-            game.camera.deadzone = new Phaser.Rectangle(0, 200, 800, 200);
 
 
+
+            //game.camera.deadzone = new Phaser.Rectangle(0, 200, 800, 200);
         }
 
-        function update() {
 
+
+        function gotList(thelist) {
+            print("List of Serial Ports:");
+
+            for (let i = 0; i < thelist.length; i++) {
+                print(i + " " + thelist[i]);
+            }
+        }
+
+        function gotOpen() {
+            //print("Serial Port is Open");
+            console.log("Serial Port is Open");
+            serial.clear(); // clears the buffer of any outstanding data
+            serial.write("A"); // send a byte to the Arduino
+        }
+        function gotData() {
+            let currentString = serial.readStringUntil('\r\n'); // store the data in a variable
+            //let currentString = serial.readLine(); //legge le linee di codice che arrivano da arduino 
+            trim(currentString); //toglie gli spazi bianchi 
+            if (!currentString) return;
+
+            if (currentString.length > 0 && currentString != 'hi') {
+                sensors = split(currentString, ",");
+                console.log(sensors);
+                serial.write("A");
+            }
+        }
+
+
+
+        function update() {
             //  Collide the player and the stars with the platforms
             var hitPlatform = game.physics.arcade.collide(player, platforms);
             game.physics.arcade.collide(stars, platforms);
@@ -109,33 +163,35 @@
             game.physics.arcade.overlap(player, stars, collectStar, null, this);
 
             //  Reset the players velocity (movement)
-            player.body.velocity.x = 0;
+            // player.body.velocity.x = 0;
 
-            if (cursors.left.isDown) {
-                //  Move to the left
-                player.body.velocity.x = -150;
 
-                player.animations.play('left');
-            }
-            else if (cursors.right.isDown) {
-                //  Move to the right
-                player.body.velocity.x = 150;
 
-                player.animations.play('right');
-            }
-            else {
-                //  Stand still
-                player.animations.stop();
+            // if (cursors.left.isDown) {
+            //     //  Move to the left
+            //     player.body.velocity.x = -150;
 
-                player.frame = 4;
-            }
+
+            // }
+            // else if (cursors.right.isDown) {
+            //     //  Move to the right
+            //     player.body.velocity.x = 150;
+
+            // }
+            // else {
+            //     //  Stand still
+            //     player.animations.stop();
+
+            //     player.frame = 4;
+            // }
 
             //  Allow the player to jump if they are touching the ground.
             //&& player.body.touching.down && hitPlatform
-            if (cursors.up.isDown) {
-                player.body.velocity.y = -350;
-            }
+            // if (cursors.up.isDown) {
+            //     player.body.velocity.y = -350;
+            // }
 
+            //EFFETTO PACMAN
             if (player.x < 0) {
                 player.x = 800;
             }
@@ -144,35 +200,53 @@
             }
 
 
+            //SE SCENDE TROPPPO SI BLOCCA E MUORI
             if (player.body.velocity.y > 550) {
                 game.paused = true;
-
             }
+
+            //TELETRASPORTO
             if (player.y < 10) {
                 player.y = 5650;
             }
-            if (pillon < 3) {
+            if (stelleCreate < 3) {
                 for (var i = 0; i < 3; i++) {
                     //  Create a star inside of the 'stars' group
-                    pillon += (1 / 3)
+                    stelleCreate += (1 / 3)
                     var star = stars.create(Math.random() * 800, player.y - Math.random() * 400, 'star');
                 }
+            }
 
+            if (sensors[0] == "A") {
+                if (sensors[1] == "R") {
+                    player.body.velocity.x = 250;
+                } else if (sensors[1] == "L") {
+                    player.body.velocity.x = -250;
+                } else if (sensors[1] == "0") {
+                    player.body.velocity.x = 0;
+                }
+            }
 
+            if (sensors[0] == "V" && sensors[1] != "0") {
+                player.body.velocity.y = -(sensors[1]);
+            } else if (sensors[0] == "V") {
+                player.body.velocity.y = 0;
             }
 
 
         }
 
         function collectStar(player, star) {
-
-            // Removes the star from the screen
-            star.kill();
-            pillon -= 1
-            player.body.velocity.y = -350;
             //  Add and update the score
             score += 1;
             scoreText.text = 'Score: ' + score;
+            // Removes the star from the screen
+            star.kill();
+            stelleCreate -= 1
+            player.body.velocity.y = -1550;
+            player.body.velocity.x = 0;
+
+
 
         }
 
