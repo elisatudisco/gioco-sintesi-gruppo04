@@ -224,7 +224,9 @@
                 player.y += 2300;
                 //stars.y += 2300;
                 sfondo.tilePosition.y += 2300;
-                // sfondo.y += 2300;
+                game.world.forEach(function (stars) {
+                    stars += 2300;
+                });
             }
 
             // if (sensors[0] == "A") {
