@@ -35,6 +35,8 @@
         var scoreText;
         var sfondo;
 
+        let pongo = 0;
+
         let serial;
         let sensors = [];
         let currentString;
@@ -122,7 +124,7 @@
             cursors = game.input.keyboard.createCursorKeys();
             game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.05, 0.001);
 
-
+            stars.children[0].y = 3900;
 
             //game.camera.deadzone = new Phaser.Rectangle(0, 200, 800, 200);
         }
@@ -225,14 +227,26 @@
                 //stars.y += 2300;
                 sfondo.tilePosition.y += 2300;
                 // stars.children[1].y = 3534;
-                // for (i = 0; i <= stars.length; i++) {
-                //     stars.children[i].y += 2300;
-                // }
+                let pongo = 0;
+                 for (i = 0; i <= stars.length - 1; i++) {
+                    
+                     stars.children[pongo].y += 2300;
+                     pongo += 1;
+                 }
                 // game.world.forEach(function (stars) {
                 //     stars += 2300;
                 // });
             }
-            stars.children[1].y = 3534;
+            //stars.children[1].y = 3534;
+            //stars.children[1].y -= 10;
+
+            
+       //     stars.children[pongo].y -= 10; 
+       //     if (pongo < (stars.length - 1)) {
+     //   pongo += 1; 
+       //     }
+            
+           // console.log(stars.children[pongo].y)
             // if (sensors[0] == "A") {
             //     if (sensors[1] == "R") {
             //         player.body.velocity.x = 250;
