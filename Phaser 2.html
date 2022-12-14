@@ -95,7 +95,7 @@
 
 
             //  Finally some stars to collect
-            stars = game.add.group();
+            stars = game.add.physicsGroup();
             //  We will enable physics for any star that is created in this group
             stars.enableBody = true;
 
@@ -224,11 +224,15 @@
                 player.y += 2300;
                 //stars.y += 2300;
                 sfondo.tilePosition.y += 2300;
-                game.world.forEach(function (stars) {
-                    stars += 2300;
-                });
+                // stars.children[1].y = 3534;
+                // for (i = 0; i <= stars.length; i++) {
+                //     stars.children[i].y += 2300;
+                // }
+                // game.world.forEach(function (stars) {
+                //     stars += 2300;
+                // });
             }
-
+            stars.children[1].y = 3534;
             // if (sensors[0] == "A") {
             //     if (sensors[1] == "R") {
             //         player.body.velocity.x = 250;
