@@ -22,7 +22,8 @@
             game.load.image('sky', 'assets/sfondo.png');
             game.load.image('ground', 'assets/platform.png');
             game.load.image('star', 'assets/star.png');
-            game.load.spritesheet('dude', 'assets/spritesheets.png', 50, 50);
+            //game.load.spritesheet('dude', 'assets/dude.png', 32, 48, 9);
+            game.load.spritesheet('dude', 'assets/spritesheets.png', 50, 50, 19);
         }
 
         var player;
@@ -35,6 +36,7 @@
         var sfondo;
 
         let pongo = 0;
+        let direzione = 0;
 
         let serial;
         let sensors = [];
@@ -59,7 +61,7 @@
         // }
 
         function create() {
-            game.world.setBounds(0, 0, 800, 3500);
+            game.world.setBounds(0, 0, 800, 3584);
 
             //  We're going to be using physics, so enable the Arcade Physics system
             game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -85,7 +87,7 @@
 
 
             // The player and its settings
-            player = game.add.sprite(400, game.world.height - 164, 'dude');
+            player = game.add.sprite(400, game.world.height - 160, 'dude');
             player.scale.setTo(2, 2);
             //  We need to enable physics on the player
             game.physics.arcade.enable(player);
@@ -93,9 +95,11 @@
             //  Player physics properties. Give the little guy a slight bounce.
             player.body.bounce.y = 0.2;
             player.body.gravity.y = 300;
-            player.animations.add('up', [10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 10, true);
-            player.animations.add('left', [0, 1, 2, 3, 4], 10, true);
-            player.animations.add('right', [6, 7, 8, 9], 10, true);
+            player.animations.add('up', [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
+            player.animations.add('left', [9, 8, 7, 6]);
+            player.animations.add('right', [1, 2, 3, 4]);
+            // player.animations.add('left', [0, 1, 2, 3], 10, true);
+            // player.animations.add('right', [5, 6, 7, 8], 10, true);
             player.body.collideWorldBounds = false;
 
             //  Finally some stars to collect
@@ -163,9 +167,12 @@
 
 
         function update() {
-            //  Collide the player and the stars with the platforms
+            game.scale.pageAlignHorizontally = true;
+            game.scale.pageAlignVertically = true;
+            game.scale.refresh();
+            //  Collide thesw player and the stars with the platforms
             var hitPlatform = game.physics.arcade.collide(player, platforms);
-            game.physics.arcade.collide(stars, platforms);
+            //game.physics.arcade.collide(stars, platforms);
 
             //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
             game.physics.arcade.overlap(player, stars, collectStar, null, this);
@@ -173,49 +180,119 @@
             //  Reset the players velocity (movement)
             player.body.velocity.x = 0;
 
-
-
             if (cursors.left.isDown) {
-                //  Move to the left
-                player.body.velocity.x = -150;
-                player.animations.play('up');
+                player.body.velocity.x = -250;
+                //player.animations.play('up', 10, true);
+                if (player.body.touching.down && hitPlatform) {
+                    player.animations.play('left', 10, true);
+                    direzione = 0;
+                }
+                if (!(player.body.touching.down && hitPlatform)) {
+                    player.animations.play('up', 10, true);
+                    direzione = 10;
+                    player.scale.setTo(3);
+                }
             }
+            // if (cursors.left.isDown && player.body.touching.down && hitPlatform) {
+            //     player.animations.play('left', 10, true)
+            // }
+
 
             else if (cursors.right.isDown) {
-                //  Move to the right
-                player.body.velocity.x = 150;
-                player.animations.play('up');
+                player.body.velocity.x = 250;
+                //player.animations.play('up', 10, true);
+                if (player.body.touching.down && hitPlatform) {
+                    player.animations.play('right', 10, true);
+                    direzione = 1;
 
+                }
+
+                if (!(player.body.touching.down && hitPlatform)) {
+                    player.animations.play('up', 10, true);
+                    direzione = 10;
+                    player.scale.setTo(3);
+                }
+                // player.animations.play('right', 10, true);
+                // //     if (player.body.onFloor() || player.body.touching.down)
+                // //         player.animations.play('right', 10, true)
+                // direzione = 1;
             }
 
-
-            if (cursors.left.isDown && player.body.touching.down && hitPlatform) {
-                //  Move to the left
-                player.body.velocity.x = -150;
-                player.animations.play('left');
-            }
-
-            else if (cursors.right.isDown && player.body.touching.down && hitPlatform) {
-                //  Move to the right
-                player.body.velocity.x = 150;
-                player.animations.play('right');
-
-            }
-
-
-
-            //  Allow the player to jump if they are touching the ground.
-            // && player.body.touching.down && hitPlatform
-            if (cursors.up.isDown) {
+            else if (cursors.up.isDown) {
                 player.body.velocity.y = -350;
-                player.animations.play('up');
+                player.animations.play('up', 10, true);
+                direzione = 2;
+                player.scale.setTo(3);
             }
 
             else {
-                //  Stand still
-                player.animations.stop();
-                player.frame = 5;
+
+                if (direzione == 0) {
+                    player.animations.stop('right', 10, true);
+                    player.frame = 5;
+                }
+
+                if (direzione == 1) {
+                    player.animations.stop('left', 10, true);
+                    player.frame = 0;
+                }
+
+                if (direzione == 2) {
+                    player.animations.stop('up', 10, true);
+                    player.frame = 10;
+                    player.scale.setTo(3);
+                }
             }
+
+            // else {
+            //     player.animations.stop('right', 10, true);
+            //     player.frame = 4;
+            // }
+
+
+
+
+            // if (cursors.left.isDown) {
+            //     //  Move to the left
+            //     player.body.velocity.x = -150;
+            //     player.animations.play('up');
+            // }
+
+            // else if (cursors.right.isDown) {
+            //     //  Move to the right
+            //     player.body.velocity.x = 150;
+            //     player.animations.play('up');
+
+            // }
+
+
+            // if (cursors.left.isDown && player.body.touching.down && hitPlatform) {
+            //     //  Move to the left
+            //     player.body.velocity.x = -150;
+            //     player.animations.play('left');
+            // }
+
+            // else if (cursors.right.isDown && player.body.touching.down && hitPlatform) {
+            //     //  Move to the right
+            //     player.body.velocity.x = 150;
+            //     player.animations.play('right');
+
+            // }
+
+
+
+            // //  Allow the player to jump if they are touching the ground.
+            // // && player.body.touching.down && hitPlatform
+            // if (cursors.up.isDown) {
+            //     player.body.velocity.y = -350;
+            //     player.animations.play('up');
+            // }
+
+            // else {
+            //     //  Stand still
+            //     player.animations.stop();
+            //     player.frame = 5;
+            // }
 
             //EFFETTO PACMAN
             if (player.x < 0) {
@@ -233,10 +310,10 @@
             }
 
 
-            if (stelleCreate < 4) {
-                for (var i = 0; i < 4; i++) {
+            if (stelleCreate < 1) {
+                for (var i = 0; i < 3; i++) {
                     //  Create a star inside of the 'stars' group
-                    stelleCreate += (1 / 4)
+                    stelleCreate += (1 / 3)
                     var star = stars.create(Math.random() * 800, player.y - 100 - Math.random() * 400, 'star');
                 }
             }
@@ -248,6 +325,7 @@
                 //stars.y += 2300;
                 sfondo.tilePosition.y += 2300;
                 // stars.children[1].y = 3534;
+                platforms.y += 2300;
                 let pongo = 0;
                 for (i = 0; i <= stars.length - 1; i++) {
 
