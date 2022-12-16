@@ -61,7 +61,7 @@
         // }
 
         function create() {
-            game.world.setBounds(0, 0, 1080, 3584);
+            game.world.setBounds(0, 0, 1080, 4896);
 
             //  We're going to be using physics, so enable the Arcade Physics system
             game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -79,8 +79,8 @@
             // Here we create the ground.
             var ground = platforms.create(0, game.world.height - 100, 'ground');
 
-            //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-            ground.scale.setTo(0.66, 0.66);
+            //  Scale it to fit the width of the game (the original sprite is 400x32 in size) misure sabbia 1667 x 292
+            ground.body.setSize(1667, 292, 0, 40);
 
             //  This stops it from falling away when you jump on it
             ground.body.immovable = true;
@@ -378,6 +378,16 @@
 
 
         }
+
+        function render() {
+
+         game.debug.bodyInfo(ground);
+
+         game.debug.body(ground);
+         game.debug.body(player);
+
+}
+       
 
     </script>
 
