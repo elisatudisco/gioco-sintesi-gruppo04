@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Gioco di merda</title>
+    <title>Mollustic</title>
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.sound.min.js"></script>
     <script src="libraries/p5.serialport.js"></script>
@@ -17,13 +17,11 @@
 
         var game = new Phaser.Game(1080, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
-
         function preload() {
             game.load.image('sky', 'assets/sfondo.jpg');
             game.load.image('ground', 'assets/sand.png');
-            game.load.image('star', 'assets/star.png');
-            //game.load.spritesheet('dude', 'assets/dude.png', 32, 48, 9);
             game.load.spritesheet('dude', 'assets/spritesheet.png', 150.1, 175.5, 20);
+            game.load.spritesheet('star', 'assets/micro.png', 70, 70, 100);
         }
 
         var player;
@@ -52,87 +50,49 @@
         //     serial.on('data', gotData);
         //     serial.on('list', gotList);
         //     serial.on('open', gotOpen);
-
-
-        //     //NON LI METTE IN SETUP MA FA UNA FUNZIONE CHIAMATA GOTDATA
-
-
         //     console.log(sensors);
         // }
 
         function create() {
-            game.world.setBounds(0, 0, 1080, 4896);
-
-            //  We're going to be using physics, so enable the Arcade Physics system
+            game.world.setBounds(0, 0, 1080, 4896); //confini del mondo
             game.physics.startSystem(Phaser.Physics.ARCADE);
 
-            //  A simple background for our game
-            //sfondo = game.add.sprite(0, 0, 'sky');
-            sfondo = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'sky');
+            sfondo = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'sky'); //sfondo in loop
 
-            //  The platforms group contains the ground and the 2 ledges we can jump on
             platforms = game.add.group();
-
-            //  We will enable physics for any object that is created in this group
             platforms.enableBody = true;
 
-            // Here we create the ground.
             var ground = platforms.create(0, game.world.height - 100, 'ground');
 
             //  Scale it to fit the width of the game (the original sprite is 400x32 in size) misure sabbia 1667 x 292
             ground.body.setSize(1667, 292, 0, 40);
-
-            //  This stops it from falling away when you jump on it
             ground.body.immovable = true;
 
-
-            // The player and its settings
-            player = game.add.sprite(400, game.world.height - 350, 'dude');
-            // player.scale.setTo(2);
-            //  We need to enable physics on the player
+            player = game.add.sprite(400, game.world.height - 183, 'dude');
+            player.scale.setTo(0.7);
             game.physics.arcade.enable(player);
 
-            //  Player physics properties. Give the little guy a slight bounce.
             player.body.bounce.y = 0.2;
             player.body.gravity.y = 300;
+            //animazioni
             player.animations.add('up', [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
             player.animations.add('left', [9, 8, 7, 6]);
             player.animations.add('right', [1, 2, 3, 4]);
-            // player.animations.add('left', [0, 1, 2, 3], 10, true);
-            // player.animations.add('right', [5, 6, 7, 8], 10, true);
+
             player.body.collideWorldBounds = false;
 
-            //  Finally some stars to collect
             stars = game.add.physicsGroup();
-            //  We will enable physics for any star that is created in this group
             stars.enableBody = true;
-
             stars.create(100, 5800, 'star')
             stars.create(100, 5600, 'star')
 
             scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
             scoreText.fixedToCamera = true;
 
-
-
-
-
-            //  Here we'll create 12 of them evenly spaced apart
-            // for (var i = 0; i < 12; i++) {
-            //     //  Create a star inside of the 'stars' group
-            //     var star = stars.create(i * 70, 0, 'star');
-            // }
-
-            //  The score
-
-
-            //  Our controls.
             cursors = game.input.keyboard.createCursorKeys();
             game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.05, 0.001);
 
             stars.children[0].y = 3900;
-
-            //game.camera.deadzone = new Phaser.Rectangle(0, 200, 800, 200);
         }
 
 
@@ -164,20 +124,14 @@
         //     }
         // }
 
-
-
         function update() {
             game.scale.pageAlignHorizontally = true;
             game.scale.pageAlignVertically = true;
             game.scale.refresh();
-            //  Collide thesw player and the stars with the platforms
-            var hitPlatform = game.physics.arcade.collide(player, platforms);
-            //game.physics.arcade.collide(stars, platforms);
 
-            //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
+            var hitPlatform = game.physics.arcade.collide(player, platforms);
             game.physics.arcade.overlap(player, stars, collectStar, null, this);
 
-            //  Reset the players velocity (movement)
             player.body.velocity.x = 0;
 
             if (cursors.left.isDown) {
@@ -187,16 +141,13 @@
                     player.animations.play('left', 10, true);
                     direzione = 0;
                 }
+
                 if (!(player.body.touching.down && hitPlatform)) {
                     player.animations.play('up', 10, true);
                     direzione = 10;
-                    // player.scale.setTo(2);
+                    player.scale.setTo(1.2);
                 }
             }
-            // if (cursors.left.isDown && player.body.touching.down && hitPlatform) {
-            //     player.animations.play('left', 10, true)
-            // }
-
 
             else if (cursors.right.isDown) {
                 player.body.velocity.x = 250;
@@ -210,23 +161,18 @@
                 if (!(player.body.touching.down && hitPlatform)) {
                     player.animations.play('up', 10, true);
                     direzione = 10;
-                    // player.scale.setTo(2);
+                    player.scale.setTo(1.2);
                 }
-                // player.animations.play('right', 10, true);
-                // //     if (player.body.onFloor() || player.body.touching.down)
-                // //         player.animations.play('right', 10, true)
-                // direzione = 1;
             }
 
             else if (cursors.up.isDown) {
                 player.body.velocity.y = -350;
                 player.animations.play('up', 10, true);
                 direzione = 2;
-                // player.scale.setTo(2);
+                player.scale.setTo(1.2);
             }
 
             else {
-
                 if (direzione == 0) {
                     player.animations.stop('right', 10, true);
                     player.frame = 5;
@@ -240,59 +186,9 @@
                 if (direzione == 2) {
                     player.animations.stop('up', 10, true);
                     player.frame = 10;
-                    // player.scale.setTo(2);
+                    player.scale.setTo(1.2);
                 }
             }
-
-            // else {
-            //     player.animations.stop('right', 10, true);
-            //     player.frame = 4;
-            // }
-
-
-
-
-            // if (cursors.left.isDown) {
-            //     //  Move to the left
-            //     player.body.velocity.x = -150;
-            //     player.animations.play('up');
-            // }
-
-            // else if (cursors.right.isDown) {
-            //     //  Move to the right
-            //     player.body.velocity.x = 150;
-            //     player.animations.play('up');
-
-            // }
-
-
-            // if (cursors.left.isDown && player.body.touching.down && hitPlatform) {
-            //     //  Move to the left
-            //     player.body.velocity.x = -150;
-            //     player.animations.play('left');
-            // }
-
-            // else if (cursors.right.isDown && player.body.touching.down && hitPlatform) {
-            //     //  Move to the right
-            //     player.body.velocity.x = 150;
-            //     player.animations.play('right');
-
-            // }
-
-
-
-            // //  Allow the player to jump if they are touching the ground.
-            // // && player.body.touching.down && hitPlatform
-            // if (cursors.up.isDown) {
-            //     player.body.velocity.y = -350;
-            //     player.animations.play('up');
-            // }
-
-            // else {
-            //     //  Stand still
-            //     player.animations.stop();
-            //     player.frame = 5;
-            // }
 
             //EFFETTO PACMAN
             if (player.x < 0) {
@@ -302,48 +198,29 @@
                 player.x = 0
             }
 
-
-
             //SE SCENDE TROPPO SI BLOCCA E MUORI
             if (player.body.velocity.y > 550) {
                 game.paused = true;
             }
 
-
             if (stelleCreate < 1) {
                 for (var i = 0; i < 3; i++) {
                     //  Create a star inside of the 'stars' group
                     stelleCreate += (1 / 3)
-                    var star = stars.create(Math.random() * 1080, player.y - 100 - Math.random() * 540, 'star');
+                    var star = stars.create(Math.random(stars.lenght) * 1080, player.y - 100 - Math.random(stars.lenght) * 540, 'star');
                 }
             }
-
-            console.log(player.y);
 
             if (player.y < 500) {
                 player.y += 2300;
-                //stars.y += 2300;
                 sfondo.tilePosition.y += 2300;
-                // stars.children[1].y = 3534;
                 platforms.y += 2300;
                 let pongo = 0;
                 for (i = 0; i <= stars.length - 1; i++) {
-
                     stars.children[pongo].y += 2300;
                     pongo += 1;
                 }
-                // game.world.forEach(function (stars) {
-                //     stars += 2300;
-                // });
             }
-            //stars.children[1].y = 3534;
-            //stars.children[1].y -= 10;
-
-
-            //     stars.children[pongo].y -= 10; 
-            //     if (pongo < (stars.length - 1)) {
-            //   pongo += 1; 
-            //     }
 
             // console.log(stars.children[pongo].y)
             // if (sensors[0] == "A") {
@@ -361,34 +238,16 @@
             // } else if (sensors[0] == "V") {
             //     player.body.velocity.y = 0;
             // }
-
-
         }
 
         function collectStar(player, star) {
-            //  Add and update the score
             score += 1;
             scoreText.text = 'Score: ' + score;
-            // Removes the star from the screen
             star.kill();
             stelleCreate -= 1
             player.body.velocity.y = -350;
             player.body.velocity.x = 0;
-
-
-
         }
-
-        function render() {
-
-            game.debug.bodyInfo(ground);
-
-            game.debug.body(ground);
-            game.debug.body(player);
-
-        }
-
-
     </script>
 
 </body>
