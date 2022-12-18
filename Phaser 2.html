@@ -41,6 +41,8 @@
             // //  Load the Google WebFont Loader script
             game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
             game.load.image('bubble', 'assets/bubble.png');
+            game.load.audio('suonomicroplastiche', 'assets/audio/microplastiche.mp3');
+            game.load.audio('musica', 'assets/audio/bali_kali.mp3');
 
         }
 
@@ -58,10 +60,14 @@
         var micro = 0;
         var font;
         var color = 3;
-
         let pongo1 = 0;
-        let direzione = 0;
+
+        //VAR AUDIO
+        var suonomicroplastiche;
+        var musica;
+
         let pongo = 0;
+        let direzione = 0;
         let serial;
         let sensors = [];
         let currentString;
@@ -139,7 +145,23 @@
             barra2.fixedToCamera = true;
             barra = game.add.sprite(840, 18, 'barra');
             barra.fixedToCamera = true;
+        
+            //CAMERA
+            game.camera.follow(player);
+            //game.camera.deadzone = new Phaser.Rectangle(0, 200, 800, 200);
+            stars.children[0].y = 3900;
+
+            
+            //AUDIO
+            suonomicroplastiche = game.add.audio('suonomicroplastiche');
+            suonomicroplastiche.allowMultiple = true;
+            musica = game.add.audio('musica');
+            musica.play();
+            
         }
+
+
+
 
         // function gotList(thelist) {
         //     print("List of Serial Ports:");
@@ -244,11 +266,12 @@
             }
 
             //EFFETTO PACMAN
-            if (player.x < 0) {
-                player.x = 1080 - 150.1;
+
+            if (player.x < -150.1) {
+                player.x = 1080;
             }
-            if (player.x > 1080 - 150.1) {
-                player.x = 0
+            if (player.x > 1080) {
+                player.x = -150.1
             }
 
             //SE SCENDE TROPPO SI BLOCCA E IL GIOCO VA IN PAUSA
@@ -335,6 +358,8 @@
 
         function collectStar(player, star) {
             //la barra aumenta a ogni microplastica presa. Il massimo di microplastiche per riempire la barra attualmente è 40 (modificabile)
+            //  Add and update the score
+            suonomicroplastiche.play();
             score += 1;
             if (micro < 40) {
                 micro += 1;
@@ -355,6 +380,11 @@
             scoreText.fill = '#FFFFFF'
             scoreText.setShadow(5, 5, 'rgba(0,0,0,0.7)', 5);
             scoreText.fixedToCamera = true;
+        }
+
+        //FA RIPARTIRE LA MUSICA
+        function restartMusica() {
+        musica.restart();
         }
 
     </script>
