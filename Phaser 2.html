@@ -43,6 +43,7 @@
             game.load.spritesheet('bubble', 'assets/bubble.png', 30, 30, 100);
             game.load.audio('suonomicroplastiche', 'assets/audio/microplastiche.mp3');
             game.load.audio('musica', 'assets/audio/soundtrack_gioco.mp3');
+            game.load.audio('morte', 'assets/audio/gameover.mp3');
         }
 
         var player;
@@ -64,6 +65,7 @@
         //VARIABILI AUDIO
         var suonomicroplastiche;
         var musica;
+        var morte;
 
         var gameover;
 
@@ -75,7 +77,7 @@
         let splitString;
         //scelta posizioni fisse nello spazio per disporre le microplastiche
         let posx = [10 + 15, 90 + 15, 170 + 15, 250 + 15, 330 + 15, 410 + 15, 490 + 15, 570 + 15, 650 + 15, 730 + 15, 810 + 15, 890 + 15, 970 + 15];
-        let posy = [280 - 50, 370 + 20- 50, 460 + 20- 50, 550 + 20- 50, 640 + 20- 50];
+        let posy = [280 - 50, 370 + 20 - 50, 460 + 20 - 50, 550 + 20 - 50, 640 + 20 - 50];
         var emitter;
         var x;
 
@@ -111,7 +113,7 @@
 
             player.body.bounce.y = 0.5;
             player.body.gravity.y = 300;
-           
+
 
             //ANIMAZIONI
             player.animations.add('up', [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
@@ -138,8 +140,8 @@
             stars.children[0].frame = 3;
             // stars.children[1].frame = 43;
             // stars.children[2].frame = 69;
-            
-
+            stars.setAll('anchor.x', 0.5)
+            stars.setAll('anchor.y', 0.5)
 
             cursors = game.input.keyboard.createCursorKeys();
             jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.S);
@@ -160,6 +162,10 @@
             //AUDIO
             suonomicroplastiche = game.add.audio('suonomicroplastiche');
             suonomicroplastiche.allowMultiple = true;
+
+            morte = game.add.audio('morte');
+            morte.loop = false;
+
             musica = game.add.audio('musica');
             musica.play();
             musica.loop = true;
@@ -209,7 +215,7 @@
             game.physics.arcade.overlap(player, stars, collectStar, null, this);
 
             player.body.velocity.x = 0;
-            
+
 
             if (cursors.left.isDown) {
                 player.body.velocity.x = -250;
@@ -304,8 +310,10 @@
                 gameover.align = 'center';
                 gameover.setShadow(4, 4, 'rgba(0,0,0,0.7)', 3);
                 gameover.fixedToCamera = true;
-                game.sound.stopAll();
+                // game.sound.stopAll();
+                musica.pause();
                 emitter.alpha = 0;
+                morte.play();
             }
 
 
