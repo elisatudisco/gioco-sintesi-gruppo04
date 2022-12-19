@@ -34,8 +34,9 @@
         function preload() {
             game.load.image('sky', 'assets/sfondo.jpg');
             game.load.image('ground', 'assets/sand.png');
-            game.load.spritesheet('barra', 'assets/barra piena.png', 200, 27, 2);
+            game.load.spritesheet('barra3', 'assets/barra piena.png', 200, 27, 2);
             game.load.image('barra2', 'assets/barra vuota.png');
+            game.load.image('barra', 'assets/barra piccola.png');
             game.load.spritesheet('dude', 'assets/spritesheet.png', 150.1, 175.5, 20);
             game.load.spritesheet('star', 'assets/micro.png', 70, 70, 100);
             game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
@@ -143,7 +144,7 @@
 
             barra2 = game.add.sprite(840, 26, 'barra2');
             barra2.fixedToCamera = true;
-            barra = game.add.sprite(840, 26, 'barra');
+            barra = game.add.sprite(840, 27.5, 'barra');
             barra.fixedToCamera = true;
 
             //CAMERA
