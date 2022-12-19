@@ -147,12 +147,12 @@
             barra2.fixedToCamera = true;
             barra = game.add.sprite(840, 18, 'barra');
             barra.fixedToCamera = true;
-        
+            
             //CAMERA
             game.camera.follow(player);
             //game.camera.deadzone = new Phaser.Rectangle(0, 200, 800, 200);
             stars.children[0].y = 3900;
-
+           
             
             //AUDIO
             suonomicroplastiche = game.add.audio('suonomicroplastiche');
@@ -246,7 +246,7 @@
                 direzione = 2;
                 player.scale.setTo(1.2);
                 micro = 0;
-
+                barra.scale.x = 0;
             }
 
             else {
@@ -288,7 +288,8 @@
             gameover.fill = '#FFFFFF'
             gameover.setShadow(2, 2, 'rgba(0,0,0,0.7)', 5);
             gameover.fixedToCamera = true;
-            music.stop();
+            //music.stop();
+            game.sound.stopAll();
             }
 
 
@@ -300,8 +301,8 @@
                     return
                 }
                 else {
-                    for (var i = 0; i < 3; i++) {
-                        stelleCreate += (1 / 3)
+                for (var i = 0; i < 3; i++) {
+                    stelleCreate += (1 / 3)
                         var star = stars.create(posx[Math.floor(Math.random() * 13)], player.y - posy[Math.floor(Math.random() * 5)], 'star');
                         //prendi la stella che crea e prendi un frame casuale tra i 100 creati in modo tale da vere micro tutte diverse
                         //dopo che hai creato la micro color va avanti di uno. Color parte da 3 perché all'inizio vengono create 3 micro fisse
@@ -359,10 +360,11 @@
 
             //la barra scala in base al numero massimo di microplastiche 
             barra.scale.x = micro / 40;
-
+            console.log(micro)
+            
             emitter.emitX = player.x + 75.05;
             emitter.emitY = player.y + 70;
-        }
+    }
 
         function collectStar(player, star) {
             //la barra aumenta a ogni microplastica presa. Il massimo di microplastiche per riempire la barra attualmente è 40 (modificabile)
