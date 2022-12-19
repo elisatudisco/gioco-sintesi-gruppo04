@@ -42,7 +42,7 @@
             game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
             game.load.spritesheet('bubble', 'assets/bubble.png', 30, 30, 100);
             game.load.audio('suonomicroplastiche', 'assets/audio/microplastiche.mp3');
-            game.load.audio('musica', 'assets/audio/bali_kali.mp3');
+            game.load.audio('musica', 'assets/audio/soundtrack_gioco.mp3');
         }
 
         var player;
@@ -138,8 +138,7 @@
             stars.children[0].frame = 3;
             // stars.children[1].frame = 43;
             // stars.children[2].frame = 69;
-            stars.setAll('anchor.x', 0.5)
-            stars.setAll('anchor.y', 0.5)
+            
 
 
             cursors = game.input.keyboard.createCursorKeys();
@@ -163,6 +162,8 @@
             suonomicroplastiche.allowMultiple = true;
             musica = game.add.audio('musica');
             musica.play();
+            musica.loop = true;
+            musica.volume() = 0.1;
         }
 
 
