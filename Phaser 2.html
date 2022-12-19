@@ -25,7 +25,7 @@
 
             //  The Google Fonts we want to load (specify as many as you like in the array)
             google: {
-                families: ['Alexandria']
+                families: ['Martian Mono']
             }
 
         };
@@ -38,12 +38,10 @@
             game.load.image('barra2', 'assets/barra vuota.png')
             game.load.spritesheet('dude', 'assets/spritesheet.png', 150.1, 175.5, 20);
             game.load.spritesheet('star', 'assets/micro.png', 70, 70, 100);
-            // //  Load the Google WebFont Loader script
             game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
             game.load.image('bubble', 'assets/bubble.png');
             game.load.audio('suonomicroplastiche', 'assets/audio/microplastiche.mp3');
             game.load.audio('musica', 'assets/audio/bali_kali.mp3');
-
         }
 
         var player;
@@ -122,9 +120,9 @@
             player.body.collideWorldBounds = false;
 
             //SCIA PLAYER
-            emitter = game.add.emitter(game.world.centerX, 4700, 600);
+            emitter = game.add.emitter(game.world.centerX, 4700, 1920);
             emitter.makeParticles('bubble');
-            emitter.setRotation(0, 0);
+            emitter.setRotation(2, 2);
             emitter.setAlpha(0.1, 1, 3000);
             emitter.setScale(0.1, 1, 0.1, 1, 6000, Phaser.Easing.Quintic.Out);
             emitter.gravity.y = -300;
@@ -147,19 +145,18 @@
             barra2.fixedToCamera = true;
             barra = game.add.sprite(840, 26, 'barra');
             barra.fixedToCamera = true;
-            
+
             //CAMERA
             game.camera.follow(player);
             //game.camera.deadzone = new Phaser.Rectangle(0, 200, 800, 200);
             stars.children[0].y = 3900;
-           
-            
+
+
             //AUDIO
             suonomicroplastiche = game.add.audio('suonomicroplastiche');
             suonomicroplastiche.allowMultiple = true;
             musica = game.add.audio('musica');
             musica.play();
-            
         }
 
 
@@ -240,16 +237,13 @@
                 emitter.start(false, 1200, 10);
             }
 
-            else if (jumpButton.isDown && micro == 40) {
+            else if (jumpButton.isDown && micro == 100) {
                 player.body.velocity.y = -550;
                 player.animations.play('up', 10, true);
                 direzione = 2;
                 player.scale.setTo(1.2);
                 micro = 0;
-<<<<<<< Updated upstream
                 barra.scale.x = 0;
-=======
->>>>>>> Stashed changes
             }
 
             else {
@@ -285,14 +279,14 @@
                 platforms.y += 2300;
             }
             if (player.body.velocity.y > 800) {
-            gameover = game.add.text(190, 230, 'Unfortunately you died!');
-            gameover.font = 'Secular One';
-            gameover.fontSize = 60;
-            gameover.fill = '#FFFFFF'
-            gameover.setShadow(2, 2, 'rgba(0,0,0,0.7)', 5);
-            gameover.fixedToCamera = true;
-            //music.stop();
-            game.sound.stopAll();
+                gameover = game.add.text(190, 230, 'Unfortunately you died!');
+                gameover.font = 'Martian Mono';
+                gameover.fontSize = 30;
+                gameover.fill = '#FFFFFF'
+                gameover.setShadow(2, 2, 'rgba(0,0,0,0.7)', 2);
+                gameover.fixedToCamera = true;
+                game.sound.stopAll();
+                emitter.alpha = 0;
             }
 
 
@@ -304,8 +298,8 @@
                     return
                 }
                 else {
-                for (var i = 0; i < 3; i++) {
-                    stelleCreate += (1 / 3)
+                    for (var i = 0; i < 3; i++) {
+                        stelleCreate += (1 / 3)
                         var star = stars.create(posx[Math.floor(Math.random() * 13)], player.y - posy[Math.floor(Math.random() * 5)], 'star');
                         //prendi la stella che crea e prendi un frame casuale tra i 100 creati in modo tale da vere micro tutte diverse
                         //dopo che hai creato la micro color va avanti di uno. Color parte da 3 perché all'inizio vengono create 3 micro fisse
@@ -362,22 +356,22 @@
             // }
 
             //la barra scala in base al numero massimo di microplastiche 
-            barra.scale.x = micro / 40;
+            barra.scale.x = micro / 100;
             console.log(micro)
-            
+
             emitter.emitX = player.x + 75.05;
             emitter.emitY = player.y + 70;
-    }
+        }
 
         function collectStar(player, star) {
             //la barra aumenta a ogni microplastica presa. Il massimo di microplastiche per riempire la barra attualmente è 40 (modificabile)
             //  Add and update the score
             suonomicroplastiche.play();
             score += 1;
-            if (micro < 40) {
+            if (micro < 100) {
                 micro += 1;
             }
-            scoreText.text = 'Score: ' + score;
+            scoreText.text = 'score: ' + score;
             star.destroy();
             stelleCreate -= 1
             color -= 1;
@@ -387,9 +381,9 @@
         }
 
         function createText() {
-            scoreText = game.add.text(30, 20, 'Score: 0');
-            scoreText.font = 'Alexandria';
-            scoreText.fontSize = 37;
+            scoreText = game.add.text(30, 20, 'score: 0');
+            scoreText.font = 'Martian Mono';
+            scoreText.fontSize = 32;
             scoreText.fill = '#FFFFFF'
             scoreText.setShadow(5, 5, 'rgba(0,0,0,0.7)', 5);
             scoreText.fixedToCamera = true;
@@ -397,7 +391,7 @@
 
         //FA RIPARTIRE LA MUSICA
         function restartMusica() {
-        musica.restart();
+            musica.restart();
         }
 
     </script>
