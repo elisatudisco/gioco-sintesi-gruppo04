@@ -34,8 +34,8 @@
         function preload() {
             game.load.image('sky', 'assets/sfondo.jpg');
             game.load.image('ground', 'assets/sand.png');
-            game.load.image('barra', 'assets/barra piena.png')
-            game.load.image('barra2', 'assets/barra vuota.png')
+            game.load.spritesheet('barra', 'assets/barra piena.png', 200, 27, 2);
+            game.load.image('barra2', 'assets/barra vuota.png');
             game.load.spritesheet('dude', 'assets/spritesheet.png', 150.1, 175.5, 20);
             game.load.spritesheet('star', 'assets/micro.png', 70, 70, 100);
             game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
@@ -108,12 +108,12 @@
             player.scale.setTo(0.7);
             game.physics.arcade.enable(player);
 
-            player.body.bounce.y = 0.2;
+            player.body.bounce.y = 0.5;
             player.body.gravity.y = 300;
 
             //ANIMAZIONI
             player.animations.add('up', [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
-            player.animations.add('left', [9, 8, 7, 6]);
+            player.animations.add('left', [6, 7, 8, 9]);
             player.animations.add('right', [1, 2, 3, 4]);
 
             player.body.collideWorldBounds = false;
@@ -237,7 +237,7 @@
                 emitter.start(false, 1200, 20);
             }
 
-            else if (jumpButton.isDown && micro == 100) {
+            else if (jumpButton.isDown && micro == 40) {
                 player.body.velocity.y = -550;
                 player.animations.play('up', 10, true);
                 direzione = 2;
@@ -245,6 +245,9 @@
                 micro = 0;
                 barra.scale.x = 0;
                 emitter.start(false, 1200, 10);
+                barra.frame = 0;
+
+
             }
 
             else {
@@ -359,7 +362,8 @@
             // }
 
             //la barra scala in base al numero massimo di microplastiche 
-            barra.scale.x = micro / 100;
+            barra.frame = 1;
+            barra.scale.x = micro / 40;
 
             emitter.emitX = player.x + 75.05;
             emitter.emitY = player.y + 20;
@@ -370,7 +374,7 @@
             //  Add and update the score
             suonomicroplastiche.play();
             score += 1;
-            if (micro < 100) {
+            if (micro < 40) {
                 micro += 1;
             }
             scoreText.text = 'score: ' + score;
