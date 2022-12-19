@@ -25,7 +25,7 @@
 
             //  The Google Fonts we want to load (specify as many as you like in the array)
             google: {
-                families: ['Secular One']
+                families: ['Alexandria']
             }
 
         };
@@ -143,9 +143,9 @@
             jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.S);
             game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.05, 0.001);
 
-            barra2 = game.add.sprite(840, 18, 'barra2');
+            barra2 = game.add.sprite(840, 26, 'barra2');
             barra2.fixedToCamera = true;
-            barra = game.add.sprite(840, 18, 'barra');
+            barra = game.add.sprite(840, 26, 'barra');
             barra.fixedToCamera = true;
             
             //CAMERA
@@ -246,7 +246,10 @@
                 direzione = 2;
                 player.scale.setTo(1.2);
                 micro = 0;
+<<<<<<< Updated upstream
                 barra.scale.x = 0;
+=======
+>>>>>>> Stashed changes
             }
 
             else {
@@ -384,9 +387,9 @@
         }
 
         function createText() {
-            scoreText = game.add.text(26, 16, 'Score: 0');
-            scoreText.font = 'Secular One';
-            scoreText.fontSize = 32;
+            scoreText = game.add.text(30, 20, 'Score: 0');
+            scoreText.font = 'Alexandria';
+            scoreText.fontSize = 37;
             scoreText.fill = '#FFFFFF'
             scoreText.setShadow(5, 5, 'rgba(0,0,0,0.7)', 5);
             scoreText.fixedToCamera = true;
