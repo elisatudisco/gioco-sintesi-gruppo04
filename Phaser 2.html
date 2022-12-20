@@ -43,7 +43,7 @@
             game.load.spritesheet('bubble', 'assets/bubble.png', 30, 30, 100);
             game.load.audio('suonomicroplastiche', 'assets/audio/microplastiche.mp3');
             game.load.audio('musica', 'assets/audio/soundtrack_gioco.mp3');
-            game.load.audio('morte', 'assets/audio/gameover.mp3');
+            game.load.audio('morte', 'assets/audio/gameover.wav');
         }
 
         var player;
@@ -164,12 +164,11 @@
             suonomicroplastiche.allowMultiple = true;
 
             morte = game.add.audio('morte');
-            morte.loop = false;
 
             musica = game.add.audio('musica');
             musica.play();
             musica.loop = true;
-            musica.volume() = 0.1;
+            //musica.volume() = 0.1;
         }
 
 
@@ -255,7 +254,7 @@
                 emitter.start(false, 1200, 20);
             }
 
-            else if (jumpButton.isDown && micro == 40) {
+            else if (jumpButton.isDown && micro == 10) {
                 player.body.velocity.y = -550;
                 player.animations.play('up', 10, true);
                 direzione = 2;
@@ -310,10 +309,10 @@
                 gameover.align = 'center';
                 gameover.setShadow(4, 4, 'rgba(0,0,0,0.7)', 3);
                 gameover.fixedToCamera = true;
-                // game.sound.stopAll();
-                musica.pause();
+                game.sound.stopAll();
+
                 emitter.alpha = 0;
-                morte.play();
+
             }
 
 
@@ -385,8 +384,8 @@
             //la barra scala in base al numero massimo di microplastiche 
             barra.frame = 1;
             //barra2.scale.x = 0;
-            barra.scale.x = micro / 40
-            if (micro > 39) {
+            barra.scale.x = micro / 10;
+            if (micro > 9) {
                 barra2.alpha = 1;
                 barra.alpha = 0;
             }
@@ -404,7 +403,7 @@
             //  Add and update the score
             suonomicroplastiche.play();
             score += 1;
-            if (micro < 40) {
+            if (micro < 10) {
                 micro += 1;
             }
             scoreText.text = 'score: ' + score;
@@ -429,6 +428,14 @@
         function restartMusica() {
             musica.restart();
         }
+
+        // function liMortacciTua() {
+        //     if (player.body.velocity.y > 800) {
+        //         // morte.restart();
+        //         morte.play();
+        //         morte.loop = true;
+        //     }
+        // }
     </script>
 
 </body>
