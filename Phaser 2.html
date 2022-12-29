@@ -253,6 +253,21 @@
             stars.setAll('anchor.x', 0.5)
             stars.setAll('anchor.y', 0.5)
 
+
+            //oscillamento microplastiche
+            if (pongo2 < 100) {
+                stars.addAll('x', 0.3)
+                pongo2 += 0.4;
+            }
+            else if (pongo2 > 100 && pongo2 < 200) {
+                stars.addAll('x', -0.3)
+                pongo2 += 0.4;
+
+            }
+            else if (pongo2 > 200) {
+                pongo2 = 0;
+            }
+
             var hitPlatform = game.physics.arcade.collide(player, platforms);
             game.physics.arcade.overlap(player, stars, collectStar, null, this);
 
@@ -416,21 +431,6 @@
                     pongo += 1;
                 }
             }
-
-            //oscillamento microplastiche
-            if (pongo2 < 100) {
-                stars.addAll('x', 0.3)
-                pongo2 += 0.4;
-            }
-            else if (pongo2 > 100 && pongo2 < 200) {
-                stars.addAll('x', -0.3)
-                pongo2 += 0.4;
-
-            }
-            else if (pongo2 > 200) {
-                pongo2 = 0;
-            }
-
 
             //CONTROLLI ARDUINO DA IMPLEMENTARE
             // console.log(stars.children[pongo].y)
