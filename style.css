@@ -1,3 +1,362 @@
+/*Reset Stylesheet*/
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+body {
+  line-height: 1;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+nav ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+/* change colours to suit your needs */
+ins {
+  background-color: #ff9;
+  color: #000;
+  text-decoration: none;
+}
+
+/* change colours to suit your needs */
+mark {
+  background-color: #ff9;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+abbr[title],
+dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* change border colour to suit your needs */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+input,
+select {
+  vertical-align: middle;
+}
+
+/* Il codice inizia qui*/
+* {
+  box-sizing: border-box;
+
+  /* Include il border e il padding
+  nell'altezza e nella larghezza
+  totale di un elemento */
+}
+
+/* Versione mobile */
+[class*='col-'] {
+  width: 100%;
+}
+html {
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #000000;
+}
+@font-face {
+      font-family: 'GD-Boing-Bold';
+      src: url('GD-Boing-Bold.ttf');
+    }
+  
+
+#titolo {
+  height: 100px;
+  margin-right: 0;
+  padding-right: 0;
+  border-right: 0;
+}
+
+#titolo1 {
+  font-family: loos-normal, sans-serif;
+  color: rgb(255, 255, 255);
+  font-style: normal;
+  font-size: 4em;
+  text-align: center;
+  display: block;
+  margin: auto;
+  width: 100%;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+}
+
+h1 {
+font-family: loos-normal, sans-serif;
+  color: rgb(255, 255, 255);
+  font-style: normal;
+  font-size: 3.5em;
+  text-align: center;
+  font-weight: 400;
+  display: block;
+  margin: auto;
+  width: 100%;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+}
+
+#nome{
+  font-family: loos-normal, sans-serif;
+  color: rgb(255, 255, 255);
+  font-style: normal;
+  font-size: 1em;
+  text-align: center;
+  font-weight: 400;
+  display: block;
+  margin: auto;
+  width: 40%;
+  position: absolute;
+  top: 105%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  border-radius: 20px
+}
+
+#go{
+  font-family: loos-normal, sans-serif;
+  color: rgb(198, 35, 132);
+  font-style: normal;
+  font-size: 2.5em;
+  text-align: center;
+  font-weight: 500;
+  display: block;
+  margin: auto;
+  width: 25%;
+  position: absolute;
+  top: 200%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+   background-color:transparent;
+   /* border-color: transparent; */
+   border-radius: 50px;
+}
+
+
+@media only screen and (min-width: 600px) {
+  /* Versione tablet */
+  .col-s-1 {
+    width: 8.33%;
+  }
+  .col-s-2 {
+    width: 16.66%;
+  }
+  .col-s-3 {
+    width: 25%;
+  }
+  .col-s-4 {
+    width: 33.33%;
+  }
+  .col-s-5 {
+    width: 41.66%;
+  }
+  .col-s-6 {
+    width: 50%;
+  }
+  .col-s-7 {
+    width: 58.33%;
+  }
+  .col-s-8 {
+    width: 66.66%;
+  }
+  .col-s-9 {
+    width: 75%;
+  }
+  .col-s-10 {
+    width: 83.33%;
+  }
+  .col-s-11 {
+    width: 91.66%;
+  }
+  .col-s-12 {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  /* Versione desktop */
+  .col-1 {
+    width: 8.33%;
+  }
+  .col-2 {
+    width: 16.66%;
+  }
+  .col-3 {
+    width: 25%;
+  }
+  .col-4 {
+    width: 33.33%;
+  }
+  .col-5 {
+    width: 41.66%;
+  }
+  .col-6 {
+    width: 50%;
+  }
+  .col-7 {
+    width: 58.33%;
+  }
+  .col-8 {
+    width: 66.66%;
+  }
+  .col-9 {
+    width: 75%;
+  }
+  .col-10 {
+    width: 83.33%;
+  }
+  .col-11 {
+    width: 91.66%;
+  }
+  .col-12 {
+    width: 100%;
+  }
+
+  [class*='col-'] {
+    float: left;
+    padding: 15px;
+  }
+  .row::after {
+    content: '';
+    clear: both; /* La proprietà clear serve a impedire che al fianco di un elemento float compaiano altri elementi */
+    display: table;
+  }
+}
+
+
 body {
 display: block;
 margin: auto; 

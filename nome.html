@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Insert your Name</title>
+
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+    <script src="libraries/p5.serialport.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/cwg3cvo.css"> <!--Loos font-->
+</head>
+
+<body>
+    <script>
+        const urlString = window.location.href;
+        const url = new URL(urlString);
+
+        let myText2;
+        let myText1;
+        let myType;
+        let go;
+
+        function setup() {
+            //Nome dell'autore
+            myText2 = createElement("h1", "Click to insert your name");
+
+            //Inserimento nome
+            myType = createInput("").attribute("placeholder", "write your name").id("nome");
+
+            go = createButton("LET'S PLAY!").id("go");
+
+            go.mouseClicked(nextPage);
+        }
+
+        function draw() {
+            if (myType.value() == "") {
+                myText2.html("Click to insert your name");
+            } else {
+                myText2.html("Hi, " + myType.value() + "!");
+            }
+        }
+
+        function nextPage() {
+            // window.open(
+            //     url.origin + "caricamento.html" + myType.value(),
+            //     "_self"
+            // );
+
+            window.open('caricamento1.html', '_self')
+        }
+
+    </script>
+</body>
+
+</html>
