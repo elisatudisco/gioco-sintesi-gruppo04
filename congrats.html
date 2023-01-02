@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Congrats</title>
+
+    <script src="libraries/p5.min.js"></script>
+    <!-- <script src="libraries/p5.sound.min.js"></script> -->
+    <script src="libraries/p5.serialport.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/cwg3cvo.css"> <!--Loos font-->
+</head>
+
+<body>
+    <script>
+        const urlString = window.location.href;
+        const url = new URL(urlString);
+        let score = localStorage.getItem('test');
+
+        window.setTimeout(function () {
+            window.location.href = "chart.js";
+        }, 6000);
+
+        var index = 0;
+        var lastMillis = 0;
+        var message = score + " " + "microplastics!";
+        var message2 = (Math.floor(score / 1.29)) + " " + "clams dance!";
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+
+        }
+
+        function draw() {
+            background("black");
+
+            //Congratulations
+            push();
+            drawingContext.shadowOffsetX = 6;
+            drawingContext.shadowOffsetY = -6;
+            drawingContext.shadowBlur = 10;
+            drawingContext.shadowColor = 'black';
+            fill("white");
+            textFont('loos-normal');
+            textSize(70);
+            textAlign(CENTER);
+            text("Congratulations!", windowWidth / 2, windowHeight / 2 - 140);
+            pop();
+
+            //Mr Mollustic has collected
+            push();
+            drawingContext.shadowOffsetX = 6;
+            drawingContext.shadowOffsetY = -6;
+            drawingContext.shadowBlur = 10;
+            drawingContext.shadowColor = 'black';
+            fill("white");
+            textFont('loos-normal');
+            textSize(40);
+            textAlign(CENTER);
+            text("Mr Mollustic has collected", windowWidth / 2, windowHeight / 2 - 50);
+            pop();
+
+            push();
+            drawingContext.shadowOffsetX = 6;
+            drawingContext.shadowOffsetY = -6;
+            drawingContext.shadowBlur = 10;
+            drawingContext.shadowColor = 'black';
+            fill("white");
+            textFont('loos-normal');
+            textSize(40);
+            textAlign(CENTER);
+            text("Making", windowWidth / 2, windowHeight / 2 + 100);
+            pop();
+
+            //+ "  " + (Math.floor(score / 1.29)) + "clams dance!"
+            push();
+            drawingContext.shadowOffsetX = 6;
+            drawingContext.shadowOffsetY = -6;
+            drawingContext.shadowBlur = 10;
+            drawingContext.shadowColor = 'black';
+            fill(198, 35, 132);
+            textFont('loos-normal');
+            textSize(40);
+            textAlign(CENTER);
+
+            // text((Math.floor(score / 1.29)) + " " + "clams dance!", windowWidth / 2, windowHeight / 2 + 150);
+
+            text(message2.substring(0, index), windowWidth / 2, windowHeight / 2 + 150);
+
+            if (millis() > lastMillis + 100) {
+                index = index + 1;
+                lastMillis = millis();
+            }
+            pop();
+
+            push()
+            drawingContext.shadowOffsetX = 6;
+            drawingContext.shadowOffsetY = -6;
+            drawingContext.shadowBlur = 10;
+            drawingContext.shadowColor = 'black';
+            fill(198, 35, 132);
+            textFont('loos-normal');
+            textSize(40);
+            textAlign(CENTER);
+            //text(score + " " + "microplastics!", windowWidth / 2, windowHeight / 2);
+            text(message.substring(0, index), windowWidth / 2, windowHeight / 2);
+
+            if (millis() > lastMillis + 70) {
+                index = index + 1;
+                lastMillis = millis();
+            }
+            pop()
+
+            function keyPressed() {
+                if (key === "c") {
+                    sessionStorage.clear();
+                }
+            }
+        }
+
+        function nextPage() {
+            // window.open(
+            //     url.origin + "caricamento.html" + myType.value(),
+            //     "_self"
+            // );
+
+            // window.open('caricamento1.html', '_self')
+        }
+
+    </script>
+</body>
+
+</html>

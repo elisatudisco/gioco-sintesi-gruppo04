@@ -180,11 +180,20 @@ select {
 }
 html {
   overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 body {
-  background-color: #000000;
+display: block;
+margin: auto; 
+background-color: rgb(0, 0, 0);
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 100%;  
 }
+
 @font-face {
       font-family: 'GD-Boing-Bold';
       src: url('GD-Boing-Bold.ttf');
@@ -231,9 +240,9 @@ font-family: loos-normal, sans-serif;
 
 #nome{
   font-family: loos-normal, sans-serif;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   font-style: normal;
-  font-size: 1em;
+  font-size: 1.5em;
   text-align: center;
   font-weight: 400;
   display: block;
@@ -356,16 +365,5 @@ font-family: loos-normal, sans-serif;
   }
 }
 
-
-body {
-display: block;
-margin: auto; 
-background-color: rgb(0, 0, 0);
-position: absolute;
-top: 50%;
-left: 50%; 
-transform: translate(-50%, -50%);
-width: 100%; 
-}
 
 

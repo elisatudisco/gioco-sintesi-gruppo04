@@ -8,20 +8,25 @@
     <script src="libraries/p5.sound.min.js"></script>
     <script src="libraries/p5.serialport.js"></script>
     <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
     <link rel="stylesheet" href="https://use.typekit.net/cwg3cvo.css">
+
+    <style>
+        body {
+            background-color: black;
+        }
+    </style>
 </head>
 
 <body>
     <script type="text/javascript">
+        const urlString = window.location.href;
+        const url = new URL(urlString);
+
         var game = new Phaser.Game(1080, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
         WebFontConfig = {
-            //  'active' means all requested fonts have finished loading
-            //  We set a 1 second delay before calling 'createText'.
-            //  For some reason if we don't the browser cannot render the text the first time it's created.
             active: function () { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
-
             //  The Google Fonts we want to load (specify as many as you like in the array)
             google: {
                 families: ['Martian Mono']
@@ -34,6 +39,7 @@
             game.load.image('sfondoliv1', 'assets/sfondoliv1.png');
             game.load.image('sfondoliv2', 'assets/sfondoliv2.png');
             game.load.spritesheet('bubble', 'assets/bubble.png', 30, 30, 100);
+            game.load.spritesheet('bollicine', 'assets/bollicine.png', 494.5, 552, 10);
             //GIOCATORE E MICROPLASTICHE
             game.load.spritesheet('dude', 'assets/spritesheet.png', 150.1, 175.5, 20);
             game.load.spritesheet('star', 'assets/micro.png', 70, 70, 100);
@@ -52,8 +58,11 @@
 
         //VARIABILI SFONDI
         var platforms;
-        var sfondoliv1 = sfondoliv1;
-        var sfondoliv2 = sfondoliv2;
+        var sfondoliv1;
+        var sfondoliv2;
+        var bollicine;
+        var bollicine1;
+        var bollicine2;
 
         //VARIABILI GIOCATORE E MICROPLASTICHE
         var player;
@@ -70,6 +79,7 @@
         var font;
         var score = 0;
         var scoreText;
+        var stellina;
 
         //VARIABILI AUDIO
         var suonomicroplastiche;
@@ -88,6 +98,8 @@
         let sensors = [];
         let currentString;
         let splitString;
+        var mortacciTua = 0;
+        let polpetta;
 
         //scelta posizioni fisse nello spazio per disporre le microplastiche
         let posx = [25, 105, 185, 265, 345, 425, 505, 585, 675, 745, 825, 905, 985];
@@ -106,7 +118,6 @@
             serial.on('list', gotList);
             serial.on('open', gotOpen);
             console.log(sensors);
-            console.log("mi ammazzo");
         }
 
         function create() {
@@ -115,9 +126,19 @@
             game.physics.startSystem(Phaser.Physics.ARCADE);
 
             //SFONDO
-            // sfondo = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'sky'); //sfondo in loop
             sfondoliv1 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'sfondoliv1');
             sfondoliv2 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'sfondoliv2');
+            bollicine = game.add.sprite(300, 3000, 'bollicine');
+            bollicine.animations.add('gluglu', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            bollicine.animations.play('gluglu', 6, true);
+
+            bollicine1 = game.add.sprite(600, 2000, 'bollicine');
+            bollicine1.animations.add('gluglu1', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            bollicine1.animations.play('gluglu1', 6, true);
+
+            bollicine2 = game.add.sprite(200, 700, 'bollicine');
+            bollicine2.animations.add('gluglu2', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            bollicine2.animations.play('gluglu2', 6, true);
 
             //GROUND
             platforms = game.add.group();
@@ -138,6 +159,7 @@
             player.animations.add('up', [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
             player.animations.add('left', [6, 7, 8, 9]);
             player.animations.add('right', [1, 2, 3, 4]);
+
 
             //SCIA GIOCATORE
             emitter = game.add.emitter(game.world.centerX, 4700, 1920);
@@ -197,6 +219,9 @@
             //AUDIO BOOST
             boost = game.add.audio('boost');
             boost.volume = 1;
+
+            stellina = game.add.sprite(30, 20, 'star');
+            stellina.fixedToCamera = true;
         }
 
         // COLLEGAMENTO ARDUINO A PHASER
@@ -236,8 +261,8 @@
             stars.setAll('anchor.x', 0.5)
             stars.setAll('anchor.y', 0.5)
 
-            sfondoliv1.tilePosition.set(game.camera.x * 0, game.camera.y * -0.03);
-            sfondoliv2.tilePosition.set(game.camera.x * 0, game.camera.y * -1);
+            // sfondoliv1.tilePosition.set(game.camera.x * 0, game.camera.y * -0.03);
+            // sfondoliv2.tilePosition.set(game.camera.x * 0, game.camera.y * -1);
 
             //oscillamento microplastiche
             if (counter2 < 100) {
@@ -255,6 +280,7 @@
 
             var hitPlatform = game.physics.arcade.collide(player, platforms);
             game.physics.arcade.overlap(player, stars, collectStar, null, this);
+
 
             //MOVIMENTI GIOCATORE 
 
@@ -339,7 +365,7 @@
 
 
             //CONTROLLI CON TASTIERA 
-             player.body.velocity.x = 0;
+            player.body.velocity.x = 0;
 
             if (cursors.left.isDown) {
                 player.body.velocity.x = -250;
@@ -410,6 +436,9 @@
                 }
             }
 
+            //CAMBIO MICROPLASTICA SCORE
+            stellina.frame = score - (100 * Math.floor(score / 100));
+
             //EFFETTO PACMAN
             if (player.x < -105) {
                 player.x = 1080;
@@ -432,13 +461,16 @@
                 gameover.align = 'center';
                 gameover.setShadow(4, 4, 'rgba(0,0,0,0.7)', 3);
                 gameover.fixedToCamera = true;
-                //game.sound.stopAll();
                 emitter.alpha = 0;
-
+                mortacciTua = 1;
 
                 window.setTimeout(function () {
                     window.location.href = "caricamento2.html";
                 }, 3000);
+
+                polpetta = score;
+                localStorage.setItem('test', polpetta);
+
             }
 
             //AUDIO PASSI
@@ -485,12 +517,13 @@
                     counter += 1;
                 }
             }
-
-
+            if (!(player.body.touching.down && hitPlatform) && mortacciTua == 0) {
+                sfondoliv2.tilePosition.y -= (player.body.velocity.y / 80);
+                sfondoliv1.tilePosition.y -= (player.body.velocity.y / 4000);
+            }
 
             //la barra scala in base al numero massimo di microplastiche 
             barra.frame = 1;
-            //barra2.scale.x = 0;
             barra.scale.x = micro / 10;
             if (micro > 9) {
                 barra2.alpha = 1;
@@ -533,7 +566,7 @@
             if (micro < 10) {
                 micro += 1;
             }
-            scoreText.text = 'score: ' + score;
+            scoreText.text = ' ' + score;
             star.destroy();
             stelleCreate -= 1
             colore -= 1;
@@ -544,7 +577,7 @@
 
         //FUNZIONE TESTO SCORE
         function createText() {
-            scoreText = game.add.text(30, 20, 'score: 0');
+            scoreText = game.add.text(90, 30, ' 0');
             scoreText.font = 'Martian Mono';
             scoreText.fontSize = 32;
             scoreText.fill = '#FFFFFF'

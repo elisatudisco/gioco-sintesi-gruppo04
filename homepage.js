@@ -92,7 +92,7 @@ function draw() {
     textFont('loos-normal');
     textSize(40);
     textAlign(CENTER);
-    text("CLICK TO START", windowWidth / 2, windowHeight / 2 + 230);
+    text("A game by Mollustic", windowWidth / 2, windowHeight / 2 + 230);
     pop();
 }
 
