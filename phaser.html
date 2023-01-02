@@ -236,8 +236,8 @@
             stars.setAll('anchor.x', 0.5)
             stars.setAll('anchor.y', 0.5)
 
-            sfondoliv1.tilePosition.set(game.camera.x * 0, game.camera.y * -0.3);
-            sfondoliv2.tilePosition.set(game.camera.x * 0, game.camera.y * -2);
+            sfondoliv1.tilePosition.set(game.camera.x * 0, game.camera.y * -0.03);
+            sfondoliv2.tilePosition.set(game.camera.x * 0, game.camera.y * -1);
 
             //oscillamento microplastiche
             if (counter2 < 100) {
@@ -339,6 +339,8 @@
 
 
             //CONTROLLI CON TASTIERA 
+             player.body.velocity.x = 0;
+
             if (cursors.left.isDown) {
                 player.body.velocity.x = -250;
                 if (player.body.touching.down && hitPlatform) {
@@ -374,7 +376,7 @@
                 player.scale.setTo(1.2);
                 micro = 0;
                 emitter.start(false, 1200, 20);
-                boost.play(); //AUDIO BOOST
+                // boost.play(); //AUDIO BOOST
             }
 
             else if (jumpButton.isDown && micro == 10) {
@@ -436,7 +438,7 @@
 
                 window.setTimeout(function () {
                     window.location.href = "caricamento2.html";
-                }, 4000);
+                }, 3000);
             }
 
             //AUDIO PASSI
@@ -460,7 +462,7 @@
             //se una micro viene distrutta e tolta dal counter, anche colore deve diminuire. 
             //se le micro sono più in basso di 200 px rispetto al player vengono distrutte (perché se no influiscono nel calcolo e fanno casino)
             for (i = 0; i < stars.length - 1; i++) { //-1 perché JS parte da 0 a contare
-                if (stars.children[counter1].y - player.y > 300) {
+                if (stars.children[counter1].y - player.y > 500) {
                     stars.children[counter1].destroy();
                     colore -= 1;
                 }
