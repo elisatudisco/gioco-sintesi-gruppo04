@@ -22,6 +22,8 @@
     <script type="text/javascript">
         const urlString = window.location.href;
         const url = new URL(urlString);
+        user = url.searchParams.get("currentUser");
+        console.log(user);
 
         var game = new Phaser.Game(1080, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
@@ -39,7 +41,7 @@
             game.load.image('sfondoliv1', 'assets/sfondoliv1.png');
             game.load.image('sfondoliv2', 'assets/sfondoliv2.png');
             game.load.spritesheet('bubble', 'assets/bubble.png', 30, 30, 100);
-            game.load.spritesheet('bollicine', 'assets/bollicine.png', 494.5, 552, 10);
+            game.load.spritesheet('bollicine', 'assets/bollicine.png', 338.58, 552, 48);
             //GIOCATORE E MICROPLASTICHE
             game.load.spritesheet('dude', 'assets/spritesheet.png', 150.1, 175.5, 20);
             game.load.spritesheet('star', 'assets/micro.png', 70, 70, 100);
@@ -129,15 +131,15 @@
             sfondoliv1 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'sfondoliv1');
             sfondoliv2 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'sfondoliv2');
             bollicine = game.add.sprite(300, 3000, 'bollicine');
-            bollicine.animations.add('gluglu', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            bollicine.animations.add('gluglu', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]);
             bollicine.animations.play('gluglu', 6, true);
 
             bollicine1 = game.add.sprite(600, 2000, 'bollicine');
-            bollicine1.animations.add('gluglu1', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            bollicine1.animations.add('gluglu1', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]);
             bollicine1.animations.play('gluglu1', 6, true);
 
             bollicine2 = game.add.sprite(200, 700, 'bollicine');
-            bollicine2.animations.add('gluglu2', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            bollicine2.animations.add('gluglu2', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]);
             bollicine2.animations.play('gluglu2', 6, true);
 
             //GROUND
@@ -469,8 +471,7 @@
                 }, 3000);
 
                 polpetta = score;
-                localStorage.setItem('test', polpetta);
-
+                sessionStorage.setItem('test', polpetta);
             }
 
             //AUDIO PASSI
@@ -550,40 +551,90 @@
                     }
                 }
             }
+
+
         }
 
+        //ELEMENTI CLASSIFICA
 
+        let userSession = {
+            'user': user,
+            'score': score
+        };
+
+        let BIN_ID = '6385e5b3a3c728450eda7d89';
+        let API_KEY = '$2b$10$KWxVu8aW.YRXOvS0UwlDP.hS6u52PsWX9b69W6JfL6fvdiXoXqqde';
+
+        let req = new XMLHttpRequest();
+
+        req.onreadystatechange = () => {
+            if (req.readyState == XMLHttpRequest.DONE) {
+                let data = JSON.parse(req.responseText).record;
+                console.log(data);
+
+                let req_u = new XMLHttpRequest();
+
+                req_u.onreadystatechange = () => {
+                    if (req_u.readyState == XMLHttpRequest.DONE) {
+                        console.log(req.responseText);
+                    }
+                };
+
+                req_u.open("PUT", `https://api.jsonbin.io/v3/b/${BIN_ID}`, true);
+                req_u.setRequestHeader("Content-Type", "application/json");
+                req_u.setRequestHeader("X-Master-Key", API_KEY);
+
+                if (data.leaderboard === undefined) {
+                    data.leaderboard = [];
+                } else {
+                    data.leaderboard.push(userSession);
+                }
+
+                req_u.send(JSON.stringify(data));
+            }
+        };
+
+        req.open("GET", `https://api.jsonbin.io/v3/b/${BIN_ID}`, true);
+        req.setRequestHeader("X-Master-Key", API_KEY);
+        req.send();
+    
+    
 
 
 
         //DA QUA IN POI METTERE LE FUNZIONI EXTRA
 
 
-        //FUNZIONE MICROPLASTICHE RACCOLTE
-        function collectStar(player, star) {
-            suonomicroplastiche.play();
-            score += 1;
-            if (micro < 10) {
-                micro += 1;
+       
+            //FUNZIONE MICROPLASTICHE RACCOLTE
+            function collectStar(player, star) {
+                suonomicroplastiche.play();
+                score += 1;
+                if (micro < 10) {
+                    micro += 1;
+                }
+                scoreText.text = ' ' + score;
+                star.destroy();
+                stelleCreate -= 1
+                colore -= 1;
+
+                player.body.velocity.y = -450;
+                player.body.velocity.x = 0;
             }
-            scoreText.text = ' ' + score;
-            star.destroy();
-            stelleCreate -= 1
-            colore -= 1;
 
-            player.body.velocity.y = -450;
-            player.body.velocity.x = 0;
-        }
+            //FUNZIONE TESTO SCORE
+            function createText() {
+                scoreText = game.add.text(90, 30, ' 0');
+                scoreText.font = 'Martian Mono';
+                scoreText.fontSize = 32;
+                scoreText.fill = '#FFFFFF'
+                scoreText.setShadow(5, 5, 'rgba(0,0,0,0.7)', 5);
+                scoreText.fixedToCamera = true;
+            }
 
-        //FUNZIONE TESTO SCORE
-        function createText() {
-            scoreText = game.add.text(90, 30, ' 0');
-            scoreText.font = 'Martian Mono';
-            scoreText.fontSize = 32;
-            scoreText.fill = '#FFFFFF'
-            scoreText.setShadow(5, 5, 'rgba(0,0,0,0.7)', 5);
-            scoreText.fixedToCamera = true;
-        }
+        
+
+
 
     </script>
 

@@ -25,6 +25,8 @@
         let myType;
         let go;
 
+
+
         function setup() {
             //Nome dell'autore
             myText2 = createElement("h1", "Click to insert your name");
@@ -42,6 +44,7 @@
             } else {
                 myText2.html("Hi, " + myType.value() + "!");
             }
+
         }
 
         function nextPage() {
@@ -49,8 +52,9 @@
             //     url.origin + "caricamento.html" + myType.value(),
             //     "_self"
             // );
-
-            window.open('caricamento1.html', '_self')
+            let utente = myType.value();
+            window.location = "/phaser.html?currentUser=" + myType.value();
+            //window.open('caricamento1.html', '_self')
         }
 
     </script>

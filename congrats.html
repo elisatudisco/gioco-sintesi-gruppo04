@@ -19,11 +19,11 @@
     <script>
         const urlString = window.location.href;
         const url = new URL(urlString);
-        let score = localStorage.getItem('test');
+        let score = sessionStorage.getItem('test');
 
         window.setTimeout(function () {
-            window.location.href = "chart.js";
-        }, 6000);
+            window.location.href = "chart.html";
+        }, 7000);
 
         var index = 0;
         var lastMillis = 0;
@@ -122,14 +122,14 @@
             }
         }
 
-        function nextPage() {
-            // window.open(
-            //     url.origin + "caricamento.html" + myType.value(),
-            //     "_self"
-            // );
+        // function nextPage() {
+        //     // window.open(
+        //     //     url.origin + "caricamento.html" + myType.value(),
+        //     //     "_self"
+        //     // );
 
-            // window.open('caricamento1.html', '_self')
-        }
+        //     // window.open('caricamento1.html', '_self')
+        // }
 
     </script>
 </body>
