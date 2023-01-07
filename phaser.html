@@ -53,10 +53,11 @@
             game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
             //PRELOAD AUDIO
             game.load.audio('suonomicroplastiche', 'assets/audio/microplastiche.mp3');
-            game.load.audio('musica', 'assets/audio/soundtrack_gioco.mp3');
+            game.load.audio('musica', 'assets/audio/soundtrack_1.mp3');
             game.load.audio('morte', 'assets/audio/gameover.wav');
             game.load.audio('suonopassi', 'assets/audio/passi.mp3');
             game.load.audio('boost', 'assets/audio/boost.mp3');
+            game.load.audio('barra_riempita', 'assets/audio/barra_riempita.mp3');
         }
 
         //VARIABILI SFONDI
@@ -92,6 +93,7 @@
         var suonopassi;
         var boost;
         var gameover;
+        var barra_riempita;
 
         //ALTRE VARIABILI
         var cursors;
@@ -203,7 +205,7 @@
             //AUDIO MICROPLASTICHE
             suonomicroplastiche = game.add.audio('suonomicroplastiche');
             suonomicroplastiche.allowMultiple = true;
-            suonomicroplastiche.volume = 0.3;
+            suonomicroplastiche.volume = 0.5;
 
             //AUDIO GAME OVER
             morte = game.add.audio('morte');
@@ -217,13 +219,17 @@
 
             //AUDIO PASSI
             suonopassi = game.add.audio('suonopassi');
-            suonopassi.volume = 0.4; //l'audio va regolato prima del play
+            suonopassi.volume = 0.6; //l'audio va regolato prima del play
             suonopassi.loop = true; //l'audio va loopato prima del play ma qua attenzione perchè riparte solo dopo che smetti di premere la direzione
             suonopassi.play();
 
             //AUDIO BOOST
             boost = game.add.audio('boost');
             boost.volume = 1;
+
+            //BARRA RIEMPITA
+            barra_riempita = game.add.audio('barra_riempita');
+            barra_riempita.volume = 1;
 
             stellina = game.add.sprite(30, 20, 'star');
             stellina.fixedToCamera = true;
@@ -555,6 +561,11 @@
                         colore += 1;
                     }
                 }
+            }
+
+            //AUDIO BARRA RIEMPITA
+            if (micro == 10) {
+                barra_riempita.play();
             }
 
 
