@@ -5,17 +5,28 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Congrats</title>
+    <title>Leaderboard</title>
 
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.serialport.js"></script>
 
-    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://use.typekit.net/cwg3cvo.css"> <!--Loos font-->
 </head>
 
 <body>
-    <p id="demo"></p>
+    <div id="testo">
+        <p id="demo0"></p>
+        <p id="demo1"></p>
+        <p id="demo2"></p>
+        <p id="demo3"></p>
+        <p id="demo4"></p>
+        <p id="demo5"></p>
+        <p id="demo6"></p>
+        <p id="demo7"></p>
+        <p id="demo8"></p>
+        <p id="demo9"></p>
+    </div>
     <script>
         const urlString = window.location.href;
         const url = new URL(urlString);
@@ -55,6 +66,7 @@
                 let pillolina = pillola.replace(/\[|\]|\{|\}|"|polpettona|:/g, '')
                 let micropillola = pillolina.split(",")
                 micropillola = bubbleSort(micropillola)
+
                 // document.getElementById("demo").innerHTML = micropillola[pongo]
 
 
@@ -75,6 +87,7 @@
 
 
                 });
+
             }
 
 
@@ -132,6 +145,7 @@
         // pillolina = bubbleSort2(micropillola)
 
         // document.getElementById("demo").innerHTML = micropillola
+
 
         req.open("GET", `https://api.jsonbin.io/v3/b/${BIN_ID}`, true);
         req.setRequestHeader("X-Master-Key", API_KEY);
