@@ -236,10 +236,12 @@ font-family: loos-normal, sans-serif;
   top: 25%;
   left: 50%;
   transform: translate(-50%, -50%); 
+  cursor:default;
 }
 
 #nome{
   font-family: loos-normal, sans-serif;
+  border: 2px solid white;
   color: rgb(0, 0, 0);
   font-style: normal;
   font-size: 1.5em;
@@ -258,6 +260,7 @@ font-family: loos-normal, sans-serif;
 #go{
   font-family: loos-normal, sans-serif;
   color: rgb(198, 35, 132);
+    border: 2px solid rgb(198, 35, 132);
   font-style: normal;
   font-size: 2.5em;
   text-align: center;
@@ -272,6 +275,7 @@ font-family: loos-normal, sans-serif;
    background-color:transparent;
    /* border-color: transparent; */
    border-radius: 50px;
+   cursor: pointer;
 }
 
 

@@ -8,7 +8,6 @@
     <script src="libraries/p5.sound.min.js"></script>
     <script src="libraries/p5.serialport.js"></script>
     <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
-    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
     <link rel="stylesheet" href="https://use.typekit.net/cwg3cvo.css">
 
     <style>
@@ -106,6 +105,7 @@
         let splitString;
         var mortacciTua = 0;
         let polpetta;
+        var polpettona = user;
 
         //scelta posizioni fisse nello spazio per disporre le microplastiche
         let posx = [25, 105, 185, 265, 345, 425, 505, 585, 675, 745, 825, 905, 985];
@@ -117,9 +117,7 @@
         function setup() {
             serial = new p5.SerialPort();
             serial.list();
-            //serial.on('open',)
             serial.open('/dev/tty.usbmodem14301');
-            //LIST LI METTE IN LISTA?
             serial.on('data', gotData);
             serial.on('list', gotList);
             serial.on('open', gotOpen);
@@ -150,12 +148,12 @@
             //GROUND
             platforms = game.add.group();
             platforms.enableBody = true;
-            var ground = platforms.create(-115, game.world.height - 100, 'ground');
-            ground.body.setSize(1667, 400, 0, 40);
+            var ground = platforms.create(0, game.world.height - 497, 'ground');
+            ground.body.setSize(1150, 497, -20, 428);
             ground.body.immovable = true;
 
             //GIOCATORE
-            player = game.add.sprite(1080 / 2, game.world.height - 183, 'dude');
+            player = game.add.sprite(1080 / 2, game.world.height - 205, 'dude');
             player.scale.setTo(0.7);
             game.physics.arcade.enable(player);
             player.body.bounce.y = 0.5;
@@ -166,7 +164,6 @@
             player.animations.add('up', [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
             player.animations.add('left', [6, 7, 8, 9]);
             player.animations.add('right', [1, 2, 3, 4]);
-
 
             //SCIA GIOCATORE
             emitter = game.add.emitter(game.world.centerX, 4700, 1920);
@@ -252,7 +249,6 @@
         }
         function gotData() {
             let currentString = serial.readStringUntil('\r\n'); // store the data in a variable
-            //let currentString = serial.readLine(); //legge le linee di codice che arrivano da arduino 
             trim(currentString); //toglie gli spazi bianchi 
             if (!currentString) return;
 
@@ -271,9 +267,6 @@
             stars.addAll('angle', 1)
             stars.setAll('anchor.x', 0.5)
             stars.setAll('anchor.y', 0.5)
-
-            // sfondoliv1.tilePosition.set(game.camera.x * 0, game.camera.y * -0.03);
-            // sfondoliv2.tilePosition.set(game.camera.x * 0, game.camera.y * -1);
 
             //oscillamento microplastiche
             if (counter2 < 100) {
@@ -475,12 +468,13 @@
                 emitter.alpha = 0;
                 mortacciTua = 1;
 
-                window.setTimeout(function () {
-                    window.location.href = "caricamento2.html";
-                }, 3000);
+                // window.setTimeout(function () {
+                //     window.location.href = "caricamento2.html";
+                // }, 3000);
 
                 polpetta = score;
                 sessionStorage.setItem('test', polpetta);
+                sessionStorage.setItem('test1', polpettona);
             }
 
             //AUDIO PASSI
@@ -571,84 +565,40 @@
 
         }
 
-        //ELEMENTI CLASSIFICA
-
-        let userSession = {
-            'user': user,
-            'score': score
-        };
-
-        let BIN_ID = '6385e5b3a3c728450eda7d89';
-        let API_KEY = '$2b$10$KWxVu8aW.YRXOvS0UwlDP.hS6u52PsWX9b69W6JfL6fvdiXoXqqde';
-
-        let req = new XMLHttpRequest();
-
-        req.onreadystatechange = () => {
-            if (req.readyState == XMLHttpRequest.DONE) {
-                let data = JSON.parse(req.responseText).record;
-                console.log(data);
-
-                let req_u = new XMLHttpRequest();
-
-                req_u.onreadystatechange = () => {
-                    if (req_u.readyState == XMLHttpRequest.DONE) {
-                        console.log(req.responseText);
-                    }
-                };
-
-                req_u.open("PUT", `https://api.jsonbin.io/v3/b/${BIN_ID}`, true);
-                req_u.setRequestHeader("Content-Type", "application/json");
-                req_u.setRequestHeader("X-Master-Key", API_KEY);
-
-                if (data.leaderboard === undefined) {
-                    data.leaderboard = [];
-                } else {
-                    data.leaderboard.push(userSession);
-                }
-
-                req_u.send(JSON.stringify(data));
+        //FUNZIONE MICROPLASTICHE RACCOLTE
+        function collectStar(player, star) {
+            suonomicroplastiche.play();
+            score += 1;
+            if (micro < 10) {
+                micro += 1;
             }
-        };
+            scoreText.text = ' ' + score;
+            star.destroy();
+            stelleCreate -= 1
+            colore -= 1;
 
-        req.open("GET", `https://api.jsonbin.io/v3/b/${BIN_ID}`, true);
-        req.setRequestHeader("X-Master-Key", API_KEY);
-        req.send();
-    
-    
+            player.body.velocity.y = -450;
+            player.body.velocity.x = 0;
+        }
 
+        //FUNZIONE TESTO SCORE
+        function createText() {
+            scoreText = game.add.text(90, 30, ' 0');
+            scoreText.font = 'Martian Mono';
+            scoreText.fontSize = 32;
+            scoreText.fill = '#FFFFFF'
+            scoreText.setShadow(5, 5, 'rgba(0,0,0,0.7)', 5);
+            scoreText.fixedToCamera = true;
+        }
 
+        function render() {
 
-        //DA QUA IN POI METTERE LE FUNZIONI EXTRA
+                game.debug.bodyInfo(ground, 32, 32);
 
+                game.debug.body(ground);
 
-       
-            //FUNZIONE MICROPLASTICHE RACCOLTE
-            function collectStar(player, star) {
-                suonomicroplastiche.play();
-                score += 1;
-                if (micro < 10) {
-                    micro += 1;
-                }
-                scoreText.text = ' ' + score;
-                star.destroy();
-                stelleCreate -= 1
-                colore -= 1;
-
-                player.body.velocity.y = -450;
-                player.body.velocity.x = 0;
             }
 
-            //FUNZIONE TESTO SCORE
-            function createText() {
-                scoreText = game.add.text(90, 30, ' 0');
-                scoreText.font = 'Martian Mono';
-                scoreText.fontSize = 32;
-                scoreText.fill = '#FFFFFF'
-                scoreText.setShadow(5, 5, 'rgba(0,0,0,0.7)', 5);
-                scoreText.fixedToCamera = true;
-            }
-
-        
 
 
 

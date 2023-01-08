@@ -20,6 +20,10 @@
         const urlString = window.location.href;
         const url = new URL(urlString);
         let score = sessionStorage.getItem('test');
+        let user = sessionStorage.getItem('test1');
+        
+
+        console.log(user);
 
         window.setTimeout(function () {
             window.location.href = "chart.html";
@@ -121,6 +125,61 @@
                 }
             }
         }
+
+          let userSession = {
+                'user': user,
+                'score': score
+            };
+
+        // let score1;
+
+        // if (score < 10) {
+        //     score1 = "00" + score;
+        // } else if (score >= 10 && score < 100) {
+        //     score1 = "0" + score;
+        // } else {
+        //     score1 = score;
+        // }
+        // let userSession = {
+
+        //     score1, user
+        // };
+
+        let BIN_ID = '6385e5b3a3c728450eda7d89';
+        let API_KEY = '$2b$10$KWxVu8aW.YRXOvS0UwlDP.hS6u52PsWX9b69W6JfL6fvdiXoXqqde';
+
+        let req = new XMLHttpRequest();
+
+        req.onreadystatechange = () => {
+            if (req.readyState == XMLHttpRequest.DONE) {
+                let data = JSON.parse(req.responseText).record;
+                console.log(data);
+
+                let req_u = new XMLHttpRequest();
+
+                req_u.onreadystatechange = () => {
+                    if (req_u.readyState == XMLHttpRequest.DONE) {
+                        console.log(req.responseText);
+                    }
+                };
+
+                req_u.open("PUT", `https://api.jsonbin.io/v3/b/${BIN_ID}`, true);
+                req_u.setRequestHeader("Content-Type", "application/json");
+                req_u.setRequestHeader("X-Master-Key", API_KEY);
+
+                if (data.leaderboard === undefined) {
+                    data.leaderboard = [];
+                } else {
+                    data.leaderboard.push(userSession);
+                }
+
+                req_u.send(JSON.stringify(data));
+            }
+        };
+
+        req.open("GET", `https://api.jsonbin.io/v3/b/${BIN_ID}`, true);
+        req.setRequestHeader("X-Master-Key", API_KEY);
+        req.send();
 
         // function nextPage() {
         //     // window.open(
