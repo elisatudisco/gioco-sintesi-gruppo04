@@ -35,7 +35,7 @@
                     var len = arr.length;
                     for (var i = len - 1; i >= 0; i--) {
                         for (var j = 1; j <= i; j++) {
-                            if (arr[j - 1] > arr[j]) {
+                            if (arr[j - 1] < arr[j]) {
                                 var temp = arr[j - 1];
                                 arr[j - 1] = arr[j];
                                 arr[j] = temp;
@@ -49,17 +49,48 @@
                 leaderboard = bubbleSort(leaderboard);
                 console.log(leaderboard);
 
-               
+
+                let pillola = JSON.stringify(leaderboard);
+                let pillolina = pillola.replace(/\[|\]|\{|\}|"|polpettona|:/g, '')
+                let micropillola = pillolina.split(",")
+                micropillola = bubbleSort(micropillola)
+                document.getElementById("demo").innerHTML = micropillola
+
+
+
+
                 //qui è dove metti su schermo i dati recuperati da JSON bin
                 leaderboard.forEach(element => {
-                    document.getElementById("demo").innerHTML = JSON.stringify(leaderboard);
-                //crei un nodo HTML con user e score
+                    // document.getElementById("demo").innerHTML = JSON.stringify(leaderboard);
+                    //crei un nodo HTML con user e score
                 });
             }
 
 
         };
 
+
+
+        // function bubbleSort2(arr) {
+        //             var len = arr.length;
+        //             for (var i = len - 1; i >= 0; i--) {
+        //                 for (var j = 1; j <= i; j++) {
+        //                     if (arr[j - 1] < arr[j]) {
+        //                         var temp = arr[j - 1];
+        //                         arr[j - 1] = arr[j];
+        //                         arr[j] = temp;
+        //                     }
+        //                 }
+        //             }
+        //             return arr;
+        //         }
+
+        // let pillola = '[{"polpettona":"74 Elisa"},{"polpettona":"21 Stefano"},{"polpettona":"43 Francesco"}]'
+        // let pillolina = pillola.replace(/\[|\]|\{|\}|"|polpettona|:/g, '')
+        // let micropillola = pillolina.split(",")
+        // pillolina = bubbleSort2(micropillola)
+
+        // document.getElementById("demo").innerHTML = micropillola
 
         req.open("GET", `https://api.jsonbin.io/v3/b/${BIN_ID}`, true);
         req.setRequestHeader("X-Master-Key", API_KEY);
