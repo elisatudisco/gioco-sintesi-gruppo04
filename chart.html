@@ -92,7 +92,7 @@
 
                              if(pongo < micropillola1.length){
 
-                                ciccia.push(micropillola1[pongo] + "<br />")
+                                ciccia.push((pongo+1) + ' ' + micropillola1[pongo] + "<br />")
 
 
                                 pongo++
@@ -103,7 +103,6 @@
                             ciccina = ciccia.toString();
                             cicciolina = ciccina.replace(/,/g, '')
 
-                             console.log(cicciolina)
 
                              
                              document.getElementById("demo").innerHTML = cicciolina
