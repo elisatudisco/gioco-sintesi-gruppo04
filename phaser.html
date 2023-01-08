@@ -147,11 +147,11 @@
             platforms = game.add.group();
             platforms.enableBody = true;
             var ground = platforms.create(0, game.world.height - 497, 'ground');
-            ground.body.setSize(1080, 497, 0, 50);
+            ground.body.setSize(1150, 497, -20, 428);
             ground.body.immovable = true;
 
             //GIOCATORE
-            player = game.add.sprite(1080 / 2, game.world.height - 600, 'dude');
+            player = game.add.sprite(1080 / 2, game.world.height - 205, 'dude');
             player.scale.setTo(0.7);
             game.physics.arcade.enable(player);
             player.body.bounce.y = 0.5;
