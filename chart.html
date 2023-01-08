@@ -5,17 +5,28 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Congrats</title>
+    <title>Leaderboard</title>
 
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.serialport.js"></script>
 
-    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://use.typekit.net/cwg3cvo.css"> <!--Loos font-->
 </head>
 
 <body>
-    <p id="demo"></p>
+    <div id="testo">
+        <p id="demo0"></p>
+        <p id="demo1"></p>
+        <p id="demo2"></p>
+        <p id="demo3"></p>
+        <p id="demo4"></p>
+        <p id="demo5"></p>
+        <p id="demo6"></p>
+        <p id="demo7"></p>
+        <p id="demo8"></p>
+        <p id="demo9"></p>
+    </div>
     <script>
         const urlString = window.location.href;
         const url = new URL(urlString);
@@ -49,48 +60,31 @@
                 leaderboard = bubbleSort(leaderboard);
                 console.log(leaderboard);
 
-
                 let pillola = JSON.stringify(leaderboard);
                 let pillolina = pillola.replace(/\[|\]|\{|\}|"|polpettona|:/g, '')
                 let micropillola = pillolina.split(",")
                 micropillola = bubbleSort(micropillola)
-                document.getElementById("demo").innerHTML = micropillola
+                document.getElementById("demo0").innerHTML = micropillola[0];
+                document.getElementById("demo1").innerHTML = micropillola[1];
+                document.getElementById("demo2").innerHTML = micropillola[2];
+                document.getElementById("demo3").innerHTML = micropillola[3];
+                document.getElementById("demo4").innerHTML = micropillola[4];
+                document.getElementById("demo5").innerHTML = micropillola[5];
+                document.getElementById("demo6").innerHTML = micropillola[6];
+                document.getElementById("demo7").innerHTML = micropillola[7];
+                document.getElementById("demo8").innerHTML = micropillola[8];
+                document.getElementById("demo9").innerHTML = micropillola[9];
 
 
-
-
-                //qui è dove metti su schermo i dati recuperati da JSON bin
-                leaderboard.forEach(element => {
-                    // document.getElementById("demo").innerHTML = JSON.stringify(leaderboard);
-                    //crei un nodo HTML con user e score
-                });
+                // //qui è dove metti su schermo i dati recuperati da JSON bin
+                // leaderboard.forEach(element => {
+                //     // document.getElementById("demo").innerHTML = JSON.stringify(leaderboard);
+                //     //crei un nodo HTML con user e score
+                // });
             }
 
 
         };
-
-
-
-        // function bubbleSort2(arr) {
-        //             var len = arr.length;
-        //             for (var i = len - 1; i >= 0; i--) {
-        //                 for (var j = 1; j <= i; j++) {
-        //                     if (arr[j - 1] < arr[j]) {
-        //                         var temp = arr[j - 1];
-        //                         arr[j - 1] = arr[j];
-        //                         arr[j] = temp;
-        //                     }
-        //                 }
-        //             }
-        //             return arr;
-        //         }
-
-        // let pillola = '[{"polpettona":"74 Elisa"},{"polpettona":"21 Stefano"},{"polpettona":"43 Francesco"}]'
-        // let pillolina = pillola.replace(/\[|\]|\{|\}|"|polpettona|:/g, '')
-        // let micropillola = pillolina.split(",")
-        // pillolina = bubbleSort2(micropillola)
-
-        // document.getElementById("demo").innerHTML = micropillola
 
         req.open("GET", `https://api.jsonbin.io/v3/b/${BIN_ID}`, true);
         req.setRequestHeader("X-Master-Key", API_KEY);
