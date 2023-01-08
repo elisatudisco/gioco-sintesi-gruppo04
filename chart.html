@@ -10,19 +10,19 @@
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.serialport.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
     <link rel="stylesheet" href="https://use.typekit.net/cwg3cvo.css"> <!--Loos font-->
 </head>
 
 <body>
+    <p id="demo"></p>
     <script>
         const urlString = window.location.href;
         const url = new URL(urlString);
-        // let score = localStorage.getItem('test');
 
-        window.setTimeout(function () {
-            window.location.href = "qrcode.html";
-        }, 8000);
+        // window.setTimeout(function () {
+        //     window.location.href = "qrcode.html";
+        // }, 8000);
 
         BIN_ID = '6385e5b3a3c728450eda7d89';
         API_KEY = '$2b$10$KWxVu8aW.YRXOvS0UwlDP.hS6u52PsWX9b69W6JfL6fvdiXoXqqde';
@@ -49,17 +49,23 @@
                 leaderboard = bubbleSort(leaderboard);
                 console.log(leaderboard);
 
-                /// qui è dove metti su schermo i dati recuperati da JSON bin
+                //qui è dove metti su schermo i dati recuperati da JSON bin
                 leaderboard.forEach(element => {
-                    
-                    // crei un nodo HTML con user e score
+                    document.getElementById("demo").innerHTML = JSON.stringify(leaderboard);
+                //crei un nodo HTML con user e score
                 });
             }
+
+
         };
+
 
         req.open("GET", `https://api.jsonbin.io/v3/b/${BIN_ID}`, true);
         req.setRequestHeader("X-Master-Key", API_KEY);
         req.send();
+
+
+
 
     </script>
 </body>
