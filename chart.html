@@ -20,6 +20,8 @@
         const urlString = window.location.href;
         const url = new URL(urlString);
 
+        let pongo = 0;
+
         // window.setTimeout(function () {
         //     window.location.href = "qrcode.html";
         // }, 8000);
@@ -53,7 +55,12 @@
                 let pillolina = pillola.replace(/\[|\]|\{|\}|"|polpettona|:/g, '')
                 let micropillola = pillolina.split(",")
                 micropillola = bubbleSort(micropillola)
-                document.getElementById("demo").innerHTML = micropillola
+                // document.getElementById("demo").innerHTML = micropillola[pongo]
+
+
+                sessionStorage.setItem('test2', micropillola);
+
+
 
 
 
@@ -62,12 +69,48 @@
                 leaderboard.forEach(element => {
                     // document.getElementById("demo").innerHTML = JSON.stringify(leaderboard);
                 //crei un nodo HTML con user e score
+
+                    // document.getElementById("demo").innerHTML = micropillola[pongo]
+
+
+
                 });
             }
 
 
         };
 
+        let pillolina1 = sessionStorage.getItem('test2');
+        let micropillola1 = pillolina1.split(",")
+
+        let ciccia = []
+        let ciccina;
+        let cicciolina;
+
+
+        function draw() {
+
+                             if(pongo < micropillola1.length){
+
+                                ciccia.push(micropillola1[pongo] + "<br />")
+
+
+                                pongo++
+
+
+
+                             }
+                            ciccina = ciccia.toString();
+                            cicciolina = ciccina.replace(/,/g, '')
+
+                             console.log(cicciolina)
+
+                             
+                             document.getElementById("demo").innerHTML = cicciolina
+
+
+
+        }
 
 
         // function bubbleSort2(arr) {
@@ -94,6 +137,11 @@
         req.open("GET", `https://api.jsonbin.io/v3/b/${BIN_ID}`, true);
         req.setRequestHeader("X-Master-Key", API_KEY);
         req.send();
+
+
+
+
+
 
 
 
