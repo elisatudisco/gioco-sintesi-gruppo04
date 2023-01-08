@@ -46,7 +46,7 @@
             game.load.spritesheet('dude', 'assets/spritesheet.png', 150.1, 175.5, 20);
             game.load.spritesheet('star', 'assets/micro.png', 70, 70, 100);
             //INTERFACCIA DI GIOCO
-            game.load.spritesheet('barra3', 'assets/barra piena.png', 200, 27, 2);
+            game.load.spritesheet('barra3', 'assets/barra piena.png', 197.33, 27, 6);
             game.load.image('barra2', 'assets/barra vuota.png');
             game.load.image('barra', 'assets/barra piccola.png');
             game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
@@ -79,6 +79,7 @@
         //VARIABILI INTERFACCIA DI GIOCO
         var barra;
         var barra2;
+        var barra3;
         var font;
         var score = 0;
         var scoreText;
@@ -186,12 +187,18 @@
             cursors = game.input.keyboard.createCursorKeys();
             jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.S);
 
-            //BARRA MICROPLASTICHE
+            // //BARRA MICROPLASTICHE
             barra2 = game.add.sprite(840, 26, 'barra2');
             barra2.fixedToCamera = true;
+
             barra = game.add.sprite(840, 26, 'barra');
             barra.fixedToCamera = true;
             barra2.alpha = 0;
+
+            barra3 = game.add.sprite(840, 26, 'barra3');
+            barra3.fixedToCamera = true;
+            barra3.alpha = 0;
+            barra3.animations.add('rainbow', [0, 1, 2, 3, 4, 5]);
 
             //CAMERA
             game.camera.follow(player);
@@ -411,7 +418,7 @@
                 micro = 0;
                 barra.scale.x = 0;
                 emitter.start(false, 1200, 10);
-                barra2.alpha = 0;
+                barra3.alpha = 0;
                 barra.alpha = 1;
                 boost.play(); //AUDIO BOOST
             }
@@ -462,9 +469,9 @@
                 emitter.alpha = 0;
                 mortacciTua = 1;
 
-                // window.setTimeout(function () {
-                //     window.location.href = "caricamento2.html";
-                // }, 3000);
+                window.setTimeout(function () {
+                    window.location.href = "caricamento2.html";
+                }, 3000);
 
                 polpetta = score;
                 sessionStorage.setItem('test', polpetta);
@@ -526,7 +533,8 @@
             barra.frame = 1;
             barra.scale.x = micro / 10;
             if (micro > 9) {
-                barra2.alpha = 1;
+                barra3.alpha = 1;
+                barra3.animations.play('rainbow', 3, true);
                 barra.alpha = 0;
             }
 
@@ -572,23 +580,13 @@
 
         //FUNZIONE TESTO SCORE
         function createText() {
-            scoreText = game.add.text(90, 30, ' 0');
+            scoreText = game.add.text(90, 35, ' 0');
             scoreText.font = 'Martian Mono';
             scoreText.fontSize = 32;
             scoreText.fill = '#FFFFFF'
             scoreText.setShadow(5, 5, 'rgba(0,0,0,0.7)', 5);
             scoreText.fixedToCamera = true;
         }
-
-        function render() {
-
-                game.debug.bodyInfo(ground, 32, 32);
-
-                game.debug.body(ground);
-
-            }
-
-
 
 
     </script>
