@@ -15,7 +15,7 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(windowWidth, windowHeight)
+    createCanvas(windowWidth, windowHeight);
 
 
     gravity = createVector(0, 0.3);
@@ -83,9 +83,9 @@ function draw() {
 }
 
 function mouseClicked() {
-    window.open('nome.html', '_self')
+    window.open('nome.html', '_self');
 }
 
 function windowResized() {
-    resizeCanvas(windowWidth, windowHeight)
+    resizeCanvas(windowWidth, windowHeight);
 }

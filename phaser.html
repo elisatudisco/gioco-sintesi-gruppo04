@@ -475,13 +475,19 @@
                 emitter.alpha = 0;
                 mortacciTua = 1;
 
+
+                function deleteItems() {
+                    localStorage.clear();
+                }
+
                 window.setTimeout(function () {
                     window.location.href = "caricamento2.html";
+                    deleteItems();
                 }, 3000);
 
                 polpetta = score;
-                sessionStorage.setItem('test', polpetta);
-                sessionStorage.setItem('test1', polpettona);
+                localStorage.setItem('test', polpetta);
+                localStorage.setItem('test1', polpettona);
             }
 
             //AUDIO PASSI

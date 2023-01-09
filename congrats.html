@@ -19,15 +19,32 @@
     <script>
         const urlString = window.location.href;
         const url = new URL(urlString);
-        let score = sessionStorage.getItem('test');
-        let user = sessionStorage.getItem('test1');
-        
+        let score = localStorage.getItem('test');
+        let user = localStorage.getItem('test1');
 
-        let polpettona = score + " " + user;
+
+
         console.log(user);
+
+        let score1;
+
+        if (score < 10) {
+            score1 = "00" + score;
+        } else if (score >= 10 && score < 100) {
+            score1 = "0" + score;
+        } else {
+            score1 = score;
+        }
+
+        let polpettona = score1 + "  " + user;
+
+        function deleteItems() {
+            localStorage.clear();
+        }
 
         window.setTimeout(function () {
             window.location.href = "chart.html";
+            deleteItems();
         }, 7000);
 
         var index = 0;
@@ -37,7 +54,6 @@
 
         function setup() {
             createCanvas(windowWidth, windowHeight);
-
         }
 
         function draw() {
@@ -111,7 +127,6 @@
             textFont('loos-normal');
             textSize(40);
             textAlign(CENTER);
-            //text(score + " " + "microplastics!", windowWidth / 2, windowHeight / 2);
             text(message.substring(0, index), windowWidth / 2, windowHeight / 2);
 
             if (millis() > lastMillis + 70) {
@@ -120,32 +135,14 @@
             }
             pop()
 
-            function keyPressed() {
-                if (key === "c") {
-                    sessionStorage.clear();
-                }
-            }
+           
         }
 
-          let userSession = {
+        let userSession = {
             polpettona
-                // 'user': user,
-                // 'score': score
-            };
+        };
 
-        // let score1;
 
-        // if (score < 10) {
-        //     score1 = "00" + score;
-        // } else if (score >= 10 && score < 100) {
-        //     score1 = "0" + score;
-        // } else {
-        //     score1 = score;
-        // }
-        // let userSession = {
-
-        //     score1, user
-        // };
 
         let BIN_ID = '6385e5b3a3c728450eda7d89';
         let API_KEY = '$2b$10$KWxVu8aW.YRXOvS0UwlDP.hS6u52PsWX9b69W6JfL6fvdiXoXqqde';
@@ -182,16 +179,6 @@
         req.open("GET", `https://api.jsonbin.io/v3/b/${BIN_ID}`, true);
         req.setRequestHeader("X-Master-Key", API_KEY);
         req.send();
-
-        // function nextPage() {
-        //     // window.open(
-        //     //     url.origin + "caricamento.html" + myType.value(),
-        //     //     "_self"
-        //     // );
-
-        //     // window.open('caricamento1.html', '_self')
-        // }
-
     </script>
 </body>
 

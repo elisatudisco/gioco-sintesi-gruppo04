@@ -1,2 +1,0 @@
-# gioco-sintesi-gruppo04
- 
