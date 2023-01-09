@@ -10,23 +10,12 @@
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.serialport.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
     <link rel="stylesheet" href="https://use.typekit.net/cwg3cvo.css"> <!--Loos font-->
 </head>
 
 <body>
-    <div id="testo">
-        <p id="demo0"></p>
-        <p id="demo1"></p>
-        <p id="demo2"></p>
-        <p id="demo3"></p>
-        <p id="demo4"></p>
-        <p id="demo5"></p>
-        <p id="demo6"></p>
-        <p id="demo7"></p>
-        <p id="demo8"></p>
-        <p id="demo9"></p>
-    </div>
+    <p id="demo"></p>
     <script>
         const urlString = window.location.href;
         const url = new URL(urlString);
@@ -80,7 +69,7 @@
                 //qui è dove metti su schermo i dati recuperati da JSON bin
                 leaderboard.forEach(element => {
                     // document.getElementById("demo").innerHTML = JSON.stringify(leaderboard);
-                //crei un nodo HTML con user e score
+                    //crei un nodo HTML con user e score
 
                     // document.getElementById("demo").innerHTML = micropillola[pongo]
 
@@ -103,22 +92,22 @@
 
         function draw() {
 
-                             if(pongo < micropillola1.length){
+            if (pongo < micropillola1.length) {
 
-                                ciccia.push((pongo+1) + ' ' + micropillola1[pongo] + "<br />")
-
-
-                                pongo++
+                ciccia.push((pongo + 1) + ' ' + micropillola1[pongo] + "<br />")
 
 
-
-                             }
-                            ciccina = ciccia.toString();
-                            cicciolina = ciccina.replace(/,/g, '')
+                pongo++
 
 
-                             
-                             document.getElementById("demo").innerHTML = cicciolina
+
+            }
+            ciccina = ciccia.toString();
+            cicciolina = ciccina.replace(/,/g, '')
+
+
+
+            document.getElementById("demo").innerHTML = cicciolina
 
 
 
