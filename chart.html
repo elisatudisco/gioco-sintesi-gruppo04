@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Leaderboard</title>
+    <title>Congrats</title>
 
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.serialport.js"></script>
@@ -51,10 +51,12 @@
                 leaderboard = bubbleSort(leaderboard);
                 console.log(leaderboard);
 
+
                 let pillola = JSON.stringify(leaderboard);
                 let pillolina = pillola.replace(/\[|\]|\{|\}|"|polpettona|:/g, '')
                 let micropillola = pillolina.split(",")
                 micropillola = bubbleSort(micropillola)
+<<<<<<< HEAD
 
                 // document.getElementById("demo").innerHTML = micropillola[pongo]
 
@@ -64,12 +66,18 @@
 
 
 
+=======
+                document.getElementById("demo").innerHTML = micropillola
+
+
+>>>>>>> parent of dd830bc (prove classifica)
 
 
                 //qui è dove metti su schermo i dati recuperati da JSON bin
                 leaderboard.forEach(element => {
                     // document.getElementById("demo").innerHTML = JSON.stringify(leaderboard);
                     //crei un nodo HTML con user e score
+<<<<<<< HEAD
 
                     // document.getElementById("demo").innerHTML = micropillola[pongo]
 
@@ -77,11 +85,15 @@
 
                 });
 
+=======
+                });
+>>>>>>> parent of dd830bc (prove classifica)
             }
 
 
         };
 
+<<<<<<< HEAD
         let pillolina1 = sessionStorage.getItem('test2');
         let micropillola1 = pillolina1.split(",")
 
@@ -112,6 +124,8 @@
 
 
         }
+=======
+>>>>>>> parent of dd830bc (prove classifica)
 
 
         // function bubbleSort2(arr) {
@@ -135,7 +149,10 @@
 
         // document.getElementById("demo").innerHTML = micropillola
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of dd830bc (prove classifica)
         req.open("GET", `https://api.jsonbin.io/v3/b/${BIN_ID}`, true);
         req.setRequestHeader("X-Master-Key", API_KEY);
         req.send();
