@@ -52,11 +52,23 @@
             game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
             //PRELOAD AUDIO
             game.load.audio('suonomicroplastiche', 'assets/audio/microplastiche.mp3');
-            game.load.audio('musica', 'assets/audio/soundtrack_1.mp3');
             game.load.audio('morte', 'assets/audio/gameover.wav');
             game.load.audio('suonopassi', 'assets/audio/passi.mp3');
             game.load.audio('boost', 'assets/audio/boost.mp3');
             game.load.audio('barra_riempita', 'assets/audio/barra_riempita.mp3');
+            //MUSICA DI BACKGROUND
+            game.load.audio('musica1', 'assets/audio/sottofondo/soundtrack1.mp3');
+            game.load.audio('musica2', 'assets/audio/sottofondo/soundtrack2.mp3');
+            game.load.audio('musica3', 'assets/audio/sottofondo/soundtrack3.mp3');
+            game.load.audio('musica4', 'assets/audio/sottofondo/soundtrack4.mp3');
+            game.load.audio('musica5', 'assets/audio/sottofondo/soundtrack5.mp3');
+            game.load.audio('musica6', 'assets/audio/sottofondo/soundtrack6.mp3');
+            game.load.audio('musica7', 'assets/audio/sottofondo/soundtrack7.mp3');
+            game.load.audio('musica8', 'assets/audio/sottofondo/soundtrack8.mp3');
+            game.load.audio('musica9', 'assets/audio/sottofondo/soundtrack9.mp3');
+            game.load.audio('musica10', 'assets/audio/sottofondo/soundtrack10.mp3');
+            game.load.audio('musica11', 'assets/audio/sottofondo/soundtrack11.mp3');
+            game.load.audio('musica12', 'assets/audio/sottofondo/soundtrack12.mp3');
         }
 
         //VARIABILI SFONDI
@@ -87,8 +99,21 @@
         var stellina;
 
         //VARIABILI AUDIO
+        var sottofondo;
+        var musica1;
+        var musica2;
+        var musica3;
+        var musica4;
+        var musica5;
+        var musica6;
+        var musica7;
+        var musica8;
+        var musica9;
+        var musica10;
+        var musica11;
+        var musica12;
+
         var suonomicroplastiche;
-        var musica;
         var morte;
         var suonopassi;
         var boost;
@@ -110,7 +135,7 @@
 
         //scelta posizioni fisse nello spazio per disporre le microplastiche
         let posx = [25, 105, 185, 265, 345, 425, 505, 585, 675, 745, 825, 905, 985];
-        let posy = [230, 340, 430, 520, 610];
+        let posy = [230, 340, 430, 520, 610, 700];
         var emitter;
         var x;
 
@@ -133,7 +158,7 @@
             //SFONDO
             sfondoliv1 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'sfondoliv1');
             sfondoliv2 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'sfondoliv2');
-            sfondoliv3 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'sfondoliv3');
+            sfondoliv3 = game.add.tileSprite(0, 14, game.world.width, game.world.height, 'sfondoliv3');
             bollicine = game.add.sprite(300, 3100, 'bollicine');
             bollicine.animations.add('gluglu', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
             bollicine.animations.play('gluglu', 7, true);
@@ -150,6 +175,7 @@
             platforms = game.add.group();
             platforms.enableBody = true;
             var ground = platforms.create(0, game.world.height - 497, 'ground');
+            //var ground = platforms.create(0, 0, 'ground');
             ground.body.setSize(1150, 497, -20, 428);
             ground.body.immovable = true;
 
@@ -216,10 +242,80 @@
             morte.volume = 0.3;
 
             //AUDIO BACKGROUND
-            musica = game.add.audio('musica');
-            musica.volume = 0.1; //l'audio va regolato prima del play
-            musica.loop = true; //l'audio va loopato prima del play
-            musica.play();
+            musica1 = game.add.audio('musica1');
+            musica1.volume = 0.1; //l'audio va regolato prima del play
+            musica1.loop = true; //l'audio va loopato prima del play
+
+            musica2 = game.add.audio('musica2');
+            musica2.volume = 0.1; //l'audio va regolato prima del play
+            musica2.loop = true; //l'audio va loopato prima del play
+
+            musica3 = game.add.audio('musica3');
+            musica3.volume = 0.1; //l'audio va regolato prima del play
+            musica3.loop = true; //l'audio va loopato prima del play
+
+            musica4 = game.add.audio('musica4');
+            musica4.volume = 0.1; //l'audio va regolato prima del play
+            musica4.loop = true; //l'audio va loopato prima del play
+
+            musica5 = game.add.audio('musica5');
+            musica5.volume = 0.1; //l'audio va regolato prima del play
+            musica5.loop = true; //l'audio va loopato prima del play
+
+            musica6 = game.add.audio('musica6');
+            musica6.volume = 0.1; //l'audio va regolato prima del play
+            musica6.loop = true; //l'audio va loopato prima del play
+
+            musica7 = game.add.audio('musica7');
+            musica7.volume = 0.1; //l'audio va regolato prima del play
+            musica7.loop = true; //l'audio va loopato prima del play
+
+            musica8 = game.add.audio('musica8');
+            musica8.volume = 0.1; //l'audio va regolato prima del play
+            musica8.loop = true; //l'audio va loopato prima del play
+
+            musica9 = game.add.audio('musica9');
+            musica9.volume = 0.1; //l'audio va regolato prima del play
+            musica9.loop = true; //l'audio va loopato prima del play
+
+            musica10 = game.add.audio('musica10');
+            musica10.volume = 0.1; //l'audio va regolato prima del play
+            musica10.loop = true; //l'audio va loopato prima del play
+
+            musica11 = game.add.audio('musica11');
+            musica11.volume = 0.1; //l'audio va regolato prima del play
+            musica11.loop = true; //l'audio va loopato prima del play
+
+            musica12 = game.add.audio('musica12');
+            musica12.volume = 0.1; //l'audio va regolato prima del play
+            musica12.loop = true; //l'audio va loopato prima del play
+
+            sottofondo = Math.floor(Math.random() * 12);
+            if (sottofondo == 1) {
+                musica1.play();
+            } if (sottofondo == 2) {
+                musica2.play();
+            } if (sottofondo == 3) {
+                musica3.play();
+            } if (sottofondo == 4) {
+                musica4.play();
+            } if (sottofondo == 5) {
+                musica5.play();
+            } if (sottofondo == 6) {
+                musica6.play();
+            } if (sottofondo == 7) {
+                musica7.play();
+            } if (sottofondo == 8) {
+                musica8.play();
+            } if (sottofondo == 9) {
+                musica9.play();
+            } if (sottofondo == 10) {
+                musica10.play();
+            } if (sottofondo == 11) {
+                musica11.play();
+            } if (sottofondo == 12) {
+                musica12.play();
+            }
 
             //AUDIO PASSI
             suonopassi = game.add.audio('suonopassi');
@@ -277,11 +373,11 @@
 
             //oscillamento microplastiche
             if (counter2 < 100) {
-                stars.addAll('x', 0.3)
+                stars.addAll('x', 0.5)
                 counter2 += 0.4;
             }
             else if (counter2 > 100 && counter2 < 200) {
-                stars.addAll('x', -0.3)
+                stars.addAll('x', -0.5)
                 counter2 += 0.4;
 
             }
@@ -290,8 +386,7 @@
             }
 
             var hitPlatform = game.physics.arcade.collide(player, platforms);
-            game.physics.arcade.overlap(player, stars, collectStar, null, this);
-
+            game.physics.arcade.overlap(player, stars, prendiLaMicro, null, this);
 
             //MOVIMENTI GIOCATORE 
 
@@ -351,7 +446,7 @@
 
             // if (sensors[0] == "V" && sensors[1] != "0") {
             //     if (player.body.touching.down && hitPlatform) {
-            //         player.body.velocity.y = -550;
+            //         player.body.velocity.y = -700;
             //         player.animations.play('up', 10, true);
             //         direzione = 2;
             //         player.scale.setTo(1.2);
@@ -407,7 +502,7 @@
             }
 
             else if (cursors.up.isDown && player.body.touching.down && hitPlatform) {
-                player.body.velocity.y = -650;
+                player.body.velocity.y = -700;
                 player.animations.play('up', 10, true);
                 direzione = 2;
                 player.scale.setTo(1.2);
@@ -416,7 +511,7 @@
                 // boost.play(); //AUDIO BOOST
             }
 
-            else if (jumpButton.isDown && micro == 10) {
+            else if (jumpButton.isDown && micro >= 10) {
                 player.body.velocity.y = -550;
                 player.animations.play('up', 10, true);
                 direzione = 2;
@@ -501,7 +596,7 @@
 
             //AUDIO GAME OVER
             if (player.body.velocity.y == 800) {
-                musica.stop();
+                musica1.stop();
                 morte.play();
             }
 
@@ -511,7 +606,7 @@
             //se una micro viene distrutta e tolta dal counter, anche colore deve diminuire. 
             //se le micro sono più in basso di 200 px rispetto al player vengono distrutte (perché se no influiscono nel calcolo e fanno casino)
             for (i = 0; i < stars.length - 1; i++) { //-1 perché JS parte da 0 a contare
-                if (stars.children[counter1].y - player.y > 500) {
+                if (stars.children[counter1].y - player.y > 900) {
                     stars.children[counter1].destroy();
                     colore -= 1;
                 }
@@ -528,7 +623,7 @@
                 sfondoliv1.tilePosition.y += 2300;
                 sfondoliv2.tilePosition.y += 2300;
                 sfondoliv3.tilePosition.y += 2300;
-                platforms.y += 2300;
+                platforms.y += 2700;
                 let counter = 0;
                 for (i = 0; i <= stars.length - 1; i++) {
                     stars.children[counter].y += 2300;
@@ -544,10 +639,11 @@
             //la barra scala in base al numero massimo di microplastiche 
             barra.frame = 1;
             barra.scale.x = micro / 10;
-            if (micro > 9) {
+            if (micro == 10) {
                 barra3.alpha = 1;
                 barra3.animations.play('rainbow', 3, true);
                 barra.alpha = 0;
+                barra_riempita.play();
             }
 
             emitter.emitX = player.x + 75.05;
@@ -556,13 +652,13 @@
             //MICROPLASTICHE CREATE
             if (stelleCreate < 1) {
                 //le micro massime da creare sono 5. Se il numero di micro create è maggiore di 5 non ne crea più 
-                if (stars.length > 5) {
+                if (stars.length > 10) {
                     return
                 }
                 else {
                     for (var i = 0; i < 3; i++) {
                         stelleCreate += (1 / 3)
-                        var star = stars.create(posx[Math.floor(Math.random() * 13)], player.y - posy[Math.floor(Math.random() * 5)], 'star');
+                        var star = stars.create(posx[Math.floor(Math.random() * 13)], player.y - posy[Math.floor(Math.random() * 6)], 'star');
                         //prendi la stella che crea e prendi un frame casuale tra i 100 creati in modo tale da vere micro tutte diverse
                         //dopo che hai creato la micro colore va avanti di uno. colore parte da 3 perché all'inizio vengono create 3 micro fisse
                         stars.children[colore].frame = Math.floor(Math.random() * 100);
@@ -570,20 +666,13 @@
                     }
                 }
             }
-
-            //AUDIO BARRA RIEMPITA
-            if (micro == 10) {
-                barra_riempita.play();
-            }
-
-
         }
 
         //FUNZIONE MICROPLASTICHE RACCOLTE
-        function collectStar(player, star) {
+        function prendiLaMicro(player, star) {
             suonomicroplastiche.play();
             score += 1;
-            if (micro < 10) {
+            if (micro < 11) {
                 micro += 1;
             }
             scoreText.text = ' ' + score;

@@ -197,30 +197,37 @@ body {
 
 @font-face {
   font-family: 'GD-Boing-Bold';
-  src: url('GD-Boing-Bold.ttf');
+  src: url('assets/GD-Boing-Bold.ttf');
 }
-
 
 #titolo {
-  height: 100px;
-  margin-right: 0;
-  padding-right: 0;
-  border-right: 0;
+  height: 90px;
+  width: 400px;
+  top: -185%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  display: inline-block;
+
 }
 
-#titolo1 {
-  font-family: loos-normal, sans-serif;
-  color: rgb(255, 255, 255);
+#titolone {
+  font-family: 'GD-Boing-Bold', serif;
+  color: rgb(198, 35, 132);
   font-style: normal;
   font-size: 4em;
-  text-align: center;
-  display: block;
   margin: auto;
   width: 100%;
+  height: 45px;
   position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  text-align: center;
+  top: 0%;
+  left: 0%;
+  line-height: 55px;
+  word-spacing: 80px;
+  vertical-align: middle;
+  letter-spacing: 1px;
+  padding-right: 10px;
 }
 
 h1 {
@@ -240,37 +247,62 @@ h1 {
   cursor: default;
 }
 
-#testo {
-  height: 700px;
-  width: 700px;
-  top: 60%;
+#titolo1 {
+  font-family: loos-normal, sans-serif;
+  color: rgb(255, 255, 255);
+  font-style: normal;
+  font-size: 5em;
+  display: block;
+  margin: auto;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  top: 17%;
   left: 50%;
+}
+
+#testo {
+  height: 500px;
+  width: 430px;
+  top: 85%;
+  left: 40%;
   transform: translate(-50%, -50%);
   position: absolute;
   display: inline-block;
   line-height: normal;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: white;
+  border-radius: 2em;
+  border: 5px solid rgb(198, 35, 132);
+}
+
+hr {
+  border-top: 1px solid black;
 }
 
 #demo {
   font-family: loos-normal, sans-serif;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   font-style: normal;
-  font-size: 1.5em;
+  font-size: 2.3em;
   margin: auto;
   width: 100%;
   height: 45px;
   position: absolute;
   text-align: left;
-  top: 20%;
+  top: 0%;
   left: 0%;
-  line-height: normal;
-  word-spacing: 170px;
+  line-height: 0px;
+  word-spacing: 80px;
   white-space: nowrap;
-  text-overflow: ellipsis;
-  word-break: keep-all;
+  /* text-overflow: ellipsis;
+  word-break: keep-all; */
   vertical-align: middle;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 40px;
 }
-
 
 #nome {
   font-family: loos-normal, sans-serif;
@@ -310,9 +342,6 @@ h1 {
   border-radius: 50px;
   cursor: pointer;
 }
-
-
-
 
 @media only screen and (min-width: 600px) {
 

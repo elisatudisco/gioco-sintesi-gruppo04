@@ -17,13 +17,11 @@
 <body>
     <div id="testo">
         <div id="demo"></div>
-        <div id="demo1"></div>
+        <div id="carnesintetica"></div>
     </div>
     <script>
         const urlString = window.location.href;
         const url = new URL(urlString);
-
-
 
         // window.setTimeout(function () {
         //     window.location.href = "qrcode.html";
@@ -58,30 +56,53 @@
                 let pillolina = pillola.replace(/\[|\]|\{|\}|"|polpettona|:/g, '')
                 let micropillola = pillolina.split(",")
                 micropillola = bubbleSort(micropillola)
-
                 localStorage.setItem('test2', micropillola);
             }
-
-
         };
 
-        let pillolina1 = localStorage.getItem('test2');
-        let micropillola1 = pillolina1.split(",");
-
+        let pillolina1
+        let micropillola1
+        let lollobrigidaseimitica = ''
         let ciccia = [];
         let ciccina;
         let cicciolina;
         let pongo = 0;
+        let gigafluffodoggus = 0;
+
+        function setup() {
+            pillolina1 = localStorage.getItem('test2');
+            console.log(pillolina1);
+
+            if (pillolina1 == null) {
+
+                lollobrigidaseimitica = 'I crostacei hanno hackerato il sito, ma non gli, permettermo di, vincere. Per, favore ricarica, la pagina'
+                document.getElementById("carnesintetica").innerHTML = lollobrigidaseimitica;
+                gigafluffodoggus = 1;
+            }
+
+            console.log(lollobrigidaseimitica);
+
+            if (gigafluffodoggus == 1) {
+                return
+            }
+            else {
+                micropillola1 = pillolina1.split(",");
+            }
+        }
 
         function draw() {
-            if (pongo < micropillola1.length) {
-                ciccia.push((pongo + 1) + ' ' + micropillola1[pongo] + "<br />")
-                pongo++;
+            if (gigafluffodoggus == 1) {
+                return
             }
-            ciccina = ciccia.toString();
-            cicciolina = ciccina.replace(/,/g, '');
-            document.getElementById("demo").innerHTML = cicciolina;
-
+            else {
+                if (pongo < micropillola1.length) {
+                    ciccia.push((pongo + 1) + ' ' + micropillola1[pongo] + "<br />")
+                    pongo++;
+                }
+                ciccina = ciccia.toString();
+                cicciolina = ciccina.replace(/,/g, '');
+                document.getElementById("demo").innerHTML = cicciolina;
+            }
         }
 
         req.open("GET", `https://api.jsonbin.io/v3/b/${BIN_ID}`, true);
