@@ -229,6 +229,29 @@ body {
   padding-right: 10px;
 }
 
+#ok {
+  height: 90px;
+  width: 400px;
+  top: -180%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  display: block;
+}
+
+#ok1 {
+  font-family: loos-normal, sans-serif;
+  color: rgb(255, 255, 255);
+  font-style: normal;
+  font-size: 4em;
+  margin: auto;
+  width: 100%;
+  position: absolute;
+  top: -195%;
+  /* left: 0%;  */
+  line-height: 55px;
+}
+
 h1 {
   font-family: loos-normal, sans-serif;
   color: rgb(255, 255, 255);
@@ -333,7 +356,24 @@ hr {
   border: none;
   text-decoration: none;
   background: url(assets/freccia.png);
-  cursor: pointer;  
+  cursor: pointer;
+}
+
+
+#qrcode {
+  position: absolute;
+  top: 20%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+}
+
+#qrcode1 {
+  width: 250px;
+  height: auto;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #nome {

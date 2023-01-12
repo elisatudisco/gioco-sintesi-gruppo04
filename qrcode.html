@@ -16,16 +16,18 @@
 </head>
 
 <body>
+    <div id="ok">
+        <div id="ok1">STAY TUNED</div>
+    </div>
+
+    <div id="qrcode">
+        <p><img src="assets/qrcode.png" id="qrcode1" alt="QR code"></p>
+    </div>
+
     <script>
-        const urlString = window.location.href;
-        const url = new URL(urlString);
-
-        //da fare tutto in html e css fine ciao
-
-        function nextPage() {
-            window.open('homepage.html', '_self')
-        }
-
+        window.setTimeout(function () {
+            window.location.href = "homepage.html";
+        }, 8000);
     </script>
 </body>
 
