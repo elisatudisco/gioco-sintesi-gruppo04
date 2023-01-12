@@ -24,7 +24,7 @@
         user = url.searchParams.get("currentUser");
         console.log(user);
 
-        var game = new Phaser.Game(1080, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+        var game = new Phaser.Game(1080, 650, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
         WebFontConfig = {
             active: function () { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
@@ -41,7 +41,8 @@
             game.load.image('sfondoliv2', 'assets/sfondoliv2.png');
             game.load.image('sfondoliv3', 'assets/sfondoliv3.png');
             game.load.spritesheet('bubble', 'assets/bubble.png', 30, 30, 100);
-            game.load.spritesheet('bollicine', 'assets/bollicine.png', 250.12, 273.5, 16);
+            // game.load.spritesheet('bollicine', 'assets/bollicine.png', 250.12, 273.5, 16);
+            game.load.spritesheet('bollicine1', 'assets/bollicine1.png', 325, 550, 49);
             //GIOCATORE E MICROPLASTICHE
             game.load.spritesheet('dude', 'assets/spritesheet.png', 150.1, 175.5, 20);
             game.load.spritesheet('star', 'assets/micro.png', 70, 70, 100);
@@ -79,6 +80,10 @@
         var bollicine;
         var bollicine1;
         var bollicine2;
+
+        var bollicineNuove;
+        var bollicineNuove1;
+        var bollicineNuove2;
 
         //VARIABILI GIOCATORE E MICROPLASTICHE
         var player;
@@ -159,23 +164,34 @@
             sfondoliv1 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'sfondoliv1');
             sfondoliv2 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'sfondoliv2');
             sfondoliv3 = game.add.tileSprite(0, 14, game.world.width, game.world.height, 'sfondoliv3');
-            bollicine = game.add.sprite(300, 3100, 'bollicine');
-            bollicine.animations.add('gluglu', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
-            bollicine.animations.play('gluglu', 7, true);
+            // bollicine = game.add.sprite(300, 3100, 'bollicine');
+            // bollicine.animations.add('gluglu', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+            // bollicine.animations.play('gluglu', 7, true);
 
-            bollicine1 = game.add.sprite(600, 2000, 'bollicine');
-            bollicine1.animations.add('gluglu1', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
-            bollicine1.animations.play('gluglu1', 7, true);
+            // bollicine1 = game.add.sprite(600, 2000, 'bollicine');
+            // bollicine1.animations.add('gluglu1', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+            // bollicine1.animations.play('gluglu1', 7, true);
 
-            bollicine2 = game.add.sprite(200, 700, 'bollicine');
-            bollicine2.animations.add('gluglu2', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
-            bollicine2.animations.play('gluglu2', 7, true);
+            // bollicine2 = game.add.sprite(200, 700, 'bollicine');
+            // bollicine2.animations.add('gluglu2', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+            // bollicine2.animations.play('gluglu2', 7, true);
+
+            bollicineNuove = game.add.sprite(300, 2900, 'bollicine1');
+            bollicineNuove.animations.add('gluglu', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48]);
+            bollicineNuove.animations.play('gluglu', 15, true);
+
+            bollicineNuove1 = game.add.sprite(600, 2000, 'bollicine1');
+            bollicineNuove1.animations.add('gluglu1', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48]);
+            bollicineNuove1.animations.play('gluglu1', 15, true);
+
+            bollicineNuove2 = game.add.sprite(200, 700, 'bollicine1');
+            bollicineNuove2.animations.add('gluglu2', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48]);
+            bollicineNuove2.animations.play('gluglu2', 15, true);
 
             //GROUND
             platforms = game.add.group();
             platforms.enableBody = true;
             var ground = platforms.create(0, game.world.height - 497, 'ground');
-            //var ground = platforms.create(0, 0, 'ground');
             ground.body.setSize(1150, 497, -20, 428);
             ground.body.immovable = true;
 
@@ -597,6 +613,17 @@
             //AUDIO GAME OVER
             if (player.body.velocity.y == 800) {
                 musica1.stop();
+                musica2.stop();
+                musica3.stop();
+                musica4.stop();
+                musica5.stop();
+                musica6.stop();
+                musica7.stop();
+                musica8.stop();
+                musica9.stop();
+                musica10.stop();
+                musica11.stop();
+                musica12.stop();
                 morte.play();
             }
 
