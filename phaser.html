@@ -24,7 +24,7 @@
         user = url.searchParams.get("currentUser");
         console.log(user);
 
-        var game = new Phaser.Game(1080, 650, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+        var game = new Phaser.Game(1080, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
         WebFontConfig = {
             active: function () { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
@@ -40,6 +40,7 @@
             game.load.image('sfondoliv1', 'assets/sfondoliv1.png');
             game.load.image('sfondoliv2', 'assets/sfondoliv2.png');
             game.load.image('sfondoliv3', 'assets/sfondoliv3.png');
+            game.load.spritesheet('mortazza', 'assets/gameover.png', 1080, 600, 20);
             game.load.spritesheet('bubble', 'assets/bubble.png', 30, 30, 100);
             // game.load.spritesheet('bollicine', 'assets/bollicine.png', 250.12, 273.5, 16);
             game.load.spritesheet('bollicine1', 'assets/bollicine1.png', 325, 550, 49);
@@ -84,6 +85,8 @@
         var bollicineNuove;
         var bollicineNuove1;
         var bollicineNuove2;
+
+        var mortazza; //schermata game over
 
         //VARIABILI GIOCATORE E MICROPLASTICHE
         var player;
@@ -148,7 +151,7 @@
         function setup() {
             serial = new p5.SerialPort();
             serial.list();
-            serial.open('/dev/tty.usbmodem14301');
+            serial.open('/dev/tty.usbmodem14401');
             serial.on('data', gotData);
             serial.on('list', gotList);
             serial.on('open', gotOpen);
@@ -187,6 +190,7 @@
             bollicineNuove2 = game.add.sprite(200, 700, 'bollicine1');
             bollicineNuove2.animations.add('gluglu2', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48]);
             bollicineNuove2.animations.play('gluglu2', 15, true);
+
 
             //GROUND
             platforms = game.add.group();
@@ -482,7 +486,6 @@
             //         barra.alpha = 1;
             //         boost.play(); //AUDIO BOOST
             //     }
-
             // }
 
 
@@ -576,13 +579,14 @@
 
             }
             if (player.body.velocity.y > 900) {
-                gameover = game.add.text(350, 130, 'GAME\nOVER');
-                gameover.font = 'Martian Mono';
-                gameover.fontSize = 120;
-                gameover.fill = '#FFFFFF'
-                gameover.align = 'center';
-                gameover.setShadow(4, 4, 'rgba(0,0,0,0.7)', 3);
-                gameover.fixedToCamera = true;
+
+                // gameover = game.add.text(350, 130, 'GAME\nOVER');
+                // gameover.font = 'Martian Mono';
+                // gameover.fontSize = 120;
+                // gameover.fill = '#FFFFFF'
+                // gameover.align = 'center';
+                // gameover.setShadow(4, 4, 'rgba(0,0,0,0.7)', 3);
+                // gameover.fixedToCamera = true;
                 emitter.alpha = 0;
                 mortacciTua = 1;
 
@@ -594,7 +598,7 @@
                 window.setTimeout(function () {
                     window.location.href = "caricamento2.html";
                     deleteItems();
-                }, 3000);
+                }, 2700);
 
                 polpetta = score;
                 localStorage.setItem('test', polpetta);
@@ -625,6 +629,11 @@
                 musica11.stop();
                 musica12.stop();
                 morte.play();
+
+                mortazza = game.add.sprite(0, 0, 'mortazza');
+                mortazza.animations.add('mortazza', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
+                mortazza.animations.play('mortazza', 10, false);
+                mortazza.fixedToCamera = true;
             }
 
 
