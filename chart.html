@@ -94,21 +94,23 @@
             else {
                 micropillola1 = pillolina1.split(",");
             }
-        }
 
-        function draw() {
             if (gigafluffodoggus == 1) {
                 return
             }
             else {
-                if (pongo < micropillola1.length) {
-                    ciccia.push(micropillola1[pongo] + "<hr>" + "<br />")
-                    pongo++;
-                }
-                ciccina = ciccia.toString();
-                cicciolina = ciccina.replace(/,/g, '');
-                document.getElementById("demo").innerHTML = cicciolina;
+                const chartContainer = document.getElementById("demo");
+                while (chartContainer.hasChildNodes()) { chartContainer.removeChild(chartContainer.lastChild); }
+                micropillola1.forEach(element => {
+                    let tmp = document.createElement('div');
+                    tmp.classList.add('chart__item');
+                    tmp.innerHTML = element;
+                    chartContainer.appendChild(tmp);
+                });
             }
+        }
+
+        function draw() {
         }
 
         setTimeout(function () {
