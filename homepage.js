@@ -57,23 +57,23 @@ function draw() {
     }
 
     push();
-    drawingContext.shadowOffsetX = 6;
-    drawingContext.shadowOffsetY = -6;
-    drawingContext.shadowBlur = 10;
-    drawingContext.shadowColor = 'black';
+    // drawingContext.shadowOffsetX = 6;
+    // drawingContext.shadowOffsetY = -6;
+    // drawingContext.shadowBlur = 10;
+    // drawingContext.shadowColor = 'black';
     fill("white");
     textFont(myfont);
-    textSize(135);
-    textLeading(130);
+    textSize(105);
+    textLeading(115);
     textAlign(CENTER);
     text("UNLOCK \n THE ISLAND", windowWidth / 2, windowHeight / 2 - 90);
     pop();
     
     push();
-    drawingContext.shadowOffsetX = 6;
-    drawingContext.shadowOffsetY = -6;
-    drawingContext.shadowBlur = 10;
-    drawingContext.shadowColor = 'black';
+    // drawingContext.shadowOffsetX = 6;
+    // drawingContext.shadowOffsetY = -6;
+    // drawingContext.shadowBlur = 10;
+    // drawingContext.shadowColor = 'black';
     fill("white");
     textFont('loos-normal');
     textSize(40);
