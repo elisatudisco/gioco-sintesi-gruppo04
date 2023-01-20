@@ -68,7 +68,7 @@ function draw() {
     textAlign(CENTER);
     text("UNLOCK \n THE ISLAND", windowWidth / 2, windowHeight / 2 - 90);
     pop();
-    
+
     push();
     // drawingContext.shadowOffsetX = 6;
     // drawingContext.shadowOffsetY = -6;
@@ -80,6 +80,12 @@ function draw() {
     textAlign(CENTER);
     text("A game by Mollustic", windowWidth / 2, windowHeight / 2 + 230);
     pop();
+}
+
+function keyPressed() {
+    if (keyCode === ENTER) {
+        window.open('nome.html', '_self');
+    }
 }
 
 function mouseClicked() {
