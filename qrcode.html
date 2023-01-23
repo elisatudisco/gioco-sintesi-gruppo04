@@ -16,18 +16,26 @@
 </head>
 
 <body>
+
     <div id="ok">
-        <div id="ok1">STAY TUNED</div>
+        <div id="ok1">Stay tuned</div>
     </div>
 
     <div id="qrcode">
         <p><img src="assets/qrcode.png" id="qrcode1" alt="QR code"></p>
     </div>
 
+    <div id="carota">
+        <div id="carota1">Follow us on Instagram <br> and discover who will be <br> the ultimate winner <br> of Unlock
+            the Island!</div>
+    </div>
+
     <script>
-        window.setTimeout(function () {
-            window.location.href = "homepage.html";
-        }, 8000);
+        function keyPressed() {
+            if (keyCode === ENTER) {
+                window.open('homepage.html', '_self');
+            }
+        }
     </script>
 </body>
 

@@ -201,10 +201,10 @@ body {
 }
 
 #titolo {
-  height: 90px;
+  height: 140px;
   width: 400px;
-  top: -185%;
-  left: 40%;
+  top: -380%;
+  left: 37%;
   transform: translate(-50%, -50%);
   position: absolute;
   display: inline-block;
@@ -214,7 +214,7 @@ body {
   font-family: 'GD-Boing-Bold', serif;
   color: white;
   font-style: normal;
-  font-size: 4em;
+  font-size: 6em;
   margin: auto;
   width: 100%;
   height: 45px;
@@ -230,26 +230,61 @@ body {
 }
 
 #ok {
-  height: 90px;
-  width: 400px;
-  top: -180%;
-  left: 50%;
+  height: 140px;
+  width: 100%;
+  top: 600%;
+  left: 75%;
   transform: translate(-50%, -50%);
-  position: absolute;
-  display: block;
+  position: relative;
+  margin-top: -30%;
 }
 
 #ok1 {
+  font-family: 'GD-Boing-Bold', serif;
+  color: rgb(255, 255, 255);
+  font-style: normal;
+  font-size: 5em;
+}
+
+#carota {
+  height: 140px;
+  width: 100%;
+  left: 56%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  margin-top: 70%;
+}
+
+#carota1 {
   font-family: loos-normal, sans-serif;
   color: rgb(255, 255, 255);
   font-style: normal;
-  font-size: 4em;
+  font-size: 2.8em;
+  text-align: left;
+  font-weight: 400;
+  display: block;
   margin: auto;
-  width: 100%;
+  width: 79%;
   position: absolute;
-  top: -195%;
-  /* left: 0%;  */
-  line-height: 55px;
+  top: -400%;
+  left: 51%;
+  transform: translate(-50%, -50%);
+  cursor: default;
+  padding: 40px;
+  line-height: 50px;
+}
+
+#qrcode {
+  position: relative;
+  top: 900%;
+  left: 72%;
+  transform: translate(-50%, -50%);
+  margin-top: 15%;
+}
+
+#qrcode1 {
+  width: 450px;
+  height: auto;
 }
 
 h1 {
@@ -258,12 +293,12 @@ h1 {
   font-style: normal;
   font-size: 3.5em;
   text-align: center;
-  font-weight: 400;
+  font-weight: 600;
   display: block;
   margin: auto;
   width: 100%;
   position: absolute;
-  top: 25%;
+  top: -100%;
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: default;
@@ -273,19 +308,19 @@ h2 {
   font-family: loos-normal, sans-serif;
   color: rgb(255, 255, 255);
   font-style: normal;
-  font-size: 2em;
-  text-align: center;
+  font-size: 2.8em;
+  text-align: left;
   font-weight: 400;
   display: block;
   margin: auto;
-  width: 80%;
+  width: 79%;
   position: absolute;
-  top: -280%;
-  left: 50%;
+  top: -400%;
+  left: 51%;
   transform: translate(-50%, -50%);
   cursor: default;
   padding: 40px;
-  line-height: 40px;
+  line-height: normal;
 }
 
 #titolo1 {
@@ -303,10 +338,10 @@ h2 {
 }
 
 #testo {
-  height: 500px;
-  width: 470px;
-  top: 85%;
-  left: 40%;
+  height: 850px;
+  width: 550px;
+  top: 70%;
+  left: 47%;
   transform: translate(-50%, -50%);
   position: absolute;
   display: inline-block;
@@ -323,23 +358,24 @@ h2 {
   font-weight: 500;
   color: rgb(0, 0, 0);
   font-style: normal;
-  font-size: 2.1em;
+  font-size: 2.5em;
   margin: auto;
-  width: 90%;
-  height: 90%;
-  padding-left: 10px;
+  width: 100%;
+  height: 120%;
+  padding-left: 20px;
   padding-right: 10px;
   padding-top: 10px;
   display: flex;
   flex-direction: column;
   word-spacing: 80px;
+
 }
 
 .chart__item {
   color: white;
   background-color: #2270B7;
   margin: 3px 3px;
-  padding: 5px;
+  padding: 10px;
   border-radius: 10px;
 }
 
@@ -366,7 +402,7 @@ h2 {
   text-align: center;
   line-height: 60px;
   white-space: nowrap;
-  left: 50%;
+  left: 60%;
   top: 72%;
   transform: translate(-50%, -50%);
 }
@@ -386,26 +422,21 @@ h2 {
   cursor: pointer;
 }
 
-
-#qrcode {
+#start {
   position: absolute;
-  top: 20%;
-  left: 48%;
-  transform: translate(-50%, -50%);
+  top: 200%;
+  left: 37%;
+
 }
 
-#qrcode1 {
-  width: 250px;
+#start1 {
+  width: 230px;
   height: auto;
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  /* position: absolute; */
 }
 
 #nome {
   font-family: loos-normal, sans-serif;
-  border: 2px solid white;
   color: rgb(0, 0, 0);
   font-style: normal;
   font-size: 1.5em;
@@ -415,7 +446,7 @@ h2 {
   margin: auto;
   width: 40%;
   position: absolute;
-  top: 105%;
+  top: -5%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 20px

@@ -23,8 +23,7 @@
     <div id="titolo">
         <div id="titolone">Leaderboard</div>
     </div>
-
-    <input type="button" id="button" onclick="location.href='qrcode.html';" value=" ">
+    <!-- <input type="button" id="button" onclick="location.href='qrcode.html';" value=" "> -->
     <script>
         const urlString = window.location.href;
         const url = new URL(urlString);
@@ -102,6 +101,7 @@
                 const chartContainer = document.getElementById("demo");
                 while (chartContainer.hasChildNodes()) { chartContainer.removeChild(chartContainer.lastChild); }
                 micropillola1.forEach(element => {
+                    
                     let tmp = document.createElement('div');
                     tmp.classList.add('chart__item');
                     tmp.innerHTML = element;
@@ -127,6 +127,12 @@
         function keyPressed() {
             if (key === "c") {
                 localStorage.clear();
+            }
+        }
+
+        function keyPressed() {
+            if (keyCode === ENTER) {
+                window.open('qrcode.html', '_self');
             }
         }
 

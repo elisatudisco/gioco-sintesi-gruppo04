@@ -13,6 +13,8 @@
     <style>
         body {
             background-color: black;
+            overflow-x: hidden;
+            overflow-y: hidden;
         }
     </style>
 </head>
@@ -24,7 +26,7 @@
         user = url.searchParams.get("currentUser");
         console.log(user);
 
-        var game = new Phaser.Game(800, 1200, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+        var game = new Phaser.Game(800, 1450, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
         WebFontConfig = {
             active: function () { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
@@ -184,7 +186,8 @@
             platforms.enableBody = true;
 
             var ground = platforms.create(0, game.world.height - 368.148, 'ground');
-            // ground.scale.setTo(1.35);
+
+
             ground.body.setSize(851.85, 368.148, -14.81, 340.74);
             ground.body.immovable = true;
 
