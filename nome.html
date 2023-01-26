@@ -59,9 +59,12 @@
 
         function keyPressed() {
             if (keyCode === ENTER) {
-                window.open('/phaser.html?currentUser=', '_self');
+                let utente = myType.value();
+                window.location = "/phaser.html?currentUser=" + myType.value();
             }
         }
+
+        console.log(utente);
 
     </script>
 </body>

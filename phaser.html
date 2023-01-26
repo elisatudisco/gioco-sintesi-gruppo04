@@ -139,7 +139,7 @@
         var polpettona = user;
 
         //scelta posizioni fisse nello spazio per disporre le microplastiche
-        let posx = [25, 105, 185, 265, 345, 425, 505, 585, 675, 745, 825, 905, 985];
+        let posx = [105, 185, 265, 345, 425, 505, 585, 675, 745];
         let posy = [230, 340, 430, 520, 610, 700];
         var emitter;
         var x;
@@ -188,7 +188,7 @@
             var ground = platforms.create(0, game.world.height - 368.148, 'ground');
 
 
-            ground.body.setSize(851.85, 368.148, -14.81, 340.74);
+            ground.body.setSize(900, 368.148, -100, 340.74);
             ground.body.immovable = true;
 
 
@@ -225,19 +225,20 @@
             stars.setAll('anchor.x', 0.5)
             stars.setAll('anchor.y', 0.5)
 
+
             //CREA CURSORE E BOTTONE SALTO
             cursors = game.input.keyboard.createCursorKeys();
             jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.S);
 
-            // //BARRA MICROPLASTICHE
-            barra2 = game.add.sprite(840, 26, 'barra2');
+            //BARRA MICROPLASTICHE
+            barra2 = game.add.sprite(590, 26, 'barra2');
             barra2.fixedToCamera = true;
 
-            barra = game.add.sprite(840, 26, 'barra');
+            barra = game.add.sprite(590, 26, 'barra');
             barra.fixedToCamera = true;
             barra2.alpha = 0;
 
-            barra3 = game.add.sprite(800, 31, 'barra3');
+            barra3 = game.add.sprite(550, 31, 'barra3');
             barra3.scale.setTo(0.7);
             barra3.fixedToCamera = true;
             barra3.alpha = 0;
@@ -386,16 +387,16 @@
             stars.setAll('anchor.y', 0.5)
 
             //oscillamento microplastiche
-            if (counter2 < 100) {
+            if (counter2 < 60) {
                 stars.addAll('x', 0.5)
                 counter2 += 0.4;
             }
-            else if (counter2 > 100 && counter2 < 200) {
+            else if (counter2 > 60 && counter2 < 160) {
                 stars.addAll('x', -0.5)
                 counter2 += 0.4;
 
             }
-            else if (counter2 > 200) {
+            else if (counter2 > 160) {
                 counter2 = 0;
             }
 
@@ -570,9 +571,9 @@
 
             //EFFETTO PACMAN
             if (player.x < -105) {
-                player.x = 1080;
+                player.x = 800;
             }
-            if (player.x > 1080) {
+            if (player.x > 800) {
                 player.x = -105
             }
 
@@ -645,14 +646,14 @@
             counter1 = 0;
 
             if (player.y < 500) {
-                player.y += 2300;
-                sfondoliv1.tilePosition.y += 2300;
-                sfondoliv2.tilePosition.y += 2300;
-                sfondoliv3.tilePosition.y += 2300;
+                player.y += 1900;
+                sfondoliv1.tilePosition.y += 1900;
+                sfondoliv2.tilePosition.y += 1900;
+                sfondoliv3.tilePosition.y += 1900;
                 platforms.y += 2700;
                 let counter = 0;
                 for (i = 0; i <= stars.length - 1; i++) {
-                    stars.children[counter].y += 2300;
+                    stars.children[counter].y += 1900;
                     counter += 1;
                 }
             }
@@ -684,7 +685,7 @@
                 else {
                     for (var i = 0; i < 3; i++) {
                         stelleCreate += (1 / 3)
-                        var star = stars.create(posx[Math.floor(Math.random() * 13)], player.y - posy[Math.floor(Math.random() * 6)], 'star');
+                        var star = stars.create(posx[Math.floor(Math.random() * 9)], player.y - posy[Math.floor(Math.random() * 6)], 'star');
                         //prendi la stella che crea e prendi un frame casuale tra i 100 creati in modo tale da vere micro tutte diverse
                         //dopo che hai creato la micro colore va avanti di uno. colore parte da 3 perché all'inizio vengono create 3 micro fisse
                         stars.children[colore].frame = Math.floor(Math.random() * 100);
@@ -712,7 +713,7 @@
 
         //FUNZIONE TESTO SCORE
         function createText() {
-            scoreText = game.add.text(90, 35, ' 0');
+            scoreText = game.add.text(100, 30, ' 0');
             scoreText.font = 'Martian Mono';
             scoreText.fontSize = 32;
             scoreText.fill = '#FFFFFF'
