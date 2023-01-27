@@ -42,10 +42,10 @@
             localStorage.clear();
         }
 
-        window.setTimeout(function () {
-            window.location.href = "chart.html";
-            deleteItems();
-        }, 7000);
+        // window.setTimeout(function () {
+        //     window.location.href = "chart.html";
+        //     deleteItems();
+        // }, 7000);
 
         var index = 0;
         var lastMillis = 0;
@@ -67,9 +67,9 @@
             drawingContext.shadowColor = 'black';
             fill("white");
             textFont('loos-normal');
-            textSize(70);
+            textSize(75);
             textAlign(CENTER);
-            text("Congratulations!", windowWidth / 2, windowHeight / 2 - 140);
+            text("Congratulations!", windowWidth / 2, windowHeight / 2 - 260);
             pop();
 
             //Mr Mollustic has collected
@@ -82,7 +82,7 @@
             textFont('loos-normal');
             textSize(40);
             textAlign(CENTER);
-            text("Mr Mollustic has collected", windowWidth / 2, windowHeight / 2 - 50);
+            text("Mr Mollustic has collected", windowWidth / 2, windowHeight / 2 - 140);
             pop();
 
             push();
@@ -94,10 +94,9 @@
             textFont('loos-normal');
             textSize(40);
             textAlign(CENTER);
-            text("Making", windowWidth / 2, windowHeight / 2 + 100);
+            text("Making", windowWidth / 2, windowHeight / 2 + 10);
             pop();
 
-            //+ "  " + (Math.floor(score / 1.29)) + "clams dance!"
             push();
             drawingContext.shadowOffsetX = 6;
             drawingContext.shadowOffsetY = -6;
@@ -110,7 +109,7 @@
 
             // text((Math.floor(score / 1.29)) + " " + "clams dance!", windowWidth / 2, windowHeight / 2 + 150);
 
-            text(message2.substring(0, index), windowWidth / 2, windowHeight / 2 + 150);
+            text(message2.substring(0, index), windowWidth / 2, windowHeight / 2 + 70);
 
             if (millis() > lastMillis + 100) {
                 index = index + 1;
@@ -127,7 +126,7 @@
             textFont('loos-normal');
             textSize(40);
             textAlign(CENTER);
-            text(message.substring(0, index), windowWidth / 2, windowHeight / 2);
+            text(message.substring(0, index), windowWidth / 2, windowHeight / 2 - 80);
 
             if (millis() > lastMillis + 70) {
                 index = index + 1;
@@ -135,6 +134,29 @@
             }
             pop()
 
+            push();
+            drawingContext.shadowOffsetX = 6;
+            drawingContext.shadowOffsetY = -6;
+            drawingContext.shadowBlur = 10;
+            drawingContext.shadowColor = 'black';
+            fill("white");
+            textFont('loos-normal');
+            textSize(30);
+            textAlign(CENTER);
+            text("The mussel community thanks\nyou for your contribution!", windowWidth / 2, windowHeight / 2 + 160);
+            pop();
+
+            push();
+            drawingContext.shadowOffsetX = 6;
+            drawingContext.shadowOffsetY = -6;
+            drawingContext.shadowBlur = 10;
+            drawingContext.shadowColor = 'black';
+            fill("white");
+            textFont('loos-normal');
+            textSize(30);
+            textAlign(CENTER);
+            text("Now let's compare your score\n with the other players!", windowWidth / 2, windowHeight / 2 + 280);
+            pop();
 
         }
 

@@ -31,9 +31,15 @@
     </div>
 
     <script>
+        function setup() {
+            noCanvas();
+        }
+
+        function draw() { }
+
         function keyPressed() {
             if (keyCode === ENTER) {
-                window.open('homepage.html', '_self');
+                window.open('./homepage.html', '_self');
             }
         }
     </script>

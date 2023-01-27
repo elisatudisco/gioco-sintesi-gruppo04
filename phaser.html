@@ -42,7 +42,7 @@
             game.load.image('sfondoliv1', 'assets/sfondoliv1.png');
             game.load.image('sfondoliv2', 'assets/sfondoliv2.png');
             game.load.image('sfondoliv3', 'assets/sfondoliv3.png');
-            game.load.spritesheet('mortazza', 'assets/gameover.png', 1080, 600, 20);
+            game.load.spritesheet('mortazza', 'assets/gameover.png', 800, 1450, 20);
             game.load.spritesheet('bubble', 'assets/bubble.png', 30, 30, 100);
             game.load.spritesheet('bollicine', 'assets/bollicine.png', 250.12, 273.5, 16);
             //GIOCATORE E MICROPLASTICHE
@@ -388,15 +388,15 @@
 
             //oscillamento microplastiche
             if (counter2 < 60) {
-                stars.addAll('x', 0.5)
+                stars.addAll('x', 0.2)
                 counter2 += 0.4;
             }
-            else if (counter2 > 60 && counter2 < 160) {
-                stars.addAll('x', -0.5)
+            else if (counter2 > 60 && counter2 < 120) {
+                stars.addAll('x', -0.2)
                 counter2 += 0.4;
 
             }
-            else if (counter2 > 160) {
+            else if (counter2 > 120) {
                 counter2 = 0;
             }
 
@@ -645,15 +645,15 @@
 
             counter1 = 0;
 
-            if (player.y < 500) {
-                player.y += 1900;
-                sfondoliv1.tilePosition.y += 1900;
-                sfondoliv2.tilePosition.y += 1900;
-                sfondoliv3.tilePosition.y += 1900;
+            if (player.y < 1000) {
+                player.y += 1800;
+                sfondoliv1.tilePosition.y += 1800;
+                sfondoliv2.tilePosition.y += 1800;
+                sfondoliv3.tilePosition.y += 1800;
                 platforms.y += 2700;
                 let counter = 0;
                 for (i = 0; i <= stars.length - 1; i++) {
-                    stars.children[counter].y += 1900;
+                    stars.children[counter].y += 1800;
                     counter += 1;
                 }
             }
@@ -679,7 +679,7 @@
             //MICROPLASTICHE CREATE
             if (stelleCreate < 1) {
                 //le micro massime da creare sono 5. Se il numero di micro create è maggiore di 5 non ne crea più 
-                if (stars.length > 10) {
+                if (stars.length > 8) {
                     return
                 }
                 else {

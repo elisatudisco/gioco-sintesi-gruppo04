@@ -367,7 +367,7 @@ h2 {
   padding-top: 10px;
   display: flex;
   flex-direction: column;
-  word-spacing: 80px;
+  word-spacing: 70px;
 
 }
 
@@ -386,7 +386,7 @@ h2 {
 .chart__item:nth-child(1) {
   background-color: rgb(198, 35, 132);
   font-size: 1.3em;
-  word-spacing: 55px;
+  word-spacing: 70px;
 }
 
 #carnesintetica {
@@ -429,11 +429,21 @@ h2 {
 
 }
 
-#start1 {
+.start1 {
   width: 230px;
   height: auto;
   position: relative;
   display: inline-block;
+}
+
+.green {
+  transition: all 1s ease;
+  transform: scale(1);
+}
+
+.green:hover {
+  /*  Making button bigger on hover  */
+  transform: scale(1.5) perspective(1px)
 }
 
 #nome {
@@ -453,146 +463,4 @@ h2 {
   border-radius: 20px
 }
 
-#go {
-  font-family: loos-normal, sans-serif;
-  color: rgb(198, 35, 132);
-  border: 2px solid rgb(198, 35, 132);
-  font-style: normal;
-  font-size: 2.5em;
-  text-align: center;
-  font-weight: 500;
-  display: block;
-  margin: auto;
-  width: 25%;
-  position: absolute;
-  top: 200%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: transparent;
-  /* border-color: transparent; */
-  border-radius: 50px;
-  cursor: pointer;
-}
 
-#go:hover {
-  /* cambia colore al passaggio del mouse */
-  background-color: rgb(50, 50, 50);
-  color: rgb(194, 191, 193);
-
-}
-
-@media only screen and (min-width: 600px) {
-
-  /* Versione tablet */
-  .col-s-1 {
-    width: 8.33%;
-  }
-
-  .col-s-2 {
-    width: 16.66%;
-  }
-
-  .col-s-3 {
-    width: 25%;
-  }
-
-  .col-s-4 {
-    width: 33.33%;
-  }
-
-  .col-s-5 {
-    width: 41.66%;
-  }
-
-  .col-s-6 {
-    width: 50%;
-  }
-
-  .col-s-7 {
-    width: 58.33%;
-  }
-
-  .col-s-8 {
-    width: 66.66%;
-  }
-
-  .col-s-9 {
-    width: 75%;
-  }
-
-  .col-s-10 {
-    width: 83.33%;
-  }
-
-  .col-s-11 {
-    width: 91.66%;
-  }
-
-  .col-s-12 {
-    width: 100%;
-  }
-}
-
-@media (min-width: 768px) {
-
-  /* Versione desktop */
-  .col-1 {
-    width: 8.33%;
-  }
-
-  .col-2 {
-    width: 16.66%;
-  }
-
-  .col-3 {
-    width: 25%;
-  }
-
-  .col-4 {
-    width: 33.33%;
-  }
-
-  .col-5 {
-    width: 41.66%;
-  }
-
-  .col-6 {
-    width: 50%;
-  }
-
-  .col-7 {
-    width: 58.33%;
-  }
-
-  .col-8 {
-    width: 66.66%;
-  }
-
-  .col-9 {
-    width: 75%;
-  }
-
-  .col-10 {
-    width: 83.33%;
-  }
-
-  .col-11 {
-    width: 91.66%;
-  }
-
-  .col-12 {
-    width: 100%;
-  }
-
-  [class*='col-'] {
-    float: left;
-    padding: 15px;
-  }
-
-  .row::after {
-    content: '';
-    clear: both;
-    /* La proprietà clear serve a impedire che al fianco di un elemento float compaiano altri elementi */
-    display: table;
-  }
-}

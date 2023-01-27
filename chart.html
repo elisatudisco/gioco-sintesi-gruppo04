@@ -71,7 +71,7 @@
         let ciccia = [];
         let ciccina;
         let cicciolina;
-        let pongo = 0;
+        let pongo = 1;
         let gigafluffodoggus = 0;
 
         function setup() {
@@ -79,7 +79,6 @@
             console.log(pillolina1);
 
             if (pillolina1 == null) {
-                // lollobrigidaseimitica = 'Please' + "<br/ >" + 'reload' + "<br/ >" + 'the page'
                 lollobrigidaseimitica = " "
                 document.getElementById("carnesintetica").innerHTML = lollobrigidaseimitica;
                 gigafluffodoggus = 1;
@@ -101,11 +100,12 @@
                 const chartContainer = document.getElementById("demo");
                 while (chartContainer.hasChildNodes()) { chartContainer.removeChild(chartContainer.lastChild); }
                 micropillola1.forEach(element => {
-                    
+
                     let tmp = document.createElement('div');
                     tmp.classList.add('chart__item');
-                    tmp.innerHTML = element;
+                    tmp.innerHTML = pongo + "°" + " " + element;
                     chartContainer.appendChild(tmp);
+                    pongo++;
                 });
             }
         }
