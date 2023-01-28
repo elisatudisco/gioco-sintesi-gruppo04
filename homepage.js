@@ -1,4 +1,3 @@
-//when you click on the homepage you can go the the drawing page
 const urlString = window.location.href
 let url = new URL(urlString)
 
@@ -114,9 +113,6 @@ function draw() {
         let wAngle = noise(xOff, yOff, zOff) * TWO_PI;
         let wind = p5.Vector.fromAngle(wAngle); //wind angle
         wind.mult(0.01); //force of the wind which moves the snowflakes
-        //the wind is smaller than gravity so that snowflakes drop down and don't go up
-        //every snowflake has a different wind
-
         flake.applyForce(gravity); //apply gravity to each snowflake
         flake.applyForce(wind); //it allows snowflakes to move (from left to right or vice versa)
         flake.update();
@@ -124,10 +120,6 @@ function draw() {
     }
 
     push();
-    // drawingContext.shadowOffsetX = 6;
-    // drawingContext.shadowOffsetY = -6;
-    // drawingContext.shadowBlur = 10;
-    // drawingContext.shadowColor = 'black';
     fill("white");
     textFont(myfont);
     textSize(105);
@@ -137,10 +129,6 @@ function draw() {
     pop();
 
     push();
-    // drawingContext.shadowOffsetX = 6;
-    // drawingContext.shadowOffsetY = -6;
-    // drawingContext.shadowBlur = 10;
-    // drawingContext.shadowColor = 'black';
     fill("white");
     textFont('loos-normal');
     textSize(40);
@@ -153,10 +141,6 @@ function keyPressed() {
     if (keyCode === ENTER) {
         window.open('nome.html', '_self');
     }
-}
-
-function mouseClicked() {
-    window.open('nome.html', '_self');
 }
 
 function windowResized() {
