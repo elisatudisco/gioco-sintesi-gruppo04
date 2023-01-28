@@ -16,9 +16,6 @@
 </head>
 
 <body>
-    <div id="start">
-        <p><img src="assets/start.png" class="start1 green" alt="Start Button"></p>
-    </div>
     <script>
         const urlString = window.location.href;
         const url = new URL(urlString);
@@ -36,11 +33,10 @@
             //Nome dell'autore
             myText2 = createElement("h1", "Insert your name");
             //Inserimento nome
-            myType = createInput("").attribute("placeholder", "write your name").id("nome");
+            myType = createInput("").attribute("placeholder", "").id("nome").attribute('autocomplete', 'off').attribute('maxlength', '9');
 
-            // go = createButton("LET'S PLAY!").id("go");
-
-            // go.mouseClicked(nextPage);
+            go = createButton().class("start1 green");
+            go.mouseClicked(nextPage);
         }
 
         function draw() {
@@ -52,15 +48,11 @@
 
         }
 
-        // function nextPage() {
-        //     let utente = myType.value();
-        //     window.location = "/phaser.html?currentUser=" + myType.value();
-        // }
-
-
-        function keyPressed() {
-            if (keyCode === ENTER) {
-                let utente = myType.value();
+        function nextPage() {
+            let utente = myType.value();
+            if (myType.value() == "") {
+                return
+            } else {
                 window.location = "/phaser.html?currentUser=" + myType.value();
             }
         }

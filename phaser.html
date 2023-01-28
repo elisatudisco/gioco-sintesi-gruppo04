@@ -81,7 +81,6 @@
         var sfondoliv3;
         var bollicine;
         var bollicine1;
-        var bollicine2;
 
         var mortazza; //schermata game over
 
@@ -163,23 +162,15 @@
             //SFONDO
             sfondoliv1 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'sfondoliv1');
             sfondoliv2 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'sfondoliv2');
-            sfondoliv3 = game.add.tileSprite(0, 11, game.world.width, game.world.height, 'sfondoliv3');
+            sfondoliv3 = game.add.tileSprite(0, 90, game.world.width, game.world.height, 'sfondoliv3');
 
-            bollicine = game.add.sprite(300, 3100, 'bollicine');
+            bollicine = game.add.sprite(posx[Math.floor(Math.random() * 7)], 2800, 'bollicine');
             bollicine.animations.add('gluglu', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
             bollicine.animations.play('gluglu', 10, true);
 
-            bollicine1 = game.add.sprite(600, 2000, 'bollicine');
+            bollicine1 = game.add.sprite(posx[Math.floor(Math.random() * 7) + 1], 1500, 'bollicine');
             bollicine1.animations.add('gluglu1', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
             bollicine1.animations.play('gluglu1', 10, true);
-
-            bollicine2 = game.add.sprite(250, 1400, 'bollicine');
-            bollicine2.animations.add('gluglu2', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
-            bollicine2.animations.play('gluglu2', 10, true);
-
-            bollicine2 = game.add.sprite(200, 700, 'bollicine');
-            bollicine2.animations.add('gluglu2', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
-            bollicine2.animations.play('gluglu2', 10, true);
 
             //GROUND
             platforms = game.add.group();
@@ -335,7 +326,7 @@
 
             //AUDIO PASSI
             suonopassi = game.add.audio('suonopassi');
-            suonopassi.volume = 0.6; //l'audio va regolato prima del play
+            suonopassi.volume = 0.7; //l'audio va regolato prima del play
             suonopassi.loop = true; //l'audio va loopato prima del play ma qua attenzione perchè riparte solo dopo che smetti di premere la direzione
             suonopassi.play();
 
@@ -439,25 +430,27 @@
 
 
             //     //player sta fermo
-            //     else if (sensors[1] == "0") {
-            //         player.body.velocity.x = 0;
+            // else if (sensors[1] == "0") {
+            // player.body.velocity.x = 0;
 
-            //         if (direzione == 0) {
-            //             player.animations.stop('right', 10, true);
-            //             player.frame = 5;
-            //         }
-
-            //         if (direzione == 1) {
-            //             player.animations.stop('left', 10, true);
-            //             player.frame = 0;
-            //         }
-
-            //         if (direzione == 2) {
-            //             player.animations.stop('up', 10, true);
-            //             player.frame = 10;
-            //             player.scale.setTo(0.7);
-            //         }
+            //       else {
+            //     if (direzione == 1) {
+            //         player.animations.stop('left', false);
             //     }
+            //     if (direzione == 0) {
+            //         player.animations.stop('right', false);
+            //     }
+
+            //     if (direzione == 2) {
+            //         player.animations.stop('up', 10, true);
+            //         player.frame = 99;
+            //         player.scale.setTo(0.7);
+            //     }
+
+            //     if (direzione == 3) {
+            //         player.scale.setTo(1.5);
+            //     }
+            // }
             // }
 
             // if (sensors[0] == "V" && sensors[1] != "0") {
@@ -545,12 +538,10 @@
 
             else {
                 if (direzione == 1) {
-                    player.animations.stop('left', 10, true);
-                    player.frame = 20;
+                    player.animations.stop('left', false);
                 }
                 if (direzione == 0) {
-                    player.animations.stop('right', 10, true);
-                    player.frame = 0;
+                    player.animations.stop('right', false);
                 }
 
                 if (direzione == 2) {
@@ -560,8 +551,6 @@
                 }
 
                 if (direzione == 3) {
-                    // player.animations.stop('up', 10, true);
-                    // player.frame = 99;
                     player.scale.setTo(1.5);
                 }
             }
@@ -646,6 +635,17 @@
             counter1 = 0;
 
             if (player.y < 1000) {
+                bollicine.kill();
+                bollicine1.kill();
+
+                bollicine = game.add.sprite(posx[Math.floor(Math.random() * 7)], 2800, 'bollicine');
+                bollicine.animations.add('gluglu', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+                bollicine.animations.play('gluglu', 10, true);
+
+                bollicine1 = game.add.sprite(posx[Math.floor(Math.random() * 7) + 1], 1500, 'bollicine');
+                bollicine1.animations.add('gluglu1', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+                bollicine1.animations.play('gluglu1', 10, true);
+
                 player.y += 1800;
                 sfondoliv1.tilePosition.y += 1800;
                 sfondoliv2.tilePosition.y += 1800;
