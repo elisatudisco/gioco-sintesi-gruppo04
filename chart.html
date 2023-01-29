@@ -23,11 +23,11 @@
     <div id="titolo">
         <div id="titolone">Leaderboard</div>
     </div>
-   
+
     <script>
         const urlString = window.location.href;
         const url = new URL(urlString);
-        
+
         BIN_ID = '6385e5b3a3c728450eda7d89';
         API_KEY = '$2b$10$KWxVu8aW.YRXOvS0UwlDP.hS6u52PsWX9b69W6JfL6fvdiXoXqqde';
 
@@ -51,7 +51,6 @@
                 let data = JSON.parse(req.responseText).record;
                 let leaderboard = data.leaderboard;
                 leaderboard = bubbleSort(leaderboard);
-                console.log(leaderboard);
 
                 let pillola = JSON.stringify(leaderboard);
                 let pillolina = pillola.replace(/\[|\]|\{|\}|"|polpettona|:/g, '')
@@ -69,18 +68,16 @@
         let cicciolina;
         let pongo = 1;
         let gigafluffodoggus = 0;
+        let chickpea;
 
         function setup() {
             pillolina1 = localStorage.getItem('test2');
-            console.log(pillolina1);
 
             if (pillolina1 == null) {
                 lollobrigidaseimitica = " "
                 document.getElementById("carnesintetica").innerHTML = lollobrigidaseimitica;
                 gigafluffodoggus = 1;
             }
-
-            console.log(lollobrigidaseimitica);
 
             if (gigafluffodoggus == 1) {
                 return
@@ -104,7 +101,23 @@
                     pongo++;
                 });
             }
+
+            console.log(pillolina1);
+            chickpea = pillolina1.replace(/a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z| |'|/g, '')
+            let chickpea1 = chickpea.split(",");
+
+            let sum = 0;
+            chickpea1.forEach(item => {
+                let antonio = Number(item);
+                sum += antonio;
+            });
+
+            console.log(sum);
+            localStorage.setItem('somma', sum);
         }
+
+
+
 
         function draw() {
         }

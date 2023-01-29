@@ -136,6 +136,7 @@
         var mortacciTua = 0;
         let polpetta;
         var polpettona = user;
+        var putenzaMassima = 0;
 
         //scelta posizioni fisse nello spazio per disporre le microplastiche
         let posx = [105, 185, 265, 345, 425, 505, 585, 675, 745];
@@ -164,11 +165,11 @@
             sfondoliv2 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'sfondoliv2');
             sfondoliv3 = game.add.tileSprite(0, 90, game.world.width, game.world.height, 'sfondoliv3');
 
-            bollicine = game.add.sprite(posx[Math.floor(Math.random() * 7)], 2800, 'bollicine');
+            bollicine = game.add.sprite([Math.floor(Math.random() * 550)], 2800, 'bollicine');
             bollicine.animations.add('gluglu', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
             bollicine.animations.play('gluglu', 10, true);
 
-            bollicine1 = game.add.sprite(posx[Math.floor(Math.random() * 7) + 1], 1500, 'bollicine');
+            bollicine1 = game.add.sprite([Math.floor(Math.random() * 550) + 1], 1500, 'bollicine');
             bollicine1.animations.add('gluglu1', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
             bollicine1.animations.play('gluglu1', 10, true);
 
@@ -393,7 +394,7 @@
 
             //MOVIMENTI GIOCATORE 
             //CONTROLLI ARDUINO 
-            // if (sensors[0] == "A") {
+            // if (sensors[0] == "A" && putenzaMassima == 0) {
             //     //player va destra
             //     if (sensors[1] == "R") {
             //         player.body.velocity.x = 250;
@@ -426,32 +427,32 @@
             //     }
 
             //     //player sta fermo
-            // else if (sensors[1] == "0") {
-            // player.body.velocity.x = 0;
+            //     else if (sensors[1] == "0") {
+            //         player.body.velocity.x = 0;
 
-            //       else {
-            //     if (direzione == 1) {
-            //         player.animations.stop('left', false);
-            //     }
-            //     if (direzione == 0) {
-            //         player.animations.stop('right', false);
-            //     }
+            //         if (direzione == 1) {
+            //             player.animations.stop('left', false);
+            //         }
+            //         if (direzione == 0) {
+            //             player.animations.stop('right', false);
+            //         }
 
-            //     if (direzione == 2) {
-            //         player.animations.stop('up', 10, true);
-            //         player.frame = 99;
-            //         player.scale.setTo(0.7);
-            //     }
+            //         if (direzione == 2) {
+            //             player.animations.stop('up', 10, true);
+            //             player.frame = 99;
+            //             player.scale.setTo(0.7);
+            //         }
 
-            //     if (direzione == 3) {
-            //         player.scale.setTo(1.5);
+            //         if (direzione == 3) {
+            //             player.scale.setTo(1.5);
+            //         }
             //     }
             // }
-            // }
 
+            // //sprint iniziale e volo del player
             // if (sensors[0] == "V" && sensors[1] != "0") {
             //     if (player.body.touching.down && hitPlatform) {
-            //         player.body.velocity.y = -700;
+            //         player.body.velocity.y = -800;
             //         player.animations.play('up', 10, true);
             //         direzione = 2;
             //         player.scale.setTo(0.7);
@@ -459,10 +460,10 @@
             //         emitter.start(false, 1200, 20);
             //         boost.play(); //AUDIO BOOST
             //     }
+
+            //     //boost
             //     else if (micro >= 10) {
-            //         // player.body.velocity.y = -(Math.abs(sensors[1]) / 10);
-            //         player.body.velocity.y = -500;
-            //         player.animations.play('up', 10, true);
+            //         player.body.velocity.y = -1100;
             //         direzione = 2;
             //         player.scale.setTo(0.7);
             //         micro = 0;
@@ -471,6 +472,8 @@
             //         barra3.alpha = 0;
             //         barra.alpha = 1;
             //         boost.play(); //AUDIO BOOST
+            //         player.animations.play('boost', 10, true);
+            //         putenzaMassima = 1;
             //     }
             // }
 
@@ -478,7 +481,7 @@
             //CONTROLLI CON TASTIERA 
             player.body.velocity.x = 0;
 
-            if (cursors.left.isDown) {
+            if (cursors.left.isDown && putenzaMassima == 0) {
                 player.body.velocity.x = -250;
                 if (player.body.touching.down && hitPlatform) {
                     player.animations.play('left', 10, true);
@@ -492,7 +495,7 @@
                 }
             }
 
-            else if (cursors.right.isDown) {
+            else if (cursors.right.isDown && putenzaMassima == 0) {
                 player.body.velocity.x = 250;
                 if (player.body.touching.down && hitPlatform) {
                     player.animations.play('right', 10, true);
@@ -528,6 +531,7 @@
                 emitter.setScale(0.1, 1, 0.1, 1, 20000, Phaser.Easing.Quintic.Out);
                 boost.play(); //AUDIO BOOST
                 player.animations.play('boost', 10, true);
+                putenzaMassima = 1;
             }
 
             else {
@@ -547,6 +551,14 @@
                 if (direzione == 3) {
                     player.scale.setTo(1.5);
                 }
+            }
+
+
+
+
+            //ALT !!! non commentare questa cosa qui sotto quando disattivi i controlli con la tastiera
+            if (player.body.velocity.y > -100) {
+                putenzaMassima = 0;
             }
 
             //CAMBIO MICROPLASTICA SCORE
@@ -630,11 +642,11 @@
                 bollicine.kill();
                 bollicine1.kill();
 
-                bollicine = game.add.sprite(posx[Math.floor(Math.random() * 7)], 2800, 'bollicine');
+                bollicine = game.add.sprite([Math.floor(Math.random() * 550)], 2800, 'bollicine');
                 bollicine.animations.add('gluglu', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
                 bollicine.animations.play('gluglu', 10, true);
 
-                bollicine1 = game.add.sprite(posx[Math.floor(Math.random() * 7) + 1], 1500, 'bollicine');
+                bollicine1 = game.add.sprite([Math.floor(Math.random() * 550) + 1], 1500, 'bollicine');
                 bollicine1.animations.add('gluglu1', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
                 bollicine1.animations.play('gluglu1', 10, true);
 
@@ -699,8 +711,9 @@
             stelleCreate -= 1
             colore -= 1;
 
-            player.body.velocity.y = -450;
-            player.body.velocity.x = 0;
+            if (putenzaMassima == 0) {
+                player.body.velocity.y = -450;
+            }
         }
 
         //FUNZIONE TESTO SCORE
@@ -714,4 +727,5 @@
         }
     </script>
 </body>
+
 </html>

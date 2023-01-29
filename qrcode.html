@@ -17,29 +17,43 @@
 
 <body>
 
-    <div id="ok">
+   <div id="ok">
         <div id="ok1">Stay tuned</div>
     </div>
 
     <div id="qrcode">
-        <p><img src="assets/qrcode.png" id="qrcode1" alt="QR code" class="animated swing"></p>
-    </div>
+        <p><img src="assets/qrcode.png" id="qrcode1" alt="QR code" class="swingimage"></p>
+    </div> 
 
     <div id="carota">
-        <div id="carota1">Follow us on Instagram <br> and discover who will be <br> the ultimate winner <br> of Unlock
-            the Island!</div>
+        <div id="carota1">Follow us on Instagram</div>
+    </div>
+
+    <div id="carotina">
+        <div id="carotina1">Total amount of microplastics produced: </div>
     </div>
 
     <script>
+        let somma = localStorage.getItem('somma');
+        var index = 0;
+        var lastMillis = 0;
+        var message = somma;
+        let myText;
+
         function setup() {
-            noCanvas();
+            
+            myText = createElement("h3", message).id("somma");
+            myText.parent("somma1");
         }
 
-        function draw() { }
+        function draw() {
+
+        }
 
         function keyPressed() {
             if (keyCode === ENTER) {
                 window.open('./homepage.html', '_self');
+                localStorage.clear();
             }
         }
     </script>
