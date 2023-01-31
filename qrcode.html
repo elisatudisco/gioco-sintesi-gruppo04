@@ -10,44 +10,57 @@
     <script src="libraries/p5.min.js"></script>
     <!-- <script src="libraries/p5.sound.min.js"></script> -->
     <script src="libraries/p5.serialport.js"></script>
-
+    <script src="snowfield.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://use.typekit.net/cwg3cvo.css"> <!--Loos font-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
 
 <body>
-
-   <div id="ok">
-        <div id="ok1">Stay tuned</div>
+    <div id="stayTuned">
+        <div id="stayTuned1">Stay tuned</div>
     </div>
 
     <div id="qrcode">
         <p><img src="assets/qrcode.png" id="qrcode1" alt="QR code" class="swingimage"></p>
-    </div> 
-
-    <div id="carota">
-        <div id="carota1">Follow us on Instagram</div>
     </div>
 
-    <div id="carotina">
-        <div id="carotina1">Total amount of microplastics produced: </div>
+    <div id="followUs">
+        <div id="followUs1">Follow us on Instagram</div>
     </div>
+
+    <div id="produced">
+        <div id="produced1">The community has produced: </div>
+    </div>
+
+    <div id="microplastics">
+        <div id="microplastics1">microplastics </div>
+    </div>
+
+    <div id="over">
+        <div id="over1">over </div>
+    </div>
+
+    <div id="numero">
+        <div id="numero1">10.000 </div>
+    </div>
+
+    <div id="soon">
+        <div id="soon1">Soon we will party together</div>
+    </div>
+
+    <script src="confetti.js"></script>
 
     <script>
         let somma = localStorage.getItem('somma');
-        var index = 0;
-        var lastMillis = 0;
         var message = somma;
         let myText;
 
         function setup() {
-            
             myText = createElement("h3", message).id("somma");
-            myText.parent("somma1");
         }
 
         function draw() {
-
         }
 
         function keyPressed() {
@@ -55,6 +68,23 @@
                 window.open('./homepage.html', '_self');
                 localStorage.clear();
             }
+        }
+
+        if (somma == 10000) {
+            const start = () => {
+                setTimeout(function () {
+                    confetti.start()
+                }, 500); // 1000 is time that after 1 second start the confetti ( 1000 = 1 sec)
+            };
+
+            const stop = () => {
+                setTimeout(function () {
+                    confetti.stop()
+                }, 4000); // 5000 is time that after 5 second stop the confetti ( 5000 = 5 sec)
+            };
+
+            start();
+            stop();
         }
     </script>
 </body>

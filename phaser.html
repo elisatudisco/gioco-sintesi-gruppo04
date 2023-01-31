@@ -137,6 +137,7 @@
         let polpetta;
         var polpettona = user;
         var putenzaMassima = 0;
+        var putenzaMassima2 = 1;
 
         //scelta posizioni fisse nello spazio per disporre le microplastiche
         let posx = [105, 185, 265, 345, 425, 505, 585, 675, 745];
@@ -371,6 +372,10 @@
             game.scale.pageAlignVertically = true;
             game.scale.refresh();
 
+            window.setTimeout(function () {
+                putenzaMassima2 = 0;
+            }, 1000);
+
             stars.addAll('angle', 1)
             stars.setAll('anchor.x', 0.5)
             stars.setAll('anchor.y', 0.5)
@@ -394,7 +399,7 @@
 
             //MOVIMENTI GIOCATORE 
             //CONTROLLI ARDUINO 
-            // if (sensors[0] == "A" && putenzaMassima == 0) {
+            // if (sensors[0] == "A" && putenzaMassima == 0 && putenzaMassima2 == 0) {
             //     //player va destra
             //     if (sensors[1] == "R") {
             //         player.body.velocity.x = 250;
@@ -465,7 +470,7 @@
             //     else if (micro >= 10) {
             //         player.body.velocity.y = -1100;
             //         direzione = 2;
-            //         player.scale.setTo(0.7);
+            //         player.scale.setTo(1.5);
             //         micro = 0;
             //         barra.scale.x = 0;
             //         emitter.start(false, 1200, 10);
@@ -481,7 +486,7 @@
             //CONTROLLI CON TASTIERA 
             player.body.velocity.x = 0;
 
-            if (cursors.left.isDown && putenzaMassima == 0) {
+            if (cursors.left.isDown && putenzaMassima == 0 && putenzaMassima2 == 0) {
                 player.body.velocity.x = -250;
                 if (player.body.touching.down && hitPlatform) {
                     player.animations.play('left', 10, true);
@@ -495,7 +500,7 @@
                 }
             }
 
-            else if (cursors.right.isDown && putenzaMassima == 0) {
+            else if (cursors.right.isDown && putenzaMassima == 0 && putenzaMassima2 == 0) {
                 player.body.velocity.x = 250;
                 if (player.body.touching.down && hitPlatform) {
                     player.animations.play('right', 10, true);

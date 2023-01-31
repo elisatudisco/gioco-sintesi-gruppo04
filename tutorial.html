@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>How to use it</title>
+
+    <script src="libraries/p5.min.js"></script>
+    <!-- <script src="libraries/p5.sound.min.js"></script> -->
+    <script src="libraries/p5.serialport.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/cwg3cvo.css"> <!--Loos font-->
+</head>
+
+<body>
+    <script>
+        let vid;
+        let playing = true;
+
+        const urlString = window.location.href;
+        const url = new URL(urlString);
+        let user = url.searchParams.get("currentUser");
+
+        window.setTimeout(function () {
+            window.location = "/phaser.html?currentUser=" + user;
+        }, 9000);
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+
+            vid = createVideo("assets/tutorial.mov");
+            vid.size(616, 1920);
+            vid.volume(0);
+            vid.loop();
+            vid.hide(); // hides the html video loader
+            vid.position(300, 0);
+
+
+        }
+
+        function draw() {
+            background("black");
+            let img = vid.get();
+            image(img, 300, -320); // redraws the video frame by frame in 
+
+            push();
+            drawingContext.shadowOffsetX = 6;
+            drawingContext.shadowOffsetY = -6;
+            drawingContext.shadowBlur = 10;
+            drawingContext.shadowColor = 'black';
+            fill("white");
+            textFont('loos-normal');
+            textSize(35);
+            textAlign(LEFT);
+            text("Incline for going \nleft or right", windowWidth / 2 - 300, windowHeight / 2 - 450);
+            pop();
+
+            push();
+            drawingContext.shadowOffsetX = 6;
+            drawingContext.shadowOffsetY = -6;
+            drawingContext.shadowBlur = 10;
+            drawingContext.shadowColor = 'black';
+            fill("white");
+            textFont('loos-normal');
+            textSize(35);
+            textAlign(LEFT);
+            text("Blow in for \n- starting the game \n- using the boost", windowWidth / 2 - 300, windowHeight / 2 + 200);
+            pop();
+        }
+
+
+    </script>
+</body>
+
+</html>
