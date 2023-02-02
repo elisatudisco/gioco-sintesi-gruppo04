@@ -8,56 +8,20 @@
     <title>Stay tuned</title>
 
     <script src="libraries/p5.min.js"></script>
-    <!-- <script src="libraries/p5.sound.min.js"></script> -->
     <script src="libraries/p5.serialport.js"></script>
-    <script src="snowfield.js"></script>
+
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://use.typekit.net/cwg3cvo.css"> <!--Loos font-->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
 
 <body>
-    <div id="stayTuned">
-        <div id="stayTuned1">Stay tuned</div>
-    </div>
-
-    <div id="qrcode">
-        <p><img src="assets/qrcode.png" id="qrcode1" alt="QR code" class="swingimage"></p>
-    </div>
-    <div id="microplastics">
-        <div id="microplastics1">microplastics </div>
-    </div>
-    
-    <div id="followUs">
-        <div id="followUs1">Until now you produced</div>
-    </div>
-
-    <div id="over">
-        <div id="over1">/ 10.000</div>
-    </div>
-
-    <!-- <div id="numero">
-        <div id="numero1">10.000 </div>
-    </div> -->
-
-    <div id="soon">
-        <div id="soon1">Do not give up</div>
-    </div>
-
-    <script src="confetti.js"></script>
-
     <script>
+        const urlString = window.location.href;
+        const url = new URL(urlString);
+
         let somma = localStorage.getItem('somma');
         var message = somma;
         let myText;
-
-        function setup() {
-            myText = createElement("h3", message).id("somma");
-            console.log(somma);
-        }
-
-        function draw() {
-        }
 
         function keyPressed() {
             if (keyCode === ENTER) {
@@ -66,21 +30,84 @@
             }
         }
 
-        if (somma >= 10000) {
-            const start = () => {
-                setTimeout(function () {
-                    confetti.start()
-                }, 500); // 1000 is time that after 1 second start the confetti ( 1000 = 1 sec)
-            };
+        let img;
+        function preload() {
+            img = loadImage('assets/qrcode.png');
+        }
 
-            const stop = () => {
-                setTimeout(function () {
-                    confetti.stop()
-                }, 4000); // 5000 is time that after 5 second stop the confetti ( 5000 = 5 sec)
-            };
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            background("black");
+            image(img, windowWidth / 2, windowHeight / 2 - 1532);
+        }
 
-            start();
-            stop();
+        function draw() {
+            //Titolo "Stay tuned"
+            push();
+            drawingContext.shadowOffsetX = 6;
+            drawingContext.shadowOffsetY = -6;
+            drawingContext.shadowBlur = 10;
+            drawingContext.shadowColor = 'black';
+            fill("white");
+            textFont('GD-Boing-Bold');
+            textSize(96);
+            textAlign(CENTER);
+            text("Stay tuned", windowWidth / 2, windowHeight - 1800);
+            pop();
+
+            //Congrats! You produced
+            push();
+            drawingContext.shadowOffsetX = 6;
+            drawingContext.shadowOffsetY = -6;
+            drawingContext.shadowBlur = 10;
+            drawingContext.shadowColor = 'black';
+            fill("white");
+            textFont('loos-normal');
+            textSize(60);
+            textAlign(CENTER);
+            text("Congrats! You produced", windowWidth / 2, windowHeight - 766);
+            pop();
+
+            //Numero micro raccolte sul totale
+            push();
+            drawingContext.shadowOffsetX = 6;
+            drawingContext.shadowOffsetY = -6;
+            drawingContext.shadowBlur = 10;
+            drawingContext.shadowColor = 'black';
+            fill(198, 35, 132);
+            textFont('loos-normal');
+            textSize(60);
+            textAlign(CENTER);
+            textStyle(BOLD);
+            text(somma + " /" + " 10.000", windowWidth / 2, windowHeight - 690);
+            pop();
+
+            //microplastics
+            push();
+            drawingContext.shadowOffsetX = 6;
+            drawingContext.shadowOffsetY = -6;
+            drawingContext.shadowBlur = 10;
+            drawingContext.shadowColor = 'black';
+            fill("white");
+            textFont('loos-normal');
+            textSize(60);
+            textAlign(CENTER);
+            text("microplastics", windowWidth / 2, windowHeight - 620);
+            pop();
+
+            //The party is coming
+            push();
+            drawingContext.shadowOffsetX = 6;
+            drawingContext.shadowOffsetY = -6;
+            drawingContext.shadowBlur = 10;
+            drawingContext.shadowColor = 'black';
+            fill("white");
+            textFont('loos-normal');
+            textSize(60);
+            textAlign(CENTER);
+            textStyle(BOLD);
+            text("The party is coming", windowWidth / 2, windowHeight - 320);
+            pop();
         }
     </script>
 </body>

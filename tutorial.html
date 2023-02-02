@@ -28,6 +28,12 @@
             window.location = "/phaser.html?currentUser=" + user;
         }, 10000);
 
+        function keyPressed() {
+            if (keyCode === ENTER) {
+                window.location = "/phaser.html?currentUser=" + user;
+            }
+        }
+
         function setup() {
             createCanvas(windowWidth, windowHeight);
 
@@ -37,8 +43,6 @@
             vid.loop();
             vid.hide(); // hides the html video loader
             vid.position(0, 0);
-
-
         }
 
         function draw() {
@@ -79,9 +83,8 @@
             textFont('GD-Boing-Bold');
             textSize(96);
             textAlign(CENTER);
-            text("Commands", 540, 120);
+            text("Controls", 540, 120); //nei giochi si usa questo termine
             pop();
-
         }
 
 
