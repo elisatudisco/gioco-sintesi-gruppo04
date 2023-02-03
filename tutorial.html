@@ -24,9 +24,9 @@
         const url = new URL(urlString);
         let user = url.searchParams.get("currentUser");
 
-        window.setTimeout(function () {
-            window.location = "/phaser.html?currentUser=" + user;
-        }, 10000);
+        // window.setTimeout(function () {
+        //     window.location = "/phaser.html?currentUser=" + user;
+        // }, 20000);
 
         function keyPressed() {
             if (keyCode === ENTER) {
@@ -59,7 +59,7 @@
             textFont('loos-normal');
             textSize(48);
             textAlign(LEFT);
-            text("Incline to go \nleft or right", 120, 798);
+            text("Incline to go \nleft or right", 120, 783);
             pop();
 
             push();
@@ -71,7 +71,7 @@
             textFont('loos-normal');
             textSize(48);
             textAlign(LEFT);
-            text("Blow in for \na special boost", 120, 1185);
+            text("Blow in for \na special boost", 120, 1600);
             pop();
 
             push();
@@ -83,7 +83,7 @@
             textFont('GD-Boing-Bold');
             textSize(96);
             textAlign(CENTER);
-            text("Controls", 540, 120); //nei giochi si usa questo termine
+            text("How to use", 540, 120); //nei giochi si usa questo termine
             pop();
         }
 

@@ -100,8 +100,8 @@ function draw() {
     drawingContext.shadowOffsetY = -6;
     drawingContext.shadowBlur = 10;
     drawingContext.shadowColor = 'black';
-    fill(198, 35, 132);
-    textFont('loos-normal');
+    fill(232, 74, 17);
+    textFont('GD-Boing-Bold');
     textSize(64);
     textAlign(CENTER);
     textStyle(BOLD);
@@ -132,7 +132,7 @@ function draw() {
     textSize(64);
     textAlign(CENTER);
     textStyle(BOLD);
-    text("The party is coming", 540, 1690);
+    text("Do not give up", 540, 1690);
     pop();
 }
 

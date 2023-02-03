@@ -131,7 +131,7 @@ function draw() {
     push();
     fill("white");
     textFont('loos-normal');
-    textSize(40);
+    textSize(45);
     textAlign(CENTER);
     text("A game by Mollustic", windowWidth / 2, windowHeight / 2 + 230);
     pop();

@@ -326,7 +326,7 @@ h2 {
 }
 
 .chart__item:nth-child(1) {
-  background-color: rgb(198, 35, 132);
+  background-color: rgb(232, 74, 17);
   font-size: 1.3em;
   word-spacing: 70px;
 }
@@ -365,7 +365,7 @@ h2 {
 
 #carnesintetica {
   font-family: loos-normal, sans-serif;
-  color: rgb(230, 22, 22);
+  color: rgb(232, 74, 17);
   font-style: normal;
   font-weight: 500;
   font-size: 3em;
