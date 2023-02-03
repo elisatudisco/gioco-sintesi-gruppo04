@@ -19,6 +19,14 @@ let spritesheet;
 let textures = [];
 let textureSize = 70;
 
+let angle;
+let angleV = 0;
+let angleA = 0;
+let bob;
+let len;
+let origin;
+let gravity1 = 0.5;
+
 let img;
 
 function preload() {
@@ -28,7 +36,12 @@ function preload() {
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    angleMode(DEGREES);
+    angleMode(RADIANS);
+
+    origin = createVector(429, 0);
+    angle = PI / 20;
+    bob = createVector();
+    len = 330;
 
     gravity = createVector(0, 0.3);
     for (let x = 0; x < spritesheet.width; x += textureSize) {
@@ -51,6 +64,14 @@ function setup() {
 function draw() {
     background("black");
 
+    let force = gravity1 * sin(angle);
+    angleA = (-1 * force) / len;
+    angleV += angleA;
+    angle += angleV;
+
+    bob.x = len * sin(angle) + origin.x;
+    bob.y = len * cos(angle) + origin.y;
+
     zOff += 0.1; //changes the perlin noise value over time
     for (flake of snow) {
         //for every element of the array
@@ -65,11 +86,6 @@ function draw() {
         flake.update();
         flake.render();
     }
-
-
- 
-    //QR CODE
-    image(img, 150, 330, 709.1, 600.6);
 
     //Titolo "Stay tuned"
     push();
@@ -135,8 +151,16 @@ function draw() {
     textSize(64);
     textAlign(CENTER);
     textStyle(BOLD);
+
+    if (somma < 10000){
     text("Do not give up", 540, 1690);
+    } else {
+        text("Soon we will party", 540, 1690);
+    }
     pop();
+
+    //QR CODE
+    image(img, bob.x - 250, bob.y, 709.1, 600.6);
 }
 
 function keyPressed() {
