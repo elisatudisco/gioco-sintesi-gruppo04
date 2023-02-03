@@ -66,7 +66,7 @@ function draw() {
     }
 
     //QR CODE
-    image(img, windowWidth / 2, windowHeight / 2 - 1532);
+    image(img, 150, 330, 709.1, 600.6);
     
     //Titolo "Stay tuned"
     push();
@@ -78,7 +78,7 @@ function draw() {
     textFont('GD-Boing-Bold');
     textSize(96);
     textAlign(CENTER);
-    text("Stay tuned", windowWidth / 2, windowHeight - 1800);
+    text("Stay tuned", 540, 160);
     pop();
 
     //Congrats! You produced
@@ -89,9 +89,9 @@ function draw() {
     drawingContext.shadowColor = 'black';
     fill("white");
     textFont('loos-normal');
-    textSize(60);
+    textSize(64);
     textAlign(CENTER);
-    text("Congrats! You produced", windowWidth / 2, windowHeight - 766);
+    text("Until now you produced", 540, 1100);
     pop();
 
     //Numero micro raccolte sul totale
@@ -102,10 +102,10 @@ function draw() {
     drawingContext.shadowColor = 'black';
     fill(198, 35, 132);
     textFont('loos-normal');
-    textSize(60);
+    textSize(64);
     textAlign(CENTER);
     textStyle(BOLD);
-    text(somma + " /" + " 10.000", windowWidth / 2, windowHeight - 690);
+    text(somma + " /" + " 10.000", 540, 1200);
     pop();
 
     //microplastics
@@ -116,9 +116,9 @@ function draw() {
     drawingContext.shadowColor = 'black';
     fill("white");
     textFont('loos-normal');
-    textSize(60);
+    textSize(64);
     textAlign(CENTER);
-    text("microplastics", windowWidth / 2, windowHeight - 620);
+    text("microplastics", 540, 1300);
     pop();
 
     //The party is coming
@@ -129,10 +129,10 @@ function draw() {
     drawingContext.shadowColor = 'black';
     fill("white");
     textFont('loos-normal');
-    textSize(60);
+    textSize(64);
     textAlign(CENTER);
     textStyle(BOLD);
-    text("The party is coming", windowWidth / 2, windowHeight - 320);
+    text("The party is coming", 540, 1690);
     pop();
 }
 
