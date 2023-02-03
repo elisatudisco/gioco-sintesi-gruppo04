@@ -28,6 +28,7 @@ function preload() {
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
+    angleMode(DEGREES);
 
     gravity = createVector(0, 0.3);
     for (let x = 0; x < spritesheet.width; x += textureSize) {
@@ -65,9 +66,11 @@ function draw() {
         flake.render();
     }
 
+
+ 
     //QR CODE
     image(img, 150, 330, 709.1, 600.6);
-    
+
     //Titolo "Stay tuned"
     push();
     drawingContext.shadowOffsetX = 6;
