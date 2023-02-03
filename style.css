@@ -200,69 +200,72 @@ body {
   src: url('assets/GD-Boing-Bold.ttf');
 }
 
-#titolo {
-  height: 140px;
-  width: 400px;
-  top: -380%;
-  left: 37%;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  display: inline-block;
-}
-
 #titolone {
   font-family: 'GD-Boing-Bold', serif;
   color: white;
   font-style: normal;
-  font-size: 6em;
-  margin: auto;
-  width: 100%;
-  height: 45px;
-  position: absolute;
+  font-size: 96px;
   text-align: center;
-  top: 0%;
-  left: 0%;
-  line-height: 55px;
-  word-spacing: 80px;
-  vertical-align: middle;
-  letter-spacing: 1px;
-  padding-right: 10px;
+  position: relative;
+  top: -760px;
 }
 
+/* PAGINA NOME */
+
 h1 {
-  font-family: loos-normal, sans-serif;
+  font-family: GD-Boing-Bold, serif;
   color: rgb(255, 255, 255);
   font-style: normal;
-  font-size: 3.5em;
+  font-size: 64px;
   text-align: center;
   font-weight: 600;
-  display: block;
-  margin: auto;
-  width: 100%;
-  position: absolute;
-  top: -100%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  cursor: default;
+  position: relative;
+  top: -450px;
 }
 
 h2 {
   font-family: loos-normal, sans-serif;
   color: rgb(255, 255, 255);
   font-style: normal;
-  font-size: 48px;
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 120%;
+  text-align: center;
+  position: relative;
+  top: -670px;
+}
+
+#nome {
+  font-family: loos-normal, sans-serif;
+  color: rgb(0, 0, 0);
+  font-style: normal;
+  font-size: 1.5em;
   text-align: center;
   font-weight: 400;
-  display: block;
-  margin: auto;
-  width: 70%;
-  position: absolute;
-  top: -400%;
-  left: 51%;
+  width: 45%;
+  position: relative;
+  top: -380px;
+  left: 50%;
   transform: translate(-50%, -50%);
-  cursor: default;
-  line-height: normal;
+  border-radius: 20px
 }
+
+.start1 {
+  top: 110%;
+  left: 40%;
+  margin: auto;
+  position: absolute;
+  text-decoration: none !important;
+  width: 230px;
+  height: 230px;
+  background: url(assets/start.png);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: transparent;
+}
+
+/* CLASSIFICA */
 
 #titolo1 {
   font-family: loos-normal, sans-serif;
@@ -279,18 +282,16 @@ h2 {
 }
 
 #testo {
-  height: 850px;
-  width: 550px;
-  top: 70%;
-  left: 47%;
-  transform: translate(-50%, -50%);
+  height: 1240px;
+  width: 630px;
   position: absolute;
+  transform: translate(220px, -45%);
   display: inline-block;
   line-height: normal;
   overflow-y: scroll;
   overflow-x: hidden;
   background-color: rgb(0, 0, 0);
-  border-radius: 2em;
+  border-radius: 20px;
   /* border: 5px solid rgb(198, 35, 132); */
 }
 
@@ -395,22 +396,6 @@ h2 {
   cursor: pointer;
 }
 
-.start1 {
-  top: 200%;
-  left: 38%;
-  margin: auto;
-  position: absolute;
-  text-decoration: none !important;
-  width: 230px;
-  height: 230px;
-  display: inline-block;
-  background: url(assets/start.png);
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: transparent;
-}
-
 .green {
   transition: all 1s ease;
   transform: scale(1);
@@ -419,23 +404,6 @@ h2 {
 .green:hover {
   /*  Making button bigger on hover  */
   transform: scale(1.5) perspective(1px)
-}
-
-#nome {
-  font-family: loos-normal, sans-serif;
-  color: rgb(0, 0, 0);
-  font-style: normal;
-  font-size: 1.5em;
-  text-align: center;
-  font-weight: 400;
-  display: block;
-  margin: auto;
-  width: 40%;
-  position: absolute;
-  top: -5%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 20px
 }
 
 @-webkit-keyframes swinging {

@@ -16,6 +16,7 @@
 </head>
 
 <body>
+
     <script>
         const urlString = window.location.href;
         const url = new URL(urlString);
@@ -27,7 +28,7 @@
         let go;
 
         function setup() {
-            myText3 = createElement("h2", "Welcome! Mr. Mollustic needs" + "</br>" + "your help to collect as much microplastics as possible and" + "</br>" + "donate them to molluscs," + "</br>" + "can you help him?");
+            myText3 = createElement("h2", "Welcome! Mr. Mollustic needs" + "</br>" + "your help to collect as much" + "</br>" + "microplastics as possible and" + "</br>" + "donate them to molluscs," + "</br>" + "can you help him?");
             myText2 = createElement("h1", "Insert your name");
             myType = createInput("").attribute("placeholder", "").id("nome").attribute('autocomplete', 'off').attribute('maxlength', '9');
 
