@@ -51,7 +51,7 @@ function setup() {
         }
     }
 
-    if (somma >= 10000) {
+    if (somma >= 2000) {
         for (let i = 0; i < 100; i++) {
             let x = random(width);
             let y = random(height);
@@ -110,7 +110,7 @@ function draw() {
     textFont('loos-normal');
     textSize(64);
     textAlign(CENTER);
-    text("Until now you produced", 540, 1100);
+    text("Until now you have produced", 540, 1100);
     pop();
 
     //Numero micro raccolte sul totale
@@ -124,7 +124,7 @@ function draw() {
     textSize(64);
     textAlign(CENTER);
     textStyle(BOLD);
-    text(somma + " /" + " 10.000", 540, 1200);
+    text(somma + " /" + " 2000", 540, 1200);
     pop();
 
     //microplastics
@@ -152,7 +152,7 @@ function draw() {
     textAlign(CENTER);
     textStyle(BOLD);
 
-    if (somma < 10000){
+    if (somma < 2000){
     text("Do not give up", 540, 1690);
     } else {
         text("Soon we will party", 540, 1690);
