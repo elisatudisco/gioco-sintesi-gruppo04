@@ -39,7 +39,7 @@ function setup() {
     angleMode(RADIANS);
 
     origin = createVector(429, 0);
-    angle = PI / 20;
+    angle = PI / 30;
     bob = createVector();
     len = 330;
 

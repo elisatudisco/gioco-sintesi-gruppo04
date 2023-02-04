@@ -251,12 +251,12 @@ h2 {
 
 .start1 {
   top: 100%;
-  left: 36%;
+  left: 34%;
   margin: auto;
   position: absolute;
   text-decoration: none !important;
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 350px;
   background: url(assets/start.png);
   background-color: transparent;
   border: none;
@@ -402,5 +402,5 @@ h2 {
 
 .green:hover {
   /*  Making button bigger on hover  */
-  transform: scale(1.5) perspective(1px)
+  transform: scale(1.2) perspective(1px)
 }
