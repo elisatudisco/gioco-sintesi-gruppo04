@@ -176,12 +176,13 @@
 
             //GIOCATORE
             player = game.add.sprite(1080 / 2, game.world.height - 350, 'dude');
-            player.scale.setTo(1.2);
-         //   player.body.setSize(174, 175, 208.8, 210);
+
             game.physics.arcade.enable(player);
             player.body.bounce.y = 0.5;
             player.body.gravity.y = 300;
+            player.body.setSize(174, 175, 0, 0);
             player.body.collideWorldBounds = false;
+            player.scale.setTo(1.2);
 
             //ANIMAZIONE GIOCATORE
             player.animations.add('up', [85, 86, 87, 88, 89, 90, 91, 94, 95, 96, 97, 98, 99]);
@@ -222,7 +223,6 @@
             barra2.alpha = 0;
 
             barra3 = game.add.sprite(700, 80, 'barra3');
-            barra3.scale.setTo(1);
             barra3.fixedToCamera = true;
             barra3.alpha = 0;
             barra3.animations.add('rainbow', [0, 1, 2, 3, 4, 5]);
@@ -404,164 +404,164 @@
 
             //MOVIMENTI GIOCATORE 
             //CONTROLLI ARDUINO 
-            if (sensors[0] == "A" && putenzaMassima == 0 && putenzaMassima2 == 0) {
-                //player va destra
-                if (sensors[1] == "R") {
-                    player.body.velocity.x = 250;
+            // if (sensors[0] == "A" && putenzaMassima == 0 && putenzaMassima2 == 0) {
+            //     //player va destra
+            //     if (sensors[1] == "R") {
+            //         player.body.velocity.x = 250;
 
-                    if (player.body.touching.down && hitPlatform) {
-                        player.animations.play('right', 10, true);
-                        direzione = 1;
-                    }
+            //         if (player.body.touching.down && hitPlatform) {
+            //             player.animations.play('right', 10, true);
+            //             direzione = 1;
+            //         }
 
-                    if (!(player.body.touching.down && hitPlatform)) {
-                        player.animations.play('up', 10, true);
-                        direzione = 10;
-                        player.scale.setTo(1.2);
-                    }
-                }
+            //         if (!(player.body.touching.down && hitPlatform)) {
+            //             player.animations.play('up', 10, true);
+            //             direzione = 10;
+            //             player.scale.setTo(1.2);
+            //         }
+            //     }
 
-                //player va a sinistra
-                else if (sensors[1] == "L") {
-                    player.body.velocity.x = -250;
-                    if (player.body.touching.down && hitPlatform) {
-                        player.animations.play('left', 10, true);
-                        direzione = 0;
-                    }
+            //     //player va a sinistra
+            //     else if (sensors[1] == "L") {
+            //         player.body.velocity.x = -250;
+            //         if (player.body.touching.down && hitPlatform) {
+            //             player.animations.play('left', 10, true);
+            //             direzione = 0;
+            //         }
 
-                    if (!(player.body.touching.down && hitPlatform)) {
-                        player.animations.play('up', 10, true);
-                        direzione = 10;
-                        player.scale.setTo(1.2);
-                    }
-                }
+            //         if (!(player.body.touching.down && hitPlatform)) {
+            //             player.animations.play('up', 10, true);
+            //             direzione = 10;
+            //             player.scale.setTo(1.2);
+            //         }
+            //     }
 
-                //player sta fermo
-                else if (sensors[1] == "0") {
-                    player.body.velocity.x = 0;
+            //     //player sta fermo
+            //     else if (sensors[1] == "0") {
+            //         player.body.velocity.x = 0;
 
-                    if (direzione == 1) {
-                        player.animations.stop('left', false);
-                    }
-                    if (direzione == 0) {
-                        player.animations.stop('right', false);
-                    }
+            //         if (direzione == 1) {
+            //             player.animations.stop('left', false);
+            //         }
+            //         if (direzione == 0) {
+            //             player.animations.stop('right', false);
+            //         }
 
-                    if (direzione == 2) {
-                        player.animations.stop('up', 10, true);
-                        player.frame = 99;
-                        player.scale.setTo(1.2);
-                    }
+            //         if (direzione == 2) {
+            //             player.animations.stop('up', 10, true);
+            //             player.frame = 99;
+            //             player.scale.setTo(1.2);
+            //         }
 
-                    if (direzione == 3) {
-                        player.scale.setTo(2.4);
-                    }
-                }
-            }
+            //         if (direzione == 3) {
+            //             player.scale.setTo(2.4);
+            //         }
+            //     }
+            // }
 
-            //sprint iniziale e volo del player
-            if (sensors[0] == "V" && sensors[1] != "0") {
-                if (player.body.touching.down && hitPlatform) {
-                    player.body.velocity.y = -800;
-                    player.animations.play('up', 10, true);
-                    direzione = 2;
-                    player.scale.setTo(1.2);
-                    micro = 0;
-                    emitter.start(false, 1200, 20);
-                    boost.play(); //AUDIO BOOST
-                }
+            // //sprint iniziale e volo del player
+            // if (sensors[0] == "V" && sensors[1] != "0") {
+            //     if (player.body.touching.down && hitPlatform) {
+            //         player.body.velocity.y = -800;
+            //         player.animations.play('up', 10, true);
+            //         direzione = 2;
+            //         player.scale.setTo(1.2);
+            //         micro = 0;
+            //         emitter.start(false, 1200, 20);
+            //         boost.play(); //AUDIO BOOST
+            //     }
 
-                //boost
-                else if (micro >= 10) {
-                    player.body.velocity.y = -1100;
-                    direzione = 2;
-                    player.scale.setTo(2.4);
-                    micro = 0;
-                    barra.scale.x = 0;
-                    emitter.start(false, 1200, 10);
-                    barra3.alpha = 0;
-                    barra.alpha = 1;
-                    boost.play(); //AUDIO BOOST
-                    player.animations.play('boost', 10, true);
-                    putenzaMassima = 1;
-                }
-            }
+            //     //boost
+            //     else if (micro >= 10) {
+            //         player.body.velocity.y = -1100;
+            //         direzione = 2;
+            //         player.scale.setTo(2.4);
+            //         micro = 0;
+            //         barra.scale.x = 0;
+            //         emitter.start(false, 1200, 10);
+            //         barra3.alpha = 0;
+            //         barra.alpha = 1;
+            //         boost.play(); //AUDIO BOOST
+            //         player.animations.play('boost', 10, true);
+            //         putenzaMassima = 1;
+            //     }
+            // }
 
 
             //CONTROLLI CON TASTIERA 
-            // player.body.velocity.x = 0;
+            player.body.velocity.x = 0;
 
-            // if (cursors.left.isDown && putenzaMassima == 0 && putenzaMassima2 == 0) {
-            //     player.body.velocity.x = -250;
-            //     if (player.body.touching.down && hitPlatform) {
-            //         player.animations.play('left', 10, true);
-            //         direzione = 0;
-            //     }
+            if (cursors.left.isDown && putenzaMassima == 0 && putenzaMassima2 == 0) {
+                player.body.velocity.x = -250;
+                if (player.body.touching.down && hitPlatform) {
+                    player.animations.play('left', 10, true);
+                    direzione = 0;
+                }
 
-            //     if (!(player.body.touching.down && hitPlatform)) {
-            //         player.animations.play('up', 10, true);
-            //         direzione = 10;
-            //         player.scale.setTo(1.2);
-            //     }
-            // }
+                if (!(player.body.touching.down && hitPlatform)) {
+                    player.animations.play('up', 10, true);
+                    direzione = 10;
+                    player.scale.setTo(1.2);
+                }
+            }
 
-            // else if (cursors.right.isDown && putenzaMassima == 0 && putenzaMassima2 == 0) {
-            //     player.body.velocity.x = 250;
-            //     if (player.body.touching.down && hitPlatform) {
-            //         player.animations.play('right', 10, true);
-            //         direzione = 1;
-            //     }
+            else if (cursors.right.isDown && putenzaMassima == 0 && putenzaMassima2 == 0) {
+                player.body.velocity.x = 250;
+                if (player.body.touching.down && hitPlatform) {
+                    player.animations.play('right', 10, true);
+                    direzione = 1;
+                }
 
-            //     if (!(player.body.touching.down && hitPlatform)) {
-            //         player.animations.play('up', 10, true);
-            //         direzione = 10;
-            //         player.scale.setTo(1.2);
-            //     }
-            // }
+                if (!(player.body.touching.down && hitPlatform)) {
+                    player.animations.play('up', 10, true);
+                    direzione = 10;
+                    player.scale.setTo(1.2);
+                }
+            }
 
-            // else if (cursors.up.isDown && player.body.touching.down && hitPlatform) {
-            //     player.body.velocity.y = -700;
-            //     player.animations.play('up', 10, true);
-            //     direzione = 2;
-            //     player.scale.setTo(1.2);
-            //     micro = 0;
-            //     emitter.start(false, 1200, 20);
-            // }
+            else if (cursors.up.isDown && player.body.touching.down && hitPlatform) {
+                player.body.velocity.y = -700;
+                player.animations.play('up', 10, true);
+                direzione = 2;
+                player.scale.setTo(1.2);
+                micro = 0;
+                emitter.start(false, 1200, 20);
+            }
 
-            // else if (jumpButton.isDown && micro >= 10) {
-            //     player.body.velocity.y = -550;
-            //     player.animations.play('up', 10, true);
-            //     direzione = 3;
-            //     player.scale.setTo(1.2);
-            //     micro = 0;
-            //     barra.scale.x = 0;
-            //     emitter.start(false, 1200, 10);
-            //     barra3.alpha = 0;
-            //     barra.alpha = 1;
-            //     emitter.setScale(0.1, 1, 0.1, 1, 20000, Phaser.Easing.Quintic.Out);
-            //     boost.play(); //AUDIO BOOST
-            //     player.animations.play('boost', 10, true);
-            //     putenzaMassima = 1;
-            // }
+            else if (jumpButton.isDown && micro >= 10) {
+                player.body.velocity.y = -550;
+                player.animations.play('up', 10, true);
+                direzione = 3;
+                player.scale.setTo(1.2);
+                micro = 0;
+                barra.scale.x = 0;
+                emitter.start(false, 1200, 10);
+                barra3.alpha = 0;
+                barra.alpha = 1;
+                emitter.setScale(0.1, 1, 0.1, 1, 20000, Phaser.Easing.Quintic.Out);
+                boost.play(); //AUDIO BOOST
+                player.animations.play('boost', 10, true);
+                putenzaMassima = 1;
+            }
 
-            // else {
-            //     if (direzione == 1) {
-            //         player.animations.stop('left', false);
-            //     }
-            //     if (direzione == 0) {
-            //         player.animations.stop('right', false);
-            //     }
+            else {
+                if (direzione == 1) {
+                    player.animations.stop('left', false);
+                }
+                if (direzione == 0) {
+                    player.animations.stop('right', false);
+                }
 
-            //     if (direzione == 2) {
-            //         player.animations.stop('up', 10, true);
-            //         player.frame = 99;
-            //         player.scale.setTo(1.2);
-            //     }
+                if (direzione == 2) {
+                    player.animations.stop('up', 10, true);
+                    player.frame = 99;
+                    player.scale.setTo(1.2);
+                }
 
-            //     if (direzione == 3) {
-            //         player.scale.setTo(2.4);
-            //     }
-            // }
+                if (direzione == 3) {
+                player.scale.setTo(2.4);
+                }
+            }
 
 
 
@@ -694,7 +694,7 @@
             //MICROPLASTICHE CREATE
             if (stelleCreate < 1) {
                 //le micro massime da creare sono 5. Se il numero di micro create è maggiore di 5 non ne crea più 
-                if (stars.length > 5) {
+                if (stars.length > 4) {
                     return
                 }
                 else {

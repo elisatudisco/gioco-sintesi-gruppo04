@@ -21,8 +21,6 @@
         let score = localStorage.getItem('test');
         let user = localStorage.getItem('test1');
 
-
-
         console.log(user);
 
         let score1;
@@ -44,7 +42,7 @@
         window.setTimeout(function () {
             window.location.href = "chart.html";
             deleteItems();
-        }, 15000);
+        }, 7000);
 
         var index = 0;
         var lastMillis = 0;
@@ -142,19 +140,6 @@
             textAlign(CENTER);
             text("Now let's compare your score\n on the Leaderboard!", 540, 840);
             pop();
-
-            // push();
-            // drawingContext.shadowOffsetX = 6;
-            // drawingContext.shadowOffsetY = -6;
-            // drawingContext.shadowBlur = 10;
-            // drawingContext.shadowColor = 'black';
-            // fill("white");
-            // textFont('loos-normal');
-            // textSize(64);
-            // textAlign(CENTER);
-            // text("Now let's compare your score\n on the Leaderboard!", 540, 1040);
-            // pop();
-
         }
 
         let userSession = {

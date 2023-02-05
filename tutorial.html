@@ -24,9 +24,9 @@
         const url = new URL(urlString);
         let user = url.searchParams.get("currentUser");
 
-        // window.setTimeout(function () {
-        //     window.location = "/phaser.html?currentUser=" + user;
-        // }, 20000);
+        window.setTimeout(function () {
+            window.location = "/phaser.html?currentUser=" + user;
+        }, 10000);
 
         function keyPressed() {
             if (keyCode === ENTER) {
