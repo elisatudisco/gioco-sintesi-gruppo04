@@ -116,8 +116,18 @@
             localStorage.setItem('somma', sum);
         }
 
+
+
+
         function draw() {
         }
+
+        setTimeout(function () {
+            if (window.location.hash != '#r') {
+                window.location.hash = 'r';
+                window.location.reload(1);
+            }
+        }, 500);
 
         req.open("GET", `https://api.jsonbin.io/v3/b/${BIN_ID}`, true);
         req.setRequestHeader("X-Master-Key", API_KEY);
@@ -135,12 +145,6 @@
             }
         }
 
-        setTimeout(function () {
-            if (window.location.hash != '#r') {
-                window.location.hash = 'r';
-                window.location.reload(1);
-            }
-        }, 500);
     </script>
 </body>
 
