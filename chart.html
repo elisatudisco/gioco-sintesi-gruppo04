@@ -25,14 +25,6 @@
     </div>
 
     <script>
-
-        setTimeout(function () {
-            if (window.location.hash != '#r') {
-                window.location.hash = 'r';
-                window.location.reload(1);
-            }
-        }, 500);
-
         const urlString = window.location.href;
         const url = new URL(urlString);
 
@@ -143,6 +135,12 @@
             }
         }
 
+        setTimeout(function () {
+            if (window.location.hash != '#r') {
+                window.location.hash = 'r';
+                window.location.reload(1);
+            }
+        }, 500);
     </script>
 </body>
 
