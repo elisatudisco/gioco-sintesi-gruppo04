@@ -467,7 +467,7 @@
                     direzione = 2;
                     player.scale.setTo(1.2);
                     micro = 0;
-                    emitter.start(false, 900, 20);
+                    emitter.start(false, 700, 20);
                     boost.play(); //AUDIO BOOST
                 }
 
@@ -478,7 +478,7 @@
                     player.scale.setTo(2.4);
                     micro = 0;
                     barra.scale.x = 0;
-                    emitter.start(false, 900, 10);
+                    emitter.start(false, 700, 10);
                     barra3.alpha = 0;
                     barra.alpha = 1;
                     boost.play(); //AUDIO BOOST
@@ -525,7 +525,7 @@
                 direzione = 2;
                 player.scale.setTo(1.2);
                 micro = 0;
-                emitter.start(false, 900, 20);
+                emitter.start(false, 700, 20);
             }
 
             else if (jumpButton.isDown && micro >= 10) {
@@ -535,7 +535,7 @@
                 player.scale.setTo(1.2);
                 micro = 0;
                 barra.scale.x = 0;
-                emitter.start(false, 900, 10);
+                emitter.start(false, 700, 10);
                 barra3.alpha = 0;
                 barra.alpha = 1;
                 emitter.setScale(0.1, 1, 0.1, 1, 20000, Phaser.Easing.Quintic.Out);
@@ -559,7 +559,7 @@
                 }
 
                 if (direzione == 3) {
-                player.scale.setTo(2.4);
+                    player.scale.setTo(2.4);
                 }
             }
 
@@ -637,7 +637,7 @@
             //se una micro viene distrutta e tolta dal counter, anche colore deve diminuire. 
             //se le micro sono più in basso di 200 px rispetto al player vengono distrutte (perché se no influiscono nel calcolo e fanno casino)
             for (i = 0; i < stars.length - 1; i++) { //-1 perché JS parte da 0 a contare
-                if (stars.children[counter1].y - player.y > 900) {
+                if (stars.children[counter1].y - player.y > 700) {
                     stars.children[counter1].destroy();
                     colore -= 1;
                 }
