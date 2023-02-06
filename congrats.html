@@ -42,7 +42,7 @@
         window.setTimeout(function () {
             window.location.href = "chart.html";
             deleteItems();
-        }, 7000);
+        }, 12000);
 
         var index = 0;
         var lastMillis = 0;
@@ -79,7 +79,7 @@
             textFont('loos-normal');
             textSize(64);
             textAlign(CENTER);
-            text("Mr. Mollustic has collected", 540, 340);
+            text("Mr. Mollustic has collected", 540, 440);
             pop();
 
             push();
@@ -91,7 +91,7 @@
             textFont('loos-normal');
             textSize(64);
             textAlign(CENTER);
-            text("This quantity would feed", 540,  540);
+            text("This quantity would feed", 540,  640);
             pop();
 
             push();
@@ -104,7 +104,7 @@
             textSize(64);
             textAlign(CENTER);
 
-            text(message2.substring(0, index), 540, 640);
+            text(message2.substring(0, index), 540, 740);
 
             if (millis() > lastMillis + 100) {
                 index = index + 1;
@@ -121,7 +121,7 @@
             textFont('GD-Boing-Bold');
             textSize(64);
             textAlign(CENTER);
-            text(message.substring(0, index), 540, 440);
+            text(message.substring(0, index), 540, 540);
 
             if (millis() > lastMillis + 70) {
                 index = index + 1;
@@ -138,7 +138,7 @@
             textFont('loos-normal');
             textSize(64);
             textAlign(CENTER);
-            text("Now let's compare your score\n on the Leaderboard!", 540, 840);
+            text("Can you understand how many\n microplastics they need?\n Now let's compare your score\n on the Leaderboard!", 540, 1040);
             pop();
         }
 
