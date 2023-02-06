@@ -160,7 +160,6 @@
             //CONFINI DEL MONDO
             game.world.setBounds(0, 0, 1080, 3584);
             game.physics.startSystem(Phaser.Physics.ARCADE);
-            checkWorldBounds = true
 
             //SFONDO
             sfondoliv1 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'sfondoliv1');
@@ -192,12 +191,13 @@
             player.animations.add('boost', [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84]);
 
             //SCIA GIOCATORE
-            emitter = game.add.emitter(game.world.centerX, 4700, 2000);
+            emitter = game.add.emitter(game.world.centerX, 4700, 1920);
             emitter.makeParticles('bubble', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]);
             emitter.setRotation(2, 2);
             emitter.setAlpha(1, 0.01, 0);
             emitter.setScale(0.1, 1, 0.1, 1, 6000, Phaser.Easing.Quintic.Out);
             emitter.gravity.y = -300;
+            emitter.checkWorldBounds = true
 
             //MICROPLASTICHE
             stars = game.add.physicsGroup();
@@ -469,7 +469,7 @@
                     player.scale.setTo(1.2);
                     micro = 0;
                     emitter.start(false, 700, 20);
-                  //  boost.play(); //AUDIO BOOST
+                    //  boost.play(); //AUDIO BOOST
                 }
 
                 //boost
@@ -490,79 +490,79 @@
 
 
             //CONTROLLI CON TASTIERA 
-            // player.body.velocity.x = 0;
+            player.body.velocity.x = 0;
 
-            // if (cursors.left.isDown && putenzaMassima == 0 && putenzaMassima2 == 0) {
-            //     player.body.velocity.x = -250;
-            //     if (player.body.touching.down && hitPlatform) {
-            //         player.animations.play('left', 10, true);
-            //         direzione = 0;
-            //     }
+            if (cursors.left.isDown && putenzaMassima == 0 && putenzaMassima2 == 0) {
+                player.body.velocity.x = -250;
+                if (player.body.touching.down && hitPlatform) {
+                    player.animations.play('left', 10, true);
+                    direzione = 0;
+                }
 
-            //     if (!(player.body.touching.down && hitPlatform)) {
-            //         player.animations.play('up', 10, true);
-            //         direzione = 10;
-            //         player.scale.setTo(1.2);
-            //     }
-            // }
+                if (!(player.body.touching.down && hitPlatform)) {
+                    player.animations.play('up', 10, true);
+                    direzione = 10;
+                    player.scale.setTo(1.2);
+                }
+            }
 
-            // else if (cursors.right.isDown && putenzaMassima == 0 && putenzaMassima2 == 0) {
-            //     player.body.velocity.x = 250;
-            //     if (player.body.touching.down && hitPlatform) {
-            //         player.animations.play('right', 10, true);
-            //         direzione = 1;
-            //     }
+            else if (cursors.right.isDown && putenzaMassima == 0 && putenzaMassima2 == 0) {
+                player.body.velocity.x = 250;
+                if (player.body.touching.down && hitPlatform) {
+                    player.animations.play('right', 10, true);
+                    direzione = 1;
+                }
 
-            //     if (!(player.body.touching.down && hitPlatform)) {
-            //         player.animations.play('up', 10, true);
-            //         direzione = 10;
-            //         player.scale.setTo(1.2);
-            //     }
-            // }
+                if (!(player.body.touching.down && hitPlatform)) {
+                    player.animations.play('up', 10, true);
+                    direzione = 10;
+                    player.scale.setTo(1.2);
+                }
+            }
 
-            // else if (cursors.up.isDown && player.body.touching.down && hitPlatform) {
-            //     player.body.velocity.y = -700;
-            //     player.animations.play('up', 10, true);
-            //     direzione = 2;
-            //     player.scale.setTo(1.2);
-            //     micro = 0;
-            //     emitter.start(false, 700, 20);
-            // }
+            else if (cursors.up.isDown && player.body.touching.down && hitPlatform) {
+                player.body.velocity.y = -700;
+                player.animations.play('up', 10, true);
+                direzione = 2;
+                player.scale.setTo(1.2);
+                micro = 0;
+                emitter.start(false, 700, 20);
+            }
 
-            // else if (jumpButton.isDown && micro >= 10) {
-            //     player.body.velocity.y = -550;
-            //     player.animations.play('up', 10, true);
-            //     direzione = 3;
-            //     player.scale.setTo(1.2);
-            //     micro = 0;
-            //     barra.scale.x = 0;
-            //     emitter.start(false, 700, 10);
-            //     barra3.alpha = 0;
-            //     barra.alpha = 1;
-            //     emitter.setScale(0.1, 1, 0.1, 1, 20000, Phaser.Easing.Quintic.Out);
-            //     boost.play(); //AUDIO BOOST
-            //     player.animations.play('boost', 10, true);
-            //     putenzaMassima = 1;
-            // }
+            else if (jumpButton.isDown && micro >= 10) {
+                player.body.velocity.y = -550;
+                player.animations.play('up', 10, true);
+                direzione = 3;
+                player.scale.setTo(1.2);
+                micro = 0;
+                barra.scale.x = 0;
+                emitter.start(false, 700, 10);
+                barra3.alpha = 0;
+                barra.alpha = 1;
+                emitter.setScale(0.1, 1, 0.1, 1, 20000, Phaser.Easing.Quintic.Out);
+                boost.play(); //AUDIO BOOST
+                player.animations.play('boost', 10, true);
+                putenzaMassima = 1;
+            }
 
-            // else {
-            //     if (direzione == 1) {
-            //         player.animations.stop('left', false);
-            //     }
-            //     if (direzione == 0) {
-            //         player.animations.stop('right', false);
-            //     }
+            else {
+                if (direzione == 1) {
+                    player.animations.stop('left', false);
+                }
+                if (direzione == 0) {
+                    player.animations.stop('right', false);
+                }
 
-            //     if (direzione == 2) {
-            //         player.animations.stop('up', 10, true);
-            //         player.frame = 99;
-            //         player.scale.setTo(1.2);
-            //     }
+                if (direzione == 2) {
+                    player.animations.stop('up', 10, true);
+                    player.frame = 99;
+                    player.scale.setTo(1.2);
+                }
 
-            //     if (direzione == 3) {
-            //         player.scale.setTo(2.4);
-            //     }
-            // }
+                if (direzione == 3) {
+                    player.scale.setTo(2.4);
+                }
+            }
 
 
 
@@ -695,7 +695,7 @@
             //MICROPLASTICHE CREATE
             if (stelleCreate < 1) {
                 //le micro massime da creare sono 5. Se il numero di micro create è maggiore di 5 non ne crea più 
-                if (stars.length > 4) {
+                if (stars.length > 3) {
                     return
                 }
                 else {
