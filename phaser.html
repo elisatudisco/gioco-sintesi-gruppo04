@@ -138,10 +138,11 @@
         var polpettona = user;
         var putenzaMassima = 0;
         var putenzaMassima2 = 1;
+        let carciofo = 0;
 
         //scelta posizioni fisse nello spazio per disporre le microplastiche
         let posx = [105, 185, 265, 345, 425, 505, 585, 675, 745, 825, 905];
-        let posy = [230, 340, 430, 520, 610, 700, 790, 880, 970, 1060, 1150, 1240, 1330, 1420, 1510];
+        let posy = [230, 430, 610, 790, 970, 1150, 1330, 1510];
         var emitter;
         var x;
 
@@ -205,9 +206,11 @@
             stars.create(200, 3584 - 550, 'star');
             stars.create(400, 3584 - 750, 'star');
             stars.create(650, 3584 - 950, 'star');
+            stars.create(320, 3584 - 1170, 'star');
+            stars.create(650, 3584 - 1400, 'star');
             stars.angle = 0;
 
-            stars.children[0].frame = 3;
+            // stars.children[0].frame = 3;
 
             stars.setAll('anchor.x', 0.5)
             stars.setAll('anchor.y', 0.5)
@@ -216,6 +219,7 @@
             //CREA CURSORE E BOTTONE SALTO
             cursors = game.input.keyboard.createCursorKeys();
             jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.S);
+            provaButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
 
             //BARRA MICROPLASTICHE
             barra2 = game.add.sprite(730, 75, 'barra2');
@@ -416,15 +420,15 @@
                         if (putenzaMassima == 0) {
                             player.animations.play('right', 10, true);
                             direzione = 1;
-                        } else {
-                            player.animations.play('boost', 10, true);
                         }
                     }
-
-                    if (!(player.body.touching.down && hitPlatform)) {
+                    if (!(player.body.touching.down && hitPlatform) && putenzaMassima == 0) {
                         player.animations.play('up', 10, true);
                         direzione = 10;
                         player.scale.setTo(1.2);
+                    }
+                    else {
+                        player.animations.play('boost', 10, true);
                     }
                 }
 
@@ -435,15 +439,15 @@
                         if (putenzaMassima == 0) {
                             player.animations.play('left', 10, true);
                             direzione = 0;
-                        } else {
-                            player.animations.play('boost', 10, true);
                         }
                     }
-
-                    if (!(player.body.touching.down && hitPlatform)) {
+                    if (!(player.body.touching.down && hitPlatform) && putenzaMassima == 0) {
                         player.animations.play('up', 10, true);
                         direzione = 10;
                         player.scale.setTo(1.2);
+                    }
+                    else {
+                        player.animations.play('boost', 10, true);
                     }
                 }
 
@@ -502,42 +506,41 @@
             //CONTROLLI CON TASTIERA 
             player.body.velocity.x = 0;
 
+            if (provaButton.isDown) {
+                player.animations.play('boost', 10, true);
+            }
+
             if (cursors.left.isDown && putenzaMassima2 == 0) {
                 player.body.velocity.x = -250;
                 if (player.body.touching.down && hitPlatform) {
-                    if (putenzaMassima == 0) {
-                        player.animations.play('left', 10, true);
-                        direzione = 0;
-                    }
-                    else {
-                        player.animations.play('boost', 10, true);
-                    }
+                    player.animations.play('left', 10, true);
+                    direzione = 0;
                 }
-
-                if (!(player.body.touching.down && hitPlatform)) {
+                if (!(player.body.touching.down && hitPlatform) && putenzaMassima == 0) {
                     player.animations.play('up', 10, true);
                     direzione = 10;
                     player.scale.setTo(1.2);
+                } else {
+                    player.animations.play('boost', 10, true);
                 }
+
             }
 
             else if (cursors.right.isDown && putenzaMassima2 == 0) {
                 player.body.velocity.x = 250;
                 if (player.body.touching.down && hitPlatform) {
-                    if (putenzaMassima == 0) {
-                        player.animations.play('right', 10, true);
-                        direzione = 1;
-                    }
-                    else {
-                        player.animations.play('boost', 10, true);
-                    }
+                    player.animations.play('right', 10, true);
+                    direzione = 1;
                 }
-
-                if (!(player.body.touching.down && hitPlatform)) {
+                if (!(player.body.touching.down && hitPlatform) && putenzaMassima == 0) {
                     player.animations.play('up', 10, true);
                     direzione = 10;
                     player.scale.setTo(1.2);
                 }
+                else {
+                    player.animations.play('boost', 10, true);
+                }
+
             }
 
             else if (cursors.up.isDown && player.body.touching.down && hitPlatform) {
@@ -551,7 +554,6 @@
 
             else if (jumpButton.isDown && micro >= 25) {
                 player.body.velocity.y = -2050;
-                player.animations.play('up', 10, true);
                 direzione = 3;
                 player.scale.setTo(1.2);
                 micro = 0;
@@ -565,8 +567,7 @@
                 putenzaMassima = 1;
             }
 
-            else if (putenzaMassima != 0) {
-
+            else {
                 if (direzione == 1) {
                     player.animations.stop('left', false);
                 }
@@ -716,18 +717,24 @@
             //MICROPLASTICHE CREATE
             if (stelleCreate < 1) {
                 //le micro massime da creare sono 5. Se il numero di micro create è maggiore di 5 non ne crea più 
-                if (stars.length > 15) {
+                if (stars.length > 7) {
                     return
                 }
                 else {
-                    for (var i = 0; i < 15; i++) {
-                        stelleCreate += (1 / 15)
-                        var star = stars.create(posx[Math.floor(Math.random() * 11)], player.y - 1000 - posy[Math.floor(Math.random() * 15)], 'star');
+                    for (var i = 0; i < 7; i++) {
+                        stelleCreate += (1 / 7)
+                        var star = stars.create(posx[Math.floor(Math.random() * 11)], player.y - 1000 - posy[carciofo], 'star');
                         //prendi la stella che crea e prendi un frame casuale tra i 100 creati in modo tale da vere micro tutte diverse
                         //dopo che hai creato la micro colore va avanti di uno. colore parte da 3 perché all'inizio vengono create 3 micro fisse
                         stars.children[colore].frame = Math.floor(Math.random() * 100);
                         colore += 1;
+
+                        carciofo += 1;
+                        if (carciofo > 7) {
+                            carciofo = 0;
+                        }
                     }
+
                 }
             }
         }
