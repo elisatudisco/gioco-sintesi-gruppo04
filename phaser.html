@@ -473,7 +473,7 @@
                 }
 
                 //boost
-                else if (micro >= 10) {
+                else if (micro >= 25) {
                     player.body.velocity.y = -1100;
                     direzione = 2;
                     player.scale.setTo(2.4);
@@ -529,7 +529,7 @@
             //     emitter.start(false, 700, 20);
             // }
 
-            // else if (jumpButton.isDown && micro >= 10) {
+            // else if (jumpButton.isDown && micro >= 25) {
             //     player.body.velocity.y = -550;
             //     player.animations.play('up', 10, true);
             //     direzione = 3;
@@ -681,8 +681,8 @@
 
             //la barra scala in base al numero massimo di microplastiche 
             barra.frame = 1;
-            barra.scale.x = micro / 10;
-            if (micro == 10) {
+            barra.scale.x = micro / 25;
+            if (micro == 25) {
                 barra3.alpha = 1;
                 barra3.animations.play('rainbow', 7, true);
                 barra.alpha = 0;
@@ -715,7 +715,7 @@
         function prendiLaMicro(player, star) {
             suonomicroplastiche.play();
             score += 1;
-            if (micro < 11) {
+            if (micro < 26) {
                 micro += 1;
             }
             scoreText.text = ' ' + score;
