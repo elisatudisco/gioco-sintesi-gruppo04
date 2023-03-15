@@ -219,7 +219,6 @@
             //CREA CURSORE E BOTTONE SALTO
             cursors = game.input.keyboard.createCursorKeys();
             jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.S);
-            provaButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
 
             //BARRA MICROPLASTICHE
             barra2 = game.add.sprite(730, 75, 'barra2');
@@ -506,10 +505,6 @@
             //CONTROLLI CON TASTIERA 
             player.body.velocity.x = 0;
 
-            if (provaButton.isDown) {
-                player.animations.play('boost', 10, true);
-            }
-
             if (cursors.left.isDown && putenzaMassima2 == 0) {
                 player.body.velocity.x = -250;
                 if (player.body.touching.down && hitPlatform) {
@@ -585,9 +580,6 @@
                     player.scale.setTo(2.4);
                 }
             }
-
-
-
 
             //ALT !!! non commentare questa cosa qui sotto quando disattivi i controlli con la tastiera
             if (player.body.velocity.y > -100) {
