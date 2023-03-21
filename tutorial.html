@@ -42,37 +42,37 @@
             vid.volume(0);
             vid.loop();
             vid.hide(); // hides the html video loader
-            vid.position(0, 0);
+            vid.position(windowWidth / 2, windowHeight / 2);
         }
 
         function draw() {
             background("black");
             let img = vid.get();
-            image(img, 0, -100); // redraws the video frame by frame in 
+            image(img, 0, 0); // redraws the video frame by frame in 
 
-            push();
-            drawingContext.shadowOffsetX = 6;
-            drawingContext.shadowOffsetY = -6;
-            drawingContext.shadowBlur = 10;
-            drawingContext.shadowColor = 'black';
-            fill("white");
-            textFont('loos-normal');
-            textSize(48);
-            textAlign(LEFT);
-            text("Incline to go \nleft or right", 120, 783);
-            pop();
+            // push();
+            // drawingContext.shadowOffsetX = 6;
+            // drawingContext.shadowOffsetY = -6;
+            // drawingContext.shadowBlur = 10;
+            // drawingContext.shadowColor = 'black';
+            // fill("white");
+            // textFont('loos-normal');
+            // textSize(48);
+            // textAlign(LEFT);
+            // text("Incline to go \nleft or right", 120, 783);
+            // pop();
 
-            push();
-            drawingContext.shadowOffsetX = 6;
-            drawingContext.shadowOffsetY = -6;
-            drawingContext.shadowBlur = 10;
-            drawingContext.shadowColor = 'black';
-            fill("white");
-            textFont('loos-normal');
-            textSize(48);
-            textAlign(LEFT);
-            text("Blow in for \na special boost", 120, 1600);
-            pop();
+            // push();
+            // drawingContext.shadowOffsetX = 6;
+            // drawingContext.shadowOffsetY = -6;
+            // drawingContext.shadowBlur = 10;
+            // drawingContext.shadowColor = 'black';
+            // fill("white");
+            // textFont('loos-normal');
+            // textSize(48);
+            // textAlign(LEFT);
+            // text("Blow in for \na special boost", 120, 1600);
+            // pop();
 
             push();
             drawingContext.shadowOffsetX = 6;
@@ -83,7 +83,7 @@
             textFont('GD-Boing-Bold');
             textSize(96);
             textAlign(CENTER);
-            text("Controls", 540, 120); //nei giochi si usa questo termine
+            text("Controls", windowWidth / 2, 120); //nei giochi si usa questo termine
             pop();
         }
     </script>
