@@ -40,7 +40,7 @@
             //SFONDI E GRAFICHE AMBIENTAZIONE
             game.load.image('ground', 'assets/sand.png');
             game.load.spritesheet('alga', 'assets/alga.png', 1080, 566, 15);
-            game.load.spritesheet('corallo', 'assets/corallo.png', 1080, 290, 17);
+            game.load.spritesheet('corallo', 'assets/corallo.png', 1080, 288.5, 17);
             game.load.image('sfondoliv0', 'assets/sfondoliv0.png');
             game.load.image('sfondoliv1', 'assets/sfondoliv1.png');
             game.load.image('sfondoliv2', 'assets/sfondoliv2.png');
@@ -52,7 +52,7 @@
             game.load.spritesheet('dude', 'assets/spritesheet.png', 174, 175, 140);
             game.load.spritesheet('star', 'assets/micro.png', 70, 70, 100);
             //INTERFACCIA DI GIOCO
-            game.load.spritesheet('barra3', 'assets/barra piena.png', 308.33, 17, 6);
+            game.load.spritesheet('barra3', 'assets/barra piena.png', 310, 310, 44);
             game.load.image('barra', 'assets/barra piccola.png');
             game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
             //PRELOAD AUDIO
@@ -175,7 +175,7 @@
             //GROUND
             platforms = game.add.group();
             platforms.enableBody = true;
-            var ground = platforms.create(0, game.world.height - 800, 'ground');
+            var ground = platforms.create(0, game.world.height - 805, 'ground');
             ground.body.setSize(1180, 700, -100, 700);
             ground.body.immovable = true;
 
@@ -183,7 +183,7 @@
             alga.animations.add('alga', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]);
             alga.animations.play('alga', 15, true);
 
-            corallo = game.add.sprite(0, game.world.height - 290, 'corallo');
+            corallo = game.add.sprite(0, game.world.height - 288.5, 'corallo');
             corallo.animations.add('corallo', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
             corallo.animations.play('corallo', 15, true);
 
@@ -237,13 +237,13 @@
             jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.S);
 
             //BARRA MICROPLASTICHE
-            barra = game.add.sprite(730, 75, 'barra');
+            barra = game.add.sprite(750, -80, 'barra');
             barra.fixedToCamera = true;
 
-            barra3 = game.add.sprite(700, 80, 'barra3');
+            barra3 = game.add.sprite(700, -80, 'barra3');
             barra3.fixedToCamera = true;
             barra3.alpha = 0;
-            barra3.animations.add('rainbow', [0, 1, 2, 3, 4, 5]);
+            barra3.animations.add('rainbow', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43]);
 
             //CAMERA
             game.camera.follow(player);
@@ -692,7 +692,7 @@
             barra.scale.x = micro / 25;
             if (micro == 25) {
                 barra3.alpha = 1;
-                barra3.animations.play('rainbow', 7, true);
+                barra3.animations.play('rainbow', 6, true);
                 barra.alpha = 0;
                 barra_riempita.play();
             }
