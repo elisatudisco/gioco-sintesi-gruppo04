@@ -176,7 +176,7 @@
             platforms = game.add.group();
             platforms.enableBody = true;
             var ground = platforms.create(0, game.world.height - 805, 'ground');
-            ground.body.setSize(1180, 700, -100, 700);
+            ground.body.setSize(1180, 700, -100, 750);
             ground.body.immovable = true;
 
             alga = game.add.sprite(0, game.world.height - 566, 'alga');
@@ -188,7 +188,7 @@
             corallo.animations.play('corallo', 15, true);
 
             //GIOCATORE
-            player = game.add.sprite(1080 / 2, game.world.height - 315, 'dude');
+            player = game.add.sprite(1080 / 2, game.world.height - 270, 'dude');
 
             game.physics.arcade.enable(player);
             player.body.bounce.y = 0.5;
